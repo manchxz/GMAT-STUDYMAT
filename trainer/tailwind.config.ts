@@ -19,6 +19,7 @@ const config = {
       fontFamily: {
         sans: ['var(--font-geist)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
+        'study-body': ['var(--font-geist)', 'Georgia', 'serif'],
       },
     },
   },

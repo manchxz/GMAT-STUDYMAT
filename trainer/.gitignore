@@ -8,3 +8,6 @@ coverage
 *.log
 prisma/dev.db
 prisma/*.db-journal
+public/textbook
+*.tsbuildinfo
+

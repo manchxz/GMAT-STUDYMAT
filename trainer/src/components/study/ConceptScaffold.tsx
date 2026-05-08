@@ -1,30 +1,33 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { buildScaffoldSequence, maxVisibleScaffoldLayers } from '@/lib/scaffold-policy';
+import { resolveScaffoldLayers, type ScaffoldContent } from '@/lib/scaffold-policy';
 
 type Props = {
-  eli5: string;
-  expert: string;
+  content: ScaffoldContent;
   recentAccuracy: number;
   userHintCap?: number;
   onLayerOpen?: () => void;
 };
 
+const LAYER_LABEL: Record<string, string> = {
+  micro: 'Quick nudge',
+  eli5: 'ELI5',
+  expert_framework: 'Expert logic',
+};
+
 export function ConceptScaffold({
-  eli5,
-  expert,
+  content,
   recentAccuracy,
-  userHintCap = 3,
+  userHintCap = 4,
   onLayerOpen,
 }: Props) {
-  const steps = maxVisibleScaffoldLayers(recentAccuracy, userHintCap);
-  const seq = buildScaffoldSequence({ eli5, expert }, steps);
+  const seq = resolveScaffoldLayers(content, recentAccuracy, userHintCap);
   const [revealed, setRevealed] = useState(0);
 
   useEffect(() => {
     setRevealed(0);
-  }, [eli5, expert, recentAccuracy]);
+  }, [content.eli5, content.expert, content.microHint, recentAccuracy]);
 
   const handleMore = () => {
     setRevealed((r) => Math.min(seq.length - 1, r + 1));
@@ -45,15 +48,14 @@ export function ConceptScaffold({
             <strong className="text-[color:var(--ink)]">
               {(recentAccuracy * 100).toFixed(0)}%
             </strong>
-            {' — '}max scaffolding depth:{' '}
-            <strong>{steps}</strong>.
+            .
           </p>
         </div>
         <button
           type="button"
           onClick={handleMore}
           disabled={revealed >= seq.length - 1}
-          className="shrink-0 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] disabled:opacity-35"
+          className="shrink-0 rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] disabled:opacity-35 motion-reduce:transition-none"
           style={{ borderColor: 'var(--border)' }}
         >
           Deeper scaffold
@@ -69,17 +71,19 @@ export function ConceptScaffold({
           {visibleLayers.map((layer, idx) => (
             <article
               key={`${layer.layer}-${idx}`}
-              className="rounded-xl border px-5 py-4 text-sm leading-relaxed"
+              className="rounded-xl border px-5 py-4 text-sm leading-relaxed motion-reduce:transition-none"
               style={{
                 borderColor: 'var(--border)',
                 background:
-                  layer.layer === 'eli5'
-                    ? 'rgba(234,179,72,0.08)'
-                    : 'rgba(20,184,166,0.08)',
+                  layer.layer === 'micro'
+                    ? 'rgba(167, 139, 250, 0.08)'
+                    : layer.layer === 'eli5'
+                      ? 'rgba(234,179,72,0.08)'
+                      : 'rgba(20,184,166,0.08)',
               }}
             >
               <header className="mb-2 text-[10px] font-bold uppercase tracking-[0.35em] opacity-65">
-                {layer.layer === 'eli5' ? 'ELI5' : 'Expert logic'}
+                {LAYER_LABEL[layer.layer] ?? layer.layer}
               </header>
               <p className="whitespace-pre-wrap font-study-body text-[color:var(--ink)]">
                 {layer.text}

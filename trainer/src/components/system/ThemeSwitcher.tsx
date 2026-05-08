@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 
 export function ThemeSwitcher() {
   const [mode, setMode] = useState<'dark' | 'light'>('dark');

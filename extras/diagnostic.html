@@ -351,6 +351,22 @@
       `;
       result.classList.add('show');
       result.scrollIntoView({ behavior: 'smooth' });
+
+      fetch('/api/diagnostic/submit', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          correct: totalCorrect,
+          total: totalQs,
+          breakdown: Object.fromEntries(
+            Object.keys(chapterMeta).map((ch) => [
+              ch,
+              { correct: results[ch].correct, total: results[ch].total },
+            ])
+          ),
+        }),
+      }).catch(function () {});
     });
 
     document.getElementById('reset-btn').addEventListener('click', () => {

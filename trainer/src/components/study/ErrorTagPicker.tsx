@@ -1,52 +1,87 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
+import { ERROR_TAG_OPTIONS, type ErrorTagId } from '@/lib/error-tags';
 
-const ERROR_TAGS = [
-  { id: 'MISREAD_PROMPT', label: 'Misread prompt' },
-  { id: 'CARELESS_CALC', label: 'Calculation error' },
-  { id: 'CONCEPT_GAP', label: 'Concept gap' },
-  { id: 'TRAP_ANSWER', label: 'Trap answer' },
-  { id: 'TIME_PRESSURE_GUESS', label: 'Time pressure guess' },
-  { id: 'OVERCONFIDENT_SKIP_REVIEW', label: 'Skipped review' },
-  { id: 'DS_LOGIC_ERROR', label: 'DS logic error' },
-  { id: 'OTHER', label: 'Other' },
-] as const;
-
-export type ErrorTagId = (typeof ERROR_TAGS)[number]['id'];
+export type { ErrorTagId };
 
 type Props = {
   open: boolean;
-  onSubmit: (tag: ErrorTagId | null) => void;
+  onSubmit: (tag: ErrorTagId) => void;
   onSkip: () => void;
+  returnFocusRef?: RefObject<HTMLElement | null>;
 };
 
-export function ErrorTagPicker({ open, onSubmit, onSkip }: Props) {
+export function ErrorTagPicker({ open, onSubmit, onSkip, returnFocusRef }: Props) {
   const [sel, setSel] = useState<ErrorTagId | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (open) setSel(null);
   }, [open]);
 
-  const picker = useMemo(() => ERROR_TAGS, []);
+  useEffect(() => {
+    if (!open) return;
+    previouslyFocused.current = document.activeElement as HTMLElement;
+    const returnEl = returnFocusRef?.current ?? null;
+    const t = window.setTimeout(() => {
+      dialogRef.current?.querySelector<HTMLElement>('button:not([disabled])')?.focus();
+    }, 10);
+    return () => {
+      window.clearTimeout(t);
+      if (returnEl) returnEl.focus();
+      else previouslyFocused.current?.focus?.();
+    };
+  }, [open, returnFocusRef]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        onSkip();
+        return;
+      }
+      if (e.key !== 'Tab' || !dialogRef.current) return;
+      const focusables = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), [href], input, textarea, select'
+      );
+      if (!focusables.length) return;
+      const list = [...focusables];
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, onSkip]);
 
   if (!open) return null;
 
   return (
     <div
       role="dialog"
+      aria-modal="true"
       aria-labelledby="etag-title"
       className="fixed inset-0 z-50 flex items-end justify-center bg-black/65 p-4 sm:items-center"
     >
-      <div className="pane-shell w-full max-w-lg p-6">
-        <h2 id="etag-title" className="font-semibold tracking-tight text-lg">
-          What happened? <span className="font-normal opacity-75">Required for incorrect tries</span>
+      <div ref={dialogRef} className="pane-shell w-full max-w-lg p-6">
+        <h2 id="etag-title" className="text-lg font-semibold tracking-tight">
+          What tripped you up?
         </h2>
-        <p className="mt-2 text-[color:var(--muted)] text-sm">
-          Behavioral tags power your analytics radar — not punishment.
+        <p className="mt-2 text-sm text-[color:var(--muted)]">
+          Pick the closest reason. This builds your personal error log and does{' '}
+          <strong className="font-medium text-[color:var(--ink)]">not</strong> change your score.
         </p>
         <div className="mt-5 grid gap-2 sm:grid-cols-2">
-          {picker.map((t) => (
+          {ERROR_TAG_OPTIONS.map((t) => (
             <button
               key={t.id}
               type="button"
@@ -66,9 +101,12 @@ export function ErrorTagPicker({ open, onSubmit, onSkip }: Props) {
             type="button"
             disabled={!sel}
             className="rounded-lg bg-[color:var(--accent)] px-4 py-2 text-sm font-semibold text-black disabled:cursor-not-allowed disabled:opacity-40"
-            onClick={() => onSubmit(sel)}
+            onClick={() => {
+              if (!sel) return;
+              onSubmit(sel);
+            }}
           >
-            Log & continue
+            Save & next question
           </button>
           <button
             type="button"
@@ -76,7 +114,7 @@ export function ErrorTagPicker({ open, onSubmit, onSkip }: Props) {
             style={{ borderColor: 'var(--border)' }}
             onClick={onSkip}
           >
-            Skip for now
+            Skip
           </button>
         </div>
       </div>

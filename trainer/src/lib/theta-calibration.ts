@@ -1,9 +1,5 @@
 import { probability3pl } from '@/lib/adaptive-router';
 
-/**
- * EAP-like online update for a single skill θ after one item.
- * Simplified Kalman / stochastic gradient step — stable for production routing.
- */
 export function updateThetaAfterAttempt(
   theta: number,
   itemTheta: number,
@@ -14,7 +10,6 @@ export function updateThetaAfterAttempt(
   const P = probability3pl(theta, itemTheta, a, c);
   const y = isCorrect ? 1 : 0;
   const residual = y - P;
-  /** Fisher information approximation */
   const info = Math.max(0.05, a ** 2 * P * (1 - P));
 
   const eta = 1 / (1 + info);

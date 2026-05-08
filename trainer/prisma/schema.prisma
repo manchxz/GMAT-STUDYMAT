@@ -10,11 +10,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// Auth identity (swap for NextAuth / Clerk userId as needed)
 model User {
   id        String   @id @default(cuid())
   email     String?  @unique
   name      String?
+  phone     String?  @unique
+  emailVerifiedAt DateTime?
+  phoneVerifiedAt DateTime?
+  passwordHash String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -23,6 +26,50 @@ model User {
   sprints         SprintSummary[]
   examAttempts    ExamAttempt[]
   preferences     UserPreference?
+  learnerProgress    LearnerChapterProgress[]
+  learnerDiagnostics LearnerDiagnostic[]
+}
+
+model LearnerChapterProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapterId   String
+  completedAt DateTime @default(now())
+
+  @@unique([userId, chapterId])
+  @@index([userId])
+}
+
+model LearnerDiagnostic {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scorePct  Float
+  correct   Int
+  total     Int
+  breakdown Json
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+enum OtpPurpose {
+  REGISTER_EMAIL
+  REGISTER_PHONE
+  LOGIN
+}
+
+model OtpChallenge {
+  id        String     @id @default(cuid())
+  purpose   OtpPurpose
+  target    String
+  codeHash  String
+  expiresAt DateTime
+  attempts  Int        @default(0)
+  createdAt DateTime   @default(now())
+
+  @@index([target, purpose])
 }
 
 model UserPreference {
@@ -33,6 +80,8 @@ model UserPreference {
   theme             String  @default("dark") // dark | light | system
   mockExamHighFidelity Boolean @default(true)
   maxHintSteps      Int     @default(3) // cap scaffold depth
+  /// After a completed 15-item tri-section round; user cannot start another until this time
+  triSectionNextAllowedAt DateTime?
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
@@ -81,6 +130,13 @@ enum QuestionType {
   MULTI_PART_MSQ
 }
 
+/// Coarse difficulty bucket for tri-section practice blocks (random pick within tier)
+enum PracticeTier {
+  EASY
+  MID
+  HARD
+}
+
 /// Item bank entry (content may be imported from your HTML/PDF pipeline)
 model Question {
   id            String       @id @default(cuid())
@@ -90,12 +146,16 @@ model Question {
   stemMd        String       @db.Text
   choicesJson   Json // [{ key: "A", text: "..." }, ...]
   correctKey    String
-  difficulty    Float        @default(0) // IRT-like theta of item (higher = harder)
+  difficulty    Float        @default(0) // IRT-style item difficulty b (−1.2…+2 typical); pairs with PracticeTier for bank calibration
   discrimination Float       @default(1.0) // IRT a-parameter (simplified)
   guessing      Float        @default(0.2) // IRT c-parameter (3PL-lite)
+  /// EASY/MID/HARD bucket for serving + weighted scoring (with `difficulty`)
+  practiceTier  PracticeTier?
   conceptId     String?
   concept       Concept?     @relation(fields: [conceptId], references: [id])
   timeTargetSec Int? // expected solve time for calibration
+  /// Shown in split-pane Breakdown only after an incorrect attempt (markdown; **bold** supported)
+  solutionWalkthroughMd String? @db.Text
   isActive      Boolean      @default(true)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
@@ -103,6 +163,8 @@ model Question {
   skills         QuestionSkill[]
   attempts       QuestionAttempt[]
   examSelections ExamQuestionSelection[]
+
+  @@index([section, practiceTier])
 }
 
 model QuestionSkill {
@@ -152,8 +214,10 @@ model StudySession {
   id        String   @id @default(cuid())
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  mode      String // practice | review | sprint | cat_drill
+  mode      String // practice | review | sprint | cat_drill | tri_section_practice
   section   Section?
+  /// Tri-section practice: queue, per-section tier, block index (JSON; see `PracticeStateV1` in app code)
+  practiceState Json?
   startedAt DateTime @default(now())
   endedAt   DateTime?
 
@@ -182,6 +246,7 @@ model QuestionAttempt {
 
   @@index([sessionId])
   @@index([questionId])
+  @@index([answeredAt, isCorrect])
 }
 
 /// Aggregated rolling stats every ~15 minutes of focused study (triggered client or cron)

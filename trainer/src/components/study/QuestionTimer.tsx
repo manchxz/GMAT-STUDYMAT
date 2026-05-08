@@ -11,6 +11,7 @@ type Props = {
 export function QuestionTimer({ active, onSecondsUpdate, className }: Props) {
   const started = useRef<number | null>(null);
   const [secs, setSecs] = useState(0);
+  const prevActive = useRef(active);
 
   useEffect(() => {
     let id: ReturnType<typeof setInterval>;
@@ -31,6 +32,14 @@ export function QuestionTimer({ active, onSecondsUpdate, className }: Props) {
     return () => {
       if (id) clearInterval(id);
     };
+  }, [active, onSecondsUpdate]);
+
+  useEffect(() => {
+    if (prevActive.current && !active && started.current !== null) {
+      const s = Math.floor((performance.now() - started.current) / 1000);
+      onSecondsUpdate?.(s);
+    }
+    prevActive.current = active;
   }, [active, onSecondsUpdate]);
 
   useEffect(() => {

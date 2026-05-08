@@ -5,6 +5,7 @@
 
 CREATE TYPE "Section" AS ENUM ('QUANT', 'VERBAL', 'DATA_INSIGHTS');
 CREATE TYPE "QuestionType" AS ENUM ('MULTIPLE_CHOICE', 'DATA_SUFFICIENCY', 'MULTI_PART_MSQ');
+CREATE TYPE "PracticeTier" AS ENUM ('EASY', 'MID', 'HARD');
 CREATE TYPE "ErrorBehaviorTag" AS ENUM (
   'MISREAD_PROMPT',
   'CARELESS_CALC',
@@ -21,6 +22,10 @@ CREATE TABLE "User" (
   "id" TEXT PRIMARY KEY,
   "email" TEXT UNIQUE,
   "name" TEXT,
+  "phone" TEXT UNIQUE,
+  "emailVerifiedAt" TIMESTAMP(3),
+  "phoneVerifiedAt" TIMESTAMP(3),
+  "passwordHash" TEXT,
   "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "updatedAt" TIMESTAMP(3) NOT NULL
 );
@@ -68,12 +73,14 @@ CREATE TABLE "Question" (
   "difficulty" DOUBLE PRECISION NOT NULL DEFAULT 0,
   "discrimination" DOUBLE PRECISION NOT NULL DEFAULT 1,
   "guessing" DOUBLE PRECISION NOT NULL DEFAULT 0.2,
+  "practiceTier" "PracticeTier",
   "conceptId" TEXT REFERENCES "Concept"("id"),
   "timeTargetSec" INTEGER,
   "isActive" BOOLEAN NOT NULL DEFAULT TRUE,
   "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "updatedAt" TIMESTAMP(3) NOT NULL
 );
+CREATE INDEX "Question_section_practiceTier_idx" ON "Question"("section", "practiceTier");
 
 CREATE TABLE "QuestionSkill" (
   "questionId" TEXT NOT NULL REFERENCES "Question"("id") ON DELETE CASCADE,
@@ -104,6 +111,7 @@ CREATE TABLE "StudySession" (
   "userId" TEXT NOT NULL REFERENCES "User"("id") ON DELETE CASCADE,
   "mode" TEXT NOT NULL,
   "section" "Section",
+  "practiceState" JSONB,
   "startedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   "endedAt" TIMESTAMP(3)
 );

@@ -1,8 +1,3 @@
-/**
- * Time-tracking & behavioral classification for QuestionAttempt payloads.
- * Flags panic-guessing vs over-investing — independent of correctness.
- */
-
 export type AttemptTimingInput = {
   timeMs: number;
   selectedKey?: string | null;
@@ -12,14 +7,10 @@ export type AttemptTimingInput = {
 
 export type PaceLabel = 'panic_like' | 'over_invested' | 'normal';
 
-/** Very fast submission relative to target */
 const PANIC_FRAC = 0.35;
-/** Extremely fast — blind guess heuristic */
 const BLIND_MS = 8500;
 
-/** Slow relative to target */
 const SLOW_FRAC = 2.4;
-/** Hard cap "overthink" threshold */
 const SLOW_CAP_MS = 240_000;
 
 export function classifyAttemptPace(t: AttemptTimingInput): PaceLabel {

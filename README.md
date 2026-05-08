@@ -34,7 +34,7 @@ The book is authored as HTML so you get:
 ### Reading mode
 
 1. Open `index.html` in Chrome, Firefox, or Edge
-2. Pick a path from the master TOC (Diagnostic, 8-Week, 12-Week, or Free Browse)
+2. Take the diagnostic from the master TOC before you start so your strengths and weaknesses are laid out
 3. Work chapters in order (~25–40 minutes each)
 4. Toggle ELI5 / Expert blocks in the chapter header
 5. Use the Error Log at the end of each chapter (saved in your browser)
@@ -52,7 +52,7 @@ Print CSS hides chrome, expands both tiers where needed, and uses a paper-friend
 ## Repository layout
 
 ```text
-├── index.html                 master TOC + study paths
+├── index.html                 master TOC + diagnostic lead + chapters
 ├── assets/                    shared CSS and JS
 ├── chapters/                  numbered sections + trap appendix
 ├── extras/                    diagnostic, flashcards, cheatsheet
@@ -61,7 +61,10 @@ Print CSS hides chrome, expands both tiers where needed, and uses a paper-friend
 
 **Source:** [github.com/manchxz/GMAT-STUDYMAT](https://github.com/manchxz/GMAT-STUDYMAT)
 
-The static book can be served from **GitHub Pages** (branch `main`, site root) — typically `https://manchxz.github.io/GMAT-STUDYMAT/`. Deploy the **trainer** separately (e.g. Vercel) with project root set to `trainer/`.
+The static book can be served from **GitHub Pages** (branch `main`, site root) — typically `https://manchxz.github.io/GMAT-STUDYMAT/`.  
+
+When you deploy the **trainer** (e.g. Vercel with root `trainer/`), the build copies this book into **`/textbook/`** on the same domain so **login (password + email OTP), chapter progress, and diagnostic scores** can sync to your **PostgreSQL** database. Local setup: **`trainer/docker-compose.yml`** + steps in **`trainer/README.md`**.
+
 
 ---
 
@@ -76,12 +79,10 @@ Toggle either tier from the chapter header.
 
 ---
 
-## Study paths
+## Study flow
 
-1. **Diagnostic-First** — placement quiz, then weakest chapters first  
-2. **8-Week Sprint** — four chapters per week  
-3. **12-Week Standard** — about one chapter every three days  
-4. **Free Browse** — open any chapter  
+1. **Diagnostic** — placement-style quiz in `extras/diagnostic.html` (also linked from the master TOC)  
+2. **Textbook** — work Quant, Verbal, DI, and Strategy sections in the order that fits your plan  
 
 ---
 
