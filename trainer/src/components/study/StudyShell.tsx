@@ -70,20 +70,18 @@ type SprintRollupLite = {
 
 const SPRINT_MS = 15 * 60 * 1000;
 
-function StudyNavHome({ guest }: { guest: boolean }) {
+function StudyNavHome() {
   return (
     <div className="flex flex-wrap items-center gap-4">
       <Link href="/" className="font-mono text-[11px] uppercase tracking-[0.35em] opacity-70">
         ← Home
       </Link>
-      {!guest ? (
-        <Link
-          href="/review"
-          className="font-mono text-[11px] uppercase tracking-[0.35em] text-[color:var(--accent)]"
-        >
-          Review mistakes
-        </Link>
-      ) : null}
+      <Link
+        href="/review"
+        className="font-mono text-[11px] uppercase tracking-[0.35em] text-[color:var(--accent)]"
+      >
+        Review mistakes
+      </Link>
     </div>
   );
 }
@@ -659,7 +657,7 @@ export function StudyShell() {
           style={{ borderColor: 'var(--border)' }}
         >
           <div className="mx-auto flex max-w-[1480px] flex-wrap items-center justify-between gap-4">
-            <StudyNavHome guest={guest} />
+            <StudyNavHome />
             <ThemeSwitcher />
           </div>
         </header>
@@ -743,7 +741,7 @@ export function StudyShell() {
           style={{ borderColor: 'var(--border)' }}
         >
           <div className="mx-auto flex max-w-[1480px] flex-wrap items-center justify-between gap-4">
-            <StudyNavHome guest={guest} />
+            <StudyNavHome />
             <ThemeSwitcher />
           </div>
         </header>
@@ -801,7 +799,7 @@ export function StudyShell() {
         style={{ borderColor: 'var(--border)' }}
       >
         <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-4">
-          <StudyNavHome guest={guest} />
+          <StudyNavHome />
           <div className="flex flex-wrap items-center gap-3">
             <label className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
               Drill

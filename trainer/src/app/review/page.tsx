@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { getSessionUserId } from '@/lib/auth-session';
 import { formatErrorTagLabel } from '@/lib/error-tags';
 import { ReviewHubMockCard } from '@/components/review/ReviewHubMockCard';
@@ -11,9 +10,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function ReviewPage() {
   const userId = await getSessionUserId();
-  if (!userId) redirect('/login?next=/review');
-
-  const rows = await fetchReviewLogForUser(userId);
+  const rows = userId ? await fetchReviewLogForUser(userId) : [];
 
   return (
     <>
@@ -31,7 +28,7 @@ export default async function ReviewPage() {
             </Link>
           </nav>
           <div className="flex items-center gap-2">
-            <LogoutButton />
+            {userId ? <LogoutButton /> : null}
             <ThemeSwitcher />
           </div>
         </div>
@@ -39,7 +36,16 @@ export default async function ReviewPage() {
 
       <main className="mx-auto max-w-2xl px-5 py-10 sm:px-6">
         <h1 className="text-2xl font-semibold tracking-tight text-[color:var(--ink)]">Review</h1>
-        <p className="mt-1 text-sm text-[color:var(--muted)]">Study misses and your last practice test.</p>
+        <p className="mt-1 text-sm text-[color:var(--muted)]">
+          Study misses and your last practice test.
+          {!userId ? (
+            <>
+              {' '}
+              <span className="text-[color:var(--ink)]">Saved study misses need an account (coming back soon).</span> Your
+              last mock is still available below on this device.
+            </>
+          ) : null}
+        </p>
 
         <div className="mt-8 space-y-10">
           <ReviewHubMockCard />
@@ -48,7 +54,15 @@ export default async function ReviewPage() {
             <h2 id="study-misses-heading" className="text-sm font-semibold text-[color:var(--ink)]">
               Study misses
             </h2>
-            {rows.length === 0 ? (
+            {!userId ? (
+              <p className="mt-3 text-sm text-[color:var(--muted)]">
+                Sign-in is paused for now, so wrong answers from the study lab aren&apos;t stored to this list yet. Use{' '}
+                <Link href="/study" className="font-medium text-[color:var(--accent)] underline-offset-2 hover:underline">
+                  Study
+                </Link>{' '}
+                to keep practicing.
+              </p>
+            ) : rows.length === 0 ? (
               <p className="mt-3 text-sm text-[color:var(--muted)]">
                 Nothing here yet. Wrong answers from the study lab show up after you go to the next question.
               </p>

@@ -259,34 +259,46 @@ export default async function HomePage() {
               Logic Field Guide
             </p>
             <p className="mt-6 max-w-xl text-xl font-medium leading-relaxed text-[color:var(--ink)] sm:text-2xl">
-              Get started with your GMAT preparation. Sign up or log in to continue using our GMAT training tools.
+              GMAT Focus prep without a password: adaptive study lab, full course textbook, and a timed practice test in
+              one place.
             </p>
 
             <div className="mt-10 max-w-2xl">
               <StudyJourney hasDiagnostic={false} modulesCompleted={0} totalCoreModules={coreChapters.length} />
             </div>
 
-            <div className="mt-10 flex max-w-xl flex-col gap-4 sm:flex-row">
+            <div className="mt-10 flex max-w-xl flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Link
-                href="/register"
+                href="/study"
                 className="rounded-lg bg-[color:var(--accent)] px-8 py-4 text-center font-semibold text-black"
               >
-                Sign up
+                Study lab
               </Link>
               <Link
-                href="/login"
+                href="/dashboard"
                 className="rounded-lg border px-8 py-4 text-center font-semibold"
                 style={{ borderColor: 'var(--border)' }}
               >
-                Log in
+                Dashboard
+              </Link>
+              <Link
+                href="/mock"
+                className="rounded-lg border px-8 py-4 text-center font-semibold"
+                style={{ borderColor: 'var(--border)' }}
+              >
+                Practice test
               </Link>
             </div>
-            <p className="mt-4 text-sm text-[color:var(--muted)]">
-              Already a user? Use <strong className="text-[color:var(--ink)]">Log in</strong>.{' '}
-              <Link href="/study" className="font-medium text-[color:var(--accent)] underline-offset-4 hover:underline">
-                Try the study lab as a guest
+            <p className="mt-4 max-w-xl text-sm text-[color:var(--muted)]">
+              Accounts and cloud-saved history are on hold.{' '}
+              <Link href="/textbook/index.html" className="font-medium text-[color:var(--accent)] underline-offset-4 hover:underline">
+                Textbook
               </Link>
-              .
+              ·{' '}
+              <span className="opacity-80">
+                Optional: <Link href="/login" className="underline-offset-2 hover:underline">Log in</Link> /{' '}
+                <Link href="/register" className="underline-offset-2 hover:underline">Register</Link> for testing only.
+              </span>
             </p>
 
             <div className="mt-14 sm:hidden">
