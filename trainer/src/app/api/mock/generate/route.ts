@@ -30,7 +30,6 @@ export async function POST(req: Request) {
   }
 
   const started = Date.now();
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const bank = require('../../../../../prisma/generated-practice-bank.js');
   const rows: Array<{
     externalKey: string;

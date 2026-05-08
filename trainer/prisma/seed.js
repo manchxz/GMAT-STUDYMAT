@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 const { PrismaClient, Section, QuestionType, PracticeTier } = require('@prisma/client');
 const { buildBankRows } = require('./generated-practice-bank');
 

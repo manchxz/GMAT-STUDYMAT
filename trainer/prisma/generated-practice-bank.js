@@ -1,7 +1,5 @@
 
 
-/* eslint-disable @typescript-eslint/no-require-imports */
-
 const { Section, PracticeTier } = require('@prisma/client');
 
 const KEYS = ['A', 'B', 'C', 'D', 'E'];

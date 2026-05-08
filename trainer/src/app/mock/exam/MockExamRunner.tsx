@@ -96,10 +96,18 @@ export function MockExamRunner() {
   }, [router]);
 
   const section = MOCK_SECTION_ORDER[sectionIdx]!;
-  const pool = payload?.pools[section] ?? [];
   const need = MOCK_SECTION_COUNTS[section];
-  const answers = answersBySection[section] ?? [];
   const salt = payload?.salt ?? '';
+
+  const pool = useMemo(
+    () => (payload?.pools[section] ?? []) as MockExamPoolItem[],
+    [payload, section]
+  );
+
+  const answers = useMemo(
+    () => answersBySection[section] ?? [],
+    [answersBySection, section]
+  );
 
   useEffect(() => {
     answersLenRef.current = answers.length;

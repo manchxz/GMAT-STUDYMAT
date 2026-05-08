@@ -130,7 +130,7 @@ export function SplitPaneStudy({
 
   const displayChoices = useMemo(
     () => buildShuffledDisplayChoices(question.choices),
-    [question.routable.id]
+    [question.choices]
   );
 
   const breakdownForDisplay = useMemo(
