@@ -9,6 +9,15 @@ const require = createRequire(import.meta.url);
 
 const POOL_TARGET = 110;
 
+type BankRow = {
+  externalKey: string;
+  section: string;
+  stemMd: string;
+  choicesJson: { key: string; text: string }[];
+  correctKey: string;
+  difficulty: number;
+};
+
 function sectionFromRow(row: { section: string }): MockSectionKey {
   return mapBankSection(String(row.section));
 }
@@ -30,15 +39,10 @@ export async function POST(req: Request) {
   }
 
   const started = Date.now();
-  const bank = require('../../../../../prisma/generated-practice-bank.js');
-  const rows: Array<{
-    externalKey: string;
-    section: string;
-    stemMd: string;
-    choicesJson: { key: string; text: string }[];
-    correctKey: string;
-    difficulty: number;
-  }> = bank.buildBankRows();
+  const bank = require('../../../../../prisma/generated-practice-bank.js') as {
+    buildBankRows: () => BankRow[];
+  };
+  const rows = bank.buildBankRows();
 
   const pools: Record<MockSectionKey, MockExamPoolItem[]> = {
     QUANT: [],
