@@ -6,7 +6,6 @@ import type { PracticeItem } from '@/lib/practice-items';
 import type { StudySectionFilter } from '@/lib/study-section';
 import type { ConfidenceSelfRating } from '@/lib/study-routing-meta';
 import { formatErrorTagLabel } from '@/lib/error-tags';
-import { ErrorTagPicker, type ErrorTagId } from '@/components/study/ErrorTagPicker';
 import { buildShuffledDisplayChoices } from '@/lib/shuffle-choices';
 import { rewriteBankLettersToDisplay } from '@/lib/explanation-display-letters';
 import { QuestionTimer } from './QuestionTimer';
@@ -124,10 +123,6 @@ export function SplitPaneStudy({
 
   const dragRef = useRef<{ active: boolean } | null>(null);
   const gridRef = useRef<HTMLDivElement | null>(null);
-  const nextItemBtnRef = useRef<HTMLButtonElement | null>(null);
-
-  const [errorPickerOpen, setErrorPickerOpen] = useState(false);
-
   const displayChoices = useMemo(
     () => buildShuffledDisplayChoices(question.choices),
     [question.choices]
@@ -158,7 +153,6 @@ export function SplitPaneStudy({
     setSelected(null);
     setSubmitted(false);
     setGuessFlag(false);
-    setErrorPickerOpen(false);
     elapsedMs.current = 0;
   }, [question.routable.id]);
 
@@ -249,33 +243,9 @@ export function SplitPaneStudy({
   );
 
   const proceedNext = useCallback(() => {
-    if (!submitted || !selected || advancing || errorPickerOpen) return;
-    if (!isCorrect) {
-      setErrorPickerOpen(true);
-      return;
-    }
+    if (!submitted || !selected || advancing) return;
     void finalizeAttempt(null);
-  }, [
-    advancing,
-    errorPickerOpen,
-    finalizeAttempt,
-    isCorrect,
-    selected,
-    submitted,
-  ]);
-
-  const onErrorPickerSubmit = useCallback(
-    (tag: ErrorTagId) => {
-      setErrorPickerOpen(false);
-      void finalizeAttempt(tag);
-    },
-    [finalizeAttempt]
-  );
-
-  const onErrorPickerSkip = useCallback(() => {
-    setErrorPickerOpen(false);
-    void finalizeAttempt(null);
-  }, [finalizeAttempt]);
+  }, [advancing, finalizeAttempt, selected, submitted]);
 
   const onTick = useCallback((s: number) => {
     elapsedMs.current = s * 1000;
@@ -539,10 +509,9 @@ export function SplitPaneStudy({
               </button>
               {submitted ? (
                 <button
-                  ref={nextItemBtnRef}
                   type="button"
                   onClick={() => proceedNext()}
-                  disabled={advancing || errorPickerOpen}
+                  disabled={advancing}
                   className="rounded-lg border px-6 py-3 font-semibold disabled:opacity-45 sm:px-8"
                   style={{ borderColor: 'var(--border)' }}
                 >
@@ -644,13 +613,6 @@ export function SplitPaneStudy({
           </div>
         </aside>
       </div>
-
-      <ErrorTagPicker
-        open={errorPickerOpen}
-        onSubmit={onErrorPickerSubmit}
-        onSkip={onErrorPickerSkip}
-        returnFocusRef={nextItemBtnRef}
-      />
     </div>
   );
 }
