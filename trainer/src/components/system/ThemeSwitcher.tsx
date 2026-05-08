@@ -7,7 +7,7 @@ export function ThemeSwitcher() {
   const [mode, setMode] = useState<'dark' | 'light'>('dark');
 
   useEffect(() => {
-    const stored = localStorage.getItem('trainer-theme') as 'dark' | 'light' | null;
+    const stored = localStorage.getItem('gmat-focus-theme') as 'dark' | 'light' | null;
     if (stored) {
       setMode(stored);
       document.documentElement.classList.toggle('theme-light', stored === 'light');
@@ -17,7 +17,7 @@ export function ThemeSwitcher() {
   const toggle = () => {
     const next = mode === 'dark' ? 'light' : 'dark';
     setMode(next);
-    localStorage.setItem('trainer-theme', next);
+    localStorage.setItem('gmat-focus-theme', next);
     document.documentElement.classList.toggle('theme-light', next === 'light');
   };
 

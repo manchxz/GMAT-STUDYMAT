@@ -1,7 +1,7 @@
 import { SplitPaneStudy } from '@/components/study/SplitPaneStudy';
 import { ThemeSwitcher } from '@/components/system/ThemeSwitcher';
 import Link from 'next/link';
-import { DEMO_QUESTIONS } from '@/lib/demo-questions';
+import { PRACTICE_ITEMS } from '@/lib/practice-items';
 
 export default function StudyPage() {
   return (
@@ -13,13 +13,13 @@ export default function StudyPage() {
           </Link>
           <div className="flex items-center gap-4">
             <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-[color:var(--muted)]">
-              Zero-struggle layout
+              Focus Edition
             </span>
             <ThemeSwitcher />
           </div>
         </div>
       </header>
-      <SplitPaneStudy question={DEMO_QUESTIONS[0]} recentAccuracy={0.58} />
+      <SplitPaneStudy question={PRACTICE_ITEMS[0]} recentAccuracy={0.58} />
     </>
   );
 }

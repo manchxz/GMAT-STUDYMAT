@@ -6,10 +6,8 @@ import { buildScaffoldSequence, maxVisibleScaffoldLayers } from '@/lib/scaffold-
 type Props = {
   eli5: string;
   expert: string;
-  /** 0–1 recent accuracy — routes hint decay */
   recentAccuracy: number;
   userHintCap?: number;
-  /** Increment when user peels another layer — never exposes answer */
   onLayerOpen?: () => void;
 };
 

@@ -4,7 +4,7 @@ import { InterSans, JetMono } from '@/lib/fonts';
 
 export const metadata: Metadata = {
   title: 'GMAT Focus Trainer',
-  description: 'Adaptive study rail with contextual scaffolding.',
+  description: 'GMAT Focus practice with contextual scaffolding and timed items.',
 };
 
 export default function RootLayout({

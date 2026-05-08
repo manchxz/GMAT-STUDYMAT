@@ -1,8 +1,3 @@
-/**
- * Contextual scaffolding: hint depth decays as recentAccuracy improves on concept/skill.
- * Never exposes the answer — only theoretical layers (ELI5 → Expert).
- */
-
 export type ScaffoldLayer = 'eli5' | 'expert_framework' | 'none';
 
 export function maxVisibleScaffoldLayers(
@@ -21,7 +16,6 @@ export type ScaffoldContent = {
   expert: string;
 };
 
-/** Build ordered steps for UI (client removes lower steps as mastery rises) */
 export function buildScaffoldSequence(
   content: ScaffoldContent,
   visibleSteps: number

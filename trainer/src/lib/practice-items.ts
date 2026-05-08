@@ -1,7 +1,6 @@
 import type { RoutableQuestion } from '@/lib/adaptive-router';
 
-/** Demo bank for UI — replace with Prisma queries + your content pipeline */
-export type DemoQuestion = {
+export type PracticeItem = {
   routable: RoutableQuestion;
   stem: string;
   choices: { key: string; text: string }[];
@@ -12,11 +11,7 @@ export type DemoQuestion = {
   skillCode: string;
 };
 
-export const SKILL_THETAS_DEMO: Record<string, number> = {
-  NUMBER_PROPERTIES: 0.2,
-};
-
-export const DEMO_QUESTIONS: DemoQuestion[] = [
+export const PRACTICE_ITEMS: PracticeItem[] = [
   {
     routable: {
       id: 'q-np-001',

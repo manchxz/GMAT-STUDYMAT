@@ -7,7 +7,7 @@ export default function MockExamPage() {
       <main className="relative flex flex-1 flex-col">
         <div className="border-b px-12 py-4" style={{ borderColor: 'var(--border)' }}>
           <p className="font-mono text-[11px] uppercase tracking-[0.45em] text-[color:var(--muted)]">
-            Pearson VUE–inspired layout · unofficial mock polish
+            Test-center style layout · unofficial practice shell
           </p>
           <h1 className="mt-2 text-xl font-semibold">
             Graduate Management Admission Test™ — Practice Shell
@@ -18,8 +18,7 @@ export default function MockExamPage() {
           <div className="rounded border bg-[color:var(--panel)] p-16 shadow-xl" style={{ borderColor: 'var(--border)' }}>
             <p className="text-center font-mono text-sm tracking-[0.4em] text-[color:var(--muted)]">QUESTION 12 / 79</p>
             <p className="mt-14 text-lg leading-relaxed">
-              Demo shell only — wire adaptive router + question bank imports here for full CAT mocks.
-              High-contrast dark surfaces reduce burnout during prolonged sessions per brief.
+              Practice layout with high-contrast surfaces for long sessions. Question content is supplied by your routing layer and item bank.
             </p>
             <div className="mt-12 flex justify-center gap-12">
               <button
@@ -40,7 +39,7 @@ export default function MockExamPage() {
           </div>
 
           <p className="mt-10 pb-28 text-center text-[color:var(--muted)] text-xs">
-            <Link href="/study">← Return to adaptive study cockpit</Link>
+            <Link href="/study">← Back to study</Link>
           </p>
         </div>
       </main>

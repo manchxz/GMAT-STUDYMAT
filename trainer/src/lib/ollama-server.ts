@@ -1,5 +1,3 @@
-/** Server-only Ollama helpers — read env at request time (not build time). */
-
 export type OllamaChatMessage = {
   role: 'system' | 'user' | 'assistant';
   content: string;
@@ -44,7 +42,6 @@ export async function ollamaChat(opts: {
   model: string;
   baseUrl: string;
   messages: OllamaChatMessage[];
-  /** ms */
   timeoutMs?: number;
 }): Promise<{ content: string } | { error: string; status: number }> {
   const { model, baseUrl, messages, timeoutMs = 120_000 } = opts;

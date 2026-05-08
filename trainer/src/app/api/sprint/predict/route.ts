@@ -2,10 +2,6 @@ import { NextResponse } from 'next/server';
 import { predictCompositeDelta } from '@/lib/predictive-scoring';
 import type { SprintRollup } from '@/lib/time-analytics';
 
-/**
- * POST JSON:
- * { userId: string, rollup: SprintRollup, skillSnapshot: Record<string,{theta:number,recentAccuracy:number}>, priorComposite?: number }
- */
 export async function POST(req: Request) {
   try {
     const body = await req.json();

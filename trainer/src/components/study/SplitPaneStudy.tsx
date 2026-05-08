@@ -1,17 +1,16 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import type { DemoQuestion } from '@/lib/demo-questions';
-import { classifyAttemptPace, shouldFlagPanicGuess, shouldFlagOverInvest } from '@/lib/time-analytics';
+import type { PracticeItem } from '@/lib/practice-items';
 import { ConceptChatSidebar } from './ConceptChatSidebar';
 import { ConceptScaffold } from './ConceptScaffold';
 import { QuestionTimer } from './QuestionTimer';
-import { ErrorTagPicker, type ErrorTagId } from './ErrorTagPicker';
+import { ErrorTagPicker } from './ErrorTagPicker';
 
 type PaneTab = 'concept' | 'breakdown';
 
 type Props = {
-  question: DemoQuestion;
+  question: PracticeItem;
   recentAccuracy?: number;
   onAdvance?: () => void;
 };
@@ -42,23 +41,6 @@ export function SplitPaneStudy({
   const handleSubmit = () => {
     if (!selected || submitted) return;
     setSubmitted(true);
-    const tMs = Math.max(500, elapsedMs.current);
-    const pace = classifyAttemptPace({
-      timeMs: tMs || 1,
-      timeTargetMs: question.timeTargetSec * 1000,
-    });
-
-    /** Dev console hook — swap for POST /api/attempts */
-    console.info('[trainer] attempt', {
-      questionId: question.routable.id,
-      timeMs: tMs,
-      selected,
-      pace,
-      panicFlag: guessFlag || shouldFlagPanicGuess({ timeMs: tMs || 1, selectedKey: selected, correctKey: question.correctKey, isCorrect }),
-      overInvest: shouldFlagOverInvest({ timeMs: tMs || 1 }),
-      scaffoldSteps: scaffoldTouches,
-    });
-
     if (!isCorrect) setShowErrorTags(true);
     setPaneTab('breakdown');
   };
@@ -80,12 +62,11 @@ export function SplitPaneStudy({
 
   return (
     <div className="mx-auto grid min-h-[calc(100vh-140px)] max-w-[1480px] gap-6 px-4 pb-10 pt-8 lg:grid-cols-[minmax(0,3fr)_minmax(340px,2fr)]">
-      {/* ---------- Question column ---------- */}
       <section className="pane-shell flex flex-col p-6 lg:p-8">
         <header className="flex flex-wrap items-center justify-between gap-4 border-b pb-6" style={{ borderColor: 'var(--border)' }}>
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.35em] opacity-65">
-              Zero-struggle pane · QUANT demo
+              Quantitative · timed practice
             </p>
             <h1 className="mt-2 font-semibold text-2xl tracking-tight">{question.skillCode}</h1>
           </div>
@@ -194,9 +175,8 @@ export function SplitPaneStudy({
         </div>
       </section>
 
-      {/* ---------- Context / Explanation column ---------- */}
       <aside
-        id="trainer-right-pane"
+        id="study-context-pane"
         className="pane-shell flex max-h-[calc(100vh-120px)] flex-col lg:sticky lg:top-6"
       >
         <div className="flex shrink-0 border-b" style={{ borderColor: 'var(--border)' }}>
@@ -244,28 +224,28 @@ export function SplitPaneStudy({
           ) : (
             <div className="custom-scroll min-h-[320px] flex-1 overflow-y-auto p-6">
               <div className="space-y-4">
-              <p className="font-mono text-[10px] uppercase tracking-[0.35em] opacity-65">
-                Full solution radar
-              </p>
-              <div className="whitespace-pre-wrap font-study-body text-[color:var(--ink)]">
-                {question.breakdown}
-              </div>
-              {submitted && (
-                <p className="text-sm text-[color:var(--muted)]">
-                  You selected{' '}
-                  <strong>{selected ?? '—'}</strong>. Correct key:{' '}
-                  <strong className={isCorrect ? 'text-teal-300' : 'text-orange-300'}>{question.correctKey}</strong>
-                  {behaviorTagLogged && (
-                    <>
-                      {' '}
-                      · Logged behavior:{' '}
-                      <span className="font-mono text-[11px] uppercase tracking-[0.2em]">
-                        {behaviorTagLogged}
-                      </span>
-                    </>
-                  )}
+                <p className="font-mono text-[10px] uppercase tracking-[0.35em] opacity-65">
+                  Full solution radar
                 </p>
-              )}
+                <div className="whitespace-pre-wrap font-study-body text-[color:var(--ink)]">
+                  {question.breakdown}
+                </div>
+                {submitted && (
+                  <p className="text-sm text-[color:var(--muted)]">
+                    You selected{' '}
+                    <strong>{selected ?? '—'}</strong>. Correct key:{' '}
+                    <strong className={isCorrect ? 'text-teal-300' : 'text-orange-300'}>{question.correctKey}</strong>
+                    {behaviorTagLogged && (
+                      <>
+                        {' '}
+                        · Logged behavior:{' '}
+                        <span className="font-mono text-[11px] uppercase tracking-[0.2em]">
+                          {behaviorTagLogged}
+                        </span>
+                      </>
+                    )}
+                  </p>
+                )}
               </div>
             </div>
           )}

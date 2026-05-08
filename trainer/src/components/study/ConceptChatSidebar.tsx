@@ -8,7 +8,6 @@ type Props = {
   skillCode: string;
   conceptEli5: string;
   conceptExpert: string;
-  /** When false, server system prompt forbids revealing the MC key */
   submitted: boolean;
   questionKey: string;
   className?: string;
