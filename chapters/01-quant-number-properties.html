@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 01 · Number Properties — The Logic Field Guide</title>
+  <meta name="description" content="GMAT Focus Edition Number Properties chapter: primes, divisibility, parity, remainders, and the Zero Trap." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+</head>
+<body data-chapter="01-number-properties">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Chapter 01</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="../extras/cheatsheet.html">Cheatsheet</a>
+        <a href="appendix-trap-library.html">Traps</a>
+      </nav>
+    </header>
+
+    <!-- ============== CHAPTER OPENER ============== -->
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Block 01 <span class="dot">·</span> Quantitative <span class="dot">·</span> Chapter 01</div>
+      <h1 class="chapter-title">Number <em>Properties</em></h1>
+      <p class="chapter-deck">Primes are the universal solvent. Parity is your sign-and-counterexample radar. Zero is the trap that catches everyone who memorizes instead of thinks.</p>
+      <div class="chapter-meta">
+        <span>Reading time <b>≈ 38 min</b></span>
+        <span>Practice questions <b>10</b></span>
+        <span>Prerequisite <b>None</b></span>
+        <span>Unlocks <b>Ch. 02 · Algebraic Logic</b></span>
+      </div>
+    </section>
+
+    <div class="chapter-grid">
+
+      <aside class="chapter-side">
+        <div class="tier-toggles">
+          <button data-tier="eli5"   aria-pressed="true"><span>ELI5 tier</span><span class="glyph">☀</span></button>
+          <button data-tier="expert" aria-pressed="true"><span>Expert tier</span><span class="glyph">◈</span></button>
+        </div>
+
+        <h4>In this chapter</h4>
+        <ol>
+          <li><a href="#s-overview">Why number properties</a></li>
+          <li><a href="#s-foundation">Integers, factors, multiples</a></li>
+          <li><a href="#s-primes">Primes &amp; factorization</a></li>
+          <li><a href="#s-divisibility">Divisibility rules</a></li>
+          <li><a href="#s-parity">Parity &amp; sign</a></li>
+          <li><a href="#s-remainders">Remainders</a></li>
+          <li><a href="#s-worked">Worked examples</a></li>
+          <li><a href="#s-practice">Practice set</a></li>
+          <li><a href="#s-explanations">Explanations</a></li>
+          <li><a href="#s-errorlog">Error log</a></li>
+        </ol>
+      </aside>
+
+      <main class="chapter-main">
+
+        <!-- ============================================================ -->
+        <section id="s-overview">
+          <h2>Why number properties is the highest-ROI quant chapter</h2>
+          <p>Number properties is the chapter that pays the most for the least studying time. Roughly a third of all official Quant questions test a number-property concept — divisibility, primes, parity, remainders, the behavior of zero — either as the central skill or as the buried twist that breaks an otherwise easy problem. This is also the chapter where rote memorization fails fastest. You cannot brute-force a question that asks "is <code>n</code> prime?" if your only tool is a list of primes you memorized in eighth grade. You need a small, tight set of <em>structural rules</em>, applied with discipline.</p>
+
+          <p class="dropcap">This chapter teaches you those rules and, more importantly, teaches you the discipline. You will leave it able to glance at almost any number-property prompt and identify, within five seconds, which one of six structural lenses applies. That is the whole game. The arithmetic afterwards is trivial.</p>
+
+          <div class="glance">
+            <h4>What you will own by the end</h4>
+            <ul>
+              <li><span class="formula">Every integer &gt; 1 = a unique product of primes.</span> The Fundamental Theorem of Arithmetic. This is the entire chapter in one line.</li>
+              <li><span class="formula">Number of factors of N = (a+1)(b+1)(c+1)…</span> where <code>N = p<sup>a</sup> × q<sup>b</sup> × r<sup>c</sup>…</code></li>
+              <li><span class="formula">Even × anything = Even.  Odd × Odd = Odd.  Odd ± Odd = Even.</span></li>
+              <li><span class="formula">Divisibility by 3 or 9</span> &rarr; sum of digits. <span class="formula">By 4</span> &rarr; last two digits. <span class="formula">By 11</span> &rarr; alternating-digit difference.</li>
+              <li><span class="formula">Remainder of N ÷ d</span> is <em>always</em> in <code>{0, 1, …, d−1}</code>. Cycles are short. Find the cycle.</li>
+              <li><span class="formula">Zero is even, neither positive nor negative, and a multiple of everything.</span> Most traps live here.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-foundation">
+          <h2>Integers, factors, and multiples — the vocabulary tax</h2>
+          <p>You cannot reason about number properties if you confuse <em>factor</em> with <em>multiple</em>, or assume "integer" means "positive". Pay this vocabulary tax once, here, and never pay it again.</p>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the cookies.</strong> Imagine 12 cookies. The <em>factors</em> of 12 are the group sizes you can use to share them out perfectly with no crumbs left over: groups of 1, 2, 3, 4, 6, or 12. The <em>multiples</em> of 12 are what you get when you keep ordering more boxes of 12: 12, 24, 36, 48, and so on, forever.</p>
+            <p><strong>Example 2 · the storybook.</strong> A storybook has 24 pages. The <em>factors</em> of 24 are the chapter sizes the publisher could split it into evenly — 1, 2, 3, 4, 6, 8, 12, or 24 pages per chapter. The <em>multiples</em> of 24 are how many pages you would have if you ordered identical copies of the book: one copy is 24 pages, two copies is 48, three copies is 72, and so on.</p>
+            <p>Factors live <em>inside</em> a number (small, finite). Multiples live <em>outside</em> a number (big, infinite). Mixing them up is the most common rookie error in this chapter.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the formal logic</span>
+            <p>An <strong>integer</strong> is any whole number — positive, negative, or zero. The set is <code>{ …, −3, −2, −1, 0, 1, 2, 3, … }</code>. The GMAT will absolutely give you a problem where the unstated negative-or-zero case breaks your assumption.</p>
+            <p>For positive integers <code>a</code> and <code>b</code>, <code>a</code> is a <strong>factor</strong> (or <strong>divisor</strong>) of <code>b</code> if <code>b ÷ a</code> leaves no remainder. Equivalently, <code>b</code> is a <strong>multiple</strong> of <code>a</code>. The two terms describe the same relationship from opposite ends.</p>
+            <p>Two structural facts you must internalize: every positive integer is a factor of itself, and 1 is a factor of every positive integer. Both will appear in counting questions where the trap is to forget the endpoints.</p>
+          </div>
+
+          <h3>Counting the factors of a number</h3>
+          <p>Listing factors by hand is fine for 12. For 360 it wastes 90 seconds. There is a structural shortcut.</p>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the count formula</span>
+            <p>Take the prime factorization of <code>N</code>. Suppose <code>N = p<sup>a</sup> × q<sup>b</sup> × r<sup>c</sup></code>. Then the <strong>total number of positive factors</strong> of <code>N</code> is:</p>
+            <pre>(a + 1)(b + 1)(c + 1)</pre>
+            <p>Why? Because any factor of <code>N</code> must use somewhere between 0 and <code>a</code> copies of <code>p</code>, between 0 and <code>b</code> copies of <code>q</code>, etc. That gives <code>(a+1)</code> choices for the <code>p</code>-exponent, <code>(b+1)</code> for <code>q</code>, and so on. Multiply them.</p>
+            <p>Example: <code>360 = 2³ × 3² × 5¹</code>. Number of factors = <code>(3+1)(2+1)(1+1) = 24</code>. Done in 10 seconds.</p>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the sandwich shop.</strong> Imagine a sandwich shop with only three ingredients: bread, cheese, and ham. You can pick 0, 1, 2, or 3 slices of bread (4 choices). You can pick 0, 1, or 2 slices of cheese (3 choices). You can pick 0, 1, or 2 slices of ham (3 choices). The total number of unique sandwiches is <code>4 × 3 × 3 = 36</code>. Each unique sandwich is one unique factor of the number that has those exponents.</p>
+            <p><strong>Example 2 · the locker combo.</strong> Imagine a combination lock with three dials. Dial A has positions 0–3 (4 options), Dial B has positions 0–2 (3 options), Dial C has positions 0–1 (2 options). The total number of distinct lock combinations is <code>4 × 3 × 2 = 24</code>. Each combination corresponds to one factor of <code>N = 2³ × 3² × 5¹ = 360</code>. Same idea, same multiplication.</p>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-primes">
+          <h2>Primes &amp; prime factorization — the universal solvent</h2>
+          <p>If number properties is the highest-ROI chapter, prime factorization is the highest-ROI <em>technique</em> within it. Almost every "hard" number-property question you see on the official exam dissolves once you write the prime factorization of the relevant numbers.</p>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · primes are atoms.</strong> Think of primes (2, 3, 5, 7, 11, 13, …) as the chemical elements of math. Every other positive integer is a <em>compound</em> built from them. 12 is "two atoms of 2 and one atom of 3". 100 is "two atoms of 2 and two atoms of 5". Once you write a number as its atoms, every question about its divisibility, factor count, or square-ness becomes a question about counting atoms — much easier than reasoning about the compound.</p>
+            <p><strong>Example 2 · primes are Lego bricks.</strong> Primes are the basic Lego bricks of math. Every bigger number is a model snapped together from those bricks. The number 12 is a model made from a 2-brick, a 2-brick, and a 3-brick. The number 30 is a 2-brick, a 3-brick, and a 5-brick. And just like every Lego model can be broken back down into <em>only one</em> set of bricks, every number has <em>only one</em> prime recipe. That uniqueness is the whole reason this chapter works.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the Fundamental Theorem</span>
+            <p>The <strong>Fundamental Theorem of Arithmetic</strong> guarantees that every integer greater than 1 has exactly one prime factorization, up to ordering. This uniqueness is the structural reason the entire chapter works. Whenever a problem asks about divisibility, multiples, perfect squares, perfect cubes, or shared factors, your <em>first move</em> is to convert each relevant number into its prime factorization and reason in atoms.</p>
+            <p><strong>The primes you must recognize on sight (under 50):</strong></p>
+            <pre>2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47</pre>
+            <p>Memorize these. Not because the GMAT will ask you to recite them, but because you will waste seconds otherwise checking whether 27, 39, or 51 are prime. (They are not: <code>27 = 3³</code>, <code>39 = 3 × 13</code>, <code>51 = 3 × 17</code>.)</p>
+          </div>
+
+          <h3>Special-case primes the test loves</h3>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the four prime traps</span>
+            <ol>
+              <li><strong>1 is not prime.</strong> By definition, a prime has exactly two distinct positive factors: 1 and itself. The number 1 has only one factor. This is asked, in some form, on every single official practice test.</li>
+              <li><strong>2 is the only even prime.</strong> Every other even number is divisible by 2 and therefore composite. If a problem says "<code>p</code> is a prime greater than 2", it is telling you <code>p</code> is odd.</li>
+              <li><strong>The smallest prime is 2.</strong> If a problem asks for the smallest prime satisfying some condition, do not skip 2.</li>
+              <li><strong>Primes are positive.</strong> No negative number is prime. This eliminates whole classes of trap answers.</li>
+            </ol>
+          </div>
+
+          <h3>Perfect squares, perfect cubes, and the exponent-parity trick</h3>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · structural square / cube test</span>
+            <p>A positive integer is a <strong>perfect square</strong> if and only if every exponent in its prime factorization is <em>even</em>. A positive integer is a <strong>perfect cube</strong> if and only if every exponent is divisible by 3.</p>
+            <pre>144 = 2⁴ × 3²    →   4 even, 2 even   →   perfect square ✓
+200 = 2³ × 5²    →   3 odd                 →   not a perfect square ✗
+216 = 2³ × 3³    →   3, 3 → both ÷3        →   perfect cube ✓</pre>
+            <p>This is the cleanest test you have. Use it instead of trying to take square roots.</p>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · doubling the recipe.</strong> A perfect square is just <code>(something)²</code>. When you square a number, every prime "atom" gets doubled — one copy becomes two, two copies become four, three copies become six. That is why the exponents are always even. If you see an odd exponent in a number, you cannot have squared anything to land on it.</p>
+            <p><strong>Example 2 · the lonely brick.</strong> Imagine each prime in a number is a brick that must find a partner to form a pair. <code>200 = 2 × 2 × 2 × 5 × 5</code>. The two 5-bricks are paired up. Of the three 2-bricks, two pair up but one is left lonely. Because there is a lonely brick, 200 is <em>not</em> a perfect square. To make 200 a perfect square, the smallest fix is to give that lonely 2 a partner — multiply by 2 to get <code>400 = 2⁴ × 5² = 20²</code>.</p>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-divisibility">
+          <h2>Divisibility rules — your mental math kit</h2>
+          <p>You will not be allowed a calculator on the Quant section. (Data Insights gives you one; Quant does not.) These shortcuts let you decide whether a number is divisible by a small integer in one or two seconds, no scratch paper required.</p>
+
+          <div class="glance">
+            <h4>The seven rules to memorize cold</h4>
+            <ul>
+              <li><span class="formula">÷ 2</span> last digit is even (0, 2, 4, 6, 8).</li>
+              <li><span class="formula">÷ 3</span> digit sum is divisible by 3.</li>
+              <li><span class="formula">÷ 4</span> last <em>two</em> digits form a number divisible by 4.</li>
+              <li><span class="formula">÷ 5</span> last digit is 0 or 5.</li>
+              <li><span class="formula">÷ 6</span> divisible by both 2 and 3.</li>
+              <li><span class="formula">÷ 9</span> digit sum is divisible by 9.</li>
+              <li><span class="formula">÷ 11</span> alternating-digit sum (a − b + c − d…) is divisible by 11.</li>
+            </ul>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · why digit-sum works for 3 and 9</span>
+            <p>Every power of 10 leaves a remainder of 1 when divided by 9. So <code>1000a + 100b + 10c + d ≡ a + b + c + d (mod 9)</code>. That is why the digit sum tells you everything. The same logic explains the rule for 3, since 3 divides 9.</p>
+            <p>The rule for 11 follows from <code>10 ≡ −1 (mod 11)</code>: powers of 10 alternate between +1 and −1 modulo 11, so the alternating-digit sum captures the remainder.</p>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the cookies-and-9 leftover.</strong> Imagine you split 100 cookies into groups of 9. You get 11 full groups and 1 cookie left over. If you split 1000 cookies, you get 111 full groups and 1 cookie left over. Every power of 10 leaves <em>exactly one</em> cookie. So the total leftover from a number is just the sum of its digits. If those leftover cookies themselves split into groups of 9 perfectly, the original number does too.</p>
+            <p><strong>Example 2 · paying with bills for $9 toys.</strong> You walk into a toy store where every toy costs $9. You have $234. Every $100 bill buys 11 toys with $1 change. Every $10 buys 1 toy with $1 change. Every $1 is just $1 change. So your total change is <code>2($1) + 3($1) + 4($1) = $9</code>. That is exactly enough for one more toy. Because your "change" (the digit sum 2+3+4 = 9) is itself divisible by 9, the original number 234 is also divisible by 9.</p>
+          </div>
+
+          <h3>The "divisible by 6" trap and what to do about it</h3>
+
+          <div class="trap">
+            <span class="trap-label">Trap · divisibility by 6</span>
+            <p>Students see "divisible by 6" and check the digit sum (rule for 3). They forget to also check whether the last digit is even (rule for 2). A number divisible by 3 but ending in an odd digit — like 15, 21, 33 — is <strong>not</strong> divisible by 6. Always verify both conditions. See <a href="appendix-trap-library.html#trap-compound-divisibility">the Compound Divisibility Trap</a> in the Trap Library for more.</p>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-parity">
+          <h2>Parity &amp; sign — the radar that catches the Zero Trap</h2>
+          <p>Parity (odd vs. even) and sign (positive vs. negative vs. zero) are the simplest properties a number can have. The GMAT exploits this simplicity by burying parity and sign questions inside problems that <em>look</em> like they require algebra. They do not. They require parity logic.</p>
+
+          <div class="glance">
+            <h4>The parity-and-sign rule sheet</h4>
+            <ul>
+              <li><span class="formula">Even × anything = Even</span> &nbsp; (the absorbing rule)</li>
+              <li><span class="formula">Odd × Odd = Odd</span></li>
+              <li><span class="formula">Odd ± Odd = Even</span> &nbsp; <span class="formula">Even ± Even = Even</span> &nbsp; <span class="formula">Odd ± Even = Odd</span></li>
+              <li><span class="formula">Negative × Negative = Positive</span></li>
+              <li><span class="formula">0 is even.</span> 0 is neither positive nor negative. 0 is a multiple of every integer.</li>
+            </ul>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the food-coloring drop.</strong> "Even" is like a single drop of red food coloring in a bowl of clear water. The moment you add it, the whole bowl turns pink. One even number anywhere in a multiplication chain turns the whole product even. You only need to find <em>one</em> even factor to know the answer.</p>
+            <p><strong>Example 2 · a single yawn at a party.</strong> One person yawns at a party (one even number). One by one, everyone else yawns too. The product "catches" even-ness from a single source. So when you see <code>5 × 7 × 4 × 9 × 11 × 3</code>, you do not multiply anything — you spot the 4, declare the whole product even, and move on.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · why parity beats algebra</span>
+            <p>When a problem asks "is the expression <code>3a + 2b + 7</code> odd?", do not solve for <code>a</code> and <code>b</code>. Apply parity directly: <code>3a</code> is odd or even depending on <code>a</code>; <code>2b</code> is always even; 7 is odd. So the parity is determined by <code>a</code> alone. If <code>a</code> is even, the expression is <code>even + even + odd = odd</code>. If <code>a</code> is odd, it is <code>odd + even + odd = even</code>. Total problem time: 15 seconds.</p>
+          </div>
+
+          <h3>The Zero Trap — read this twice</h3>
+
+          <div class="trap">
+            <span class="trap-label">Trap · the Zero Trap</span>
+            <p>Zero breaks more GMAT problems than any other single value. Here are the four facts test-writers exploit:</p>
+            <ol>
+              <li><strong>Zero is even.</strong> Every "if <code>n</code> is even" statement <em>includes</em> <code>n = 0</code>.</li>
+              <li><strong>Zero is neither positive nor negative.</strong> So "<code>n &gt; 0</code>" and "<code>n &lt; 0</code>" both <em>exclude</em> zero. "<code>n ≥ 0</code>" includes it. Pay attention to that bar under the inequality.</li>
+              <li><strong>Zero is a multiple of every integer.</strong> So if a question asks "how many multiples of 7 are between −10 and 10?", the answer includes <code>−7, 0, 7</code> — three values, not two.</li>
+              <li><strong>Zero times anything is zero.</strong> So products and sums involving an unknown variable can collapse if that variable is allowed to be zero. In Data Sufficiency especially, always ask: "what if this variable is zero?"</li>
+            </ol>
+            <p>Cross-reference: <a href="appendix-trap-library.html#trap-zero">The Zero Trap (full appendix entry)</a>.</p>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the empty box.</strong> Zero is the math equivalent of an empty box. It has the rules of "a box" — it is even, it is an integer, it is a number — but it has none of the contents. Most rules in math (positivity, multiplicativity, sign) quietly assume your box has something in it. When zero shows up, those rules silently break — and the GMAT exists to catch you when they do.</p>
+            <p><strong>Example 2 · playing tag with no friends.</strong> Imagine you are told to play tag, and you have zero friends with you. You technically have a "team." All the tag rules — chase, tag, run — assume at least one other person is around. They quietly fail. Math rules behave the same way around zero: they assume some real number is there and break the moment it is replaced by nothing.</p>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-remainders">
+          <h2>Remainders — modular thinking without the modular notation</h2>
+          <p>Remainder questions look intimidating because they smell like number theory. They are not. They are the easiest place on the test to apply <em>structural thinking</em>: every remainder problem reduces to spotting a short, repeating cycle.</p>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the clock.</strong> A clock only has 12 numbers. If you start at 9 and add 5 hours, you do not land at 14 — you land at 2, because the clock <em>wraps around</em>. That wrap-around is exactly what a remainder is. The "clock size" is the divisor. Asking "remainder of 100 ÷ 7" is exactly the same as asking "where do I land on a 7-hour clock if I walk 100 steps forward?". Answer: 100 ÷ 7 = 14 r 2, so you land on 2.</p>
+            <p><strong>Example 2 · days of the week.</strong> There are 7 days in a week. If today is Sunday and someone asks what day it will be 30 days from now, do not count one by one. Compute 30 ÷ 7 = 4 r 2. Four full weeks bring you back to Sunday, then 2 more days lands you on Tuesday. The "size of the cycle" is 7. The remainder tells you where you stop inside the cycle.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the cycle-spotting algorithm</span>
+            <p>Most GMAT remainder problems take one of three forms. Recognize the form, then execute.</p>
+
+            <h4>Form 1 · Powers and remainders</h4>
+            <p>"What is the remainder when <code>3<sup>50</sup></code> is divided by 5?"</p>
+            <p>Compute the first few remainders and look for a cycle:</p>
+            <pre>3¹ ÷ 5 → remainder 3
+3² ÷ 5 → remainder 4    (since 9 = 5 × 1 + 4)
+3³ ÷ 5 → remainder 2    (27 = 5 × 5 + 2)
+3⁴ ÷ 5 → remainder 1    (81 = 5 × 16 + 1)
+3⁵ ÷ 5 → remainder 3    (cycle restarts)</pre>
+            <p>The cycle length is 4. So <code>3<sup>50</sup></code> has the same remainder as <code>3<sup>50 mod 4</sup> = 3<sup>2</sup></code>, which is 4. Done.</p>
+
+            <h4>Form 2 · Sum / product remainders</h4>
+            <p>If <code>a</code> leaves remainder <code>r₁</code> when divided by <code>n</code>, and <code>b</code> leaves remainder <code>r₂</code>, then <code>a + b</code> leaves remainder <code>(r₁ + r₂) mod n</code>, and <code>a × b</code> leaves remainder <code>(r₁ × r₂) mod n</code>. You never need to compute <code>a</code> or <code>b</code> themselves.</p>
+
+            <h4>Form 3 · "Divided by, the remainder is" word problems</h4>
+            <p>"When <code>n</code> is divided by 7, the remainder is 3. What is <code>n</code>?" Translate to: <code>n = 7k + 3</code> for some non-negative integer <code>k</code>. So <code>n ∈ {3, 10, 17, 24, …}</code>. Now you can reason about <code>n</code> using its full general form, not by guessing.</p>
+          </div>
+
+          <h3>The flowchart you should run on every remainder problem</h3>
+
+          <div class="flowchart">
+            <div class="fc-caption">Remainder Decision Flow</div>
+
+            <div class="flow-row">
+              <div class="flow-node start">Is the question about a power, a sum/product, or a "divided by" form?</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row">
+              <div class="flow-node decision">Power?<br/>(e.g. 3<sup>50</sup> ÷ 5)</div>
+              <div class="flow-node decision">Sum / Product?<br/>(combine remainders)</div>
+              <div class="flow-node decision">"Divided by" word form?<br/>(n = qd + r)</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row">
+              <div class="flow-node">Compute first 4–5 remainders. Spot the cycle length L.</div>
+              <div class="flow-node">Take remainders of each piece. Combine using <code>(r₁ + r₂) mod n</code> or <code>(r₁ × r₂) mod n</code>.</div>
+              <div class="flow-node">Write <code>n = qd + r</code>. List a few values. Use them.</div>
+            </div>
+            <div class="flow-arrow">↓ <span class="label">Result</span></div>
+            <div class="flow-row">
+              <div class="flow-node outcome">Reduce exponent mod L. Compute small power. Done.</div>
+              <div class="flow-node outcome">Single small modular arithmetic step.</div>
+              <div class="flow-node outcome">Substitute back into the question.</div>
+            </div>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · negative dividends</span>
+            <p>If a problem allows the dividend to be negative, the remainder convention can shift. By GMAT convention, the remainder is always in <code>{0, 1, …, d−1}</code> — non-negative — even if the dividend is negative. So <code>−7 ÷ 3</code> has remainder 2, not −1, because <code>−7 = 3 × (−3) + 2</code>. Most problems sidestep this, but be ready.</p>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-worked">
+          <h2>Worked examples — apply the structural lenses</h2>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 01 · Prime-factorization speed</div>
+            <p class="stem">If <code>N = 2³ × 3² × 5 × 7</code>, how many positive factors does <code>N</code> have?</p>
+            <ol>
+              <li>Identify that "number of factors" is the count formula's exact use case.</li>
+              <li>Read the exponents off the prime factorization: <code>3, 2, 1, 1</code>.</li>
+              <li>Add 1 to each: <code>4, 3, 2, 2</code>.</li>
+              <li>Multiply: <code>4 × 3 × 2 × 2 = 48</code>.</li>
+            </ol>
+            <p class="answer">Answer: <b>48</b>. Total time: under 20 seconds. No factor listing required.</p>
+          </div>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 02 · Parity inside an algebraic disguise</div>
+            <p class="stem">If <code>a</code>, <code>b</code>, and <code>c</code> are positive integers and <code>a + b = c</code>, which of the following must be true?
+              <br/>I. <code>a × b × c</code> is even.
+              <br/>II. <code>a + b + c</code> is even.
+              <br/>III. <code>a × c</code> is odd.</p>
+            <ol>
+              <li>This is parity, not algebra. Translate.</li>
+              <li><strong>Statement II:</strong> <code>a + b + c = (a + b) + c = c + c = 2c</code>. Always even. ✓</li>
+              <li><strong>Statement I:</strong> the parities of <code>a + b</code> and <code>c</code> are equal. If <code>a, b</code> are both odd, then <code>c = a + b</code> is even, so <code>abc</code> is even. If both even, <code>abc</code> is even. If one odd and one even, <code>c</code> is odd, but <code>abc</code> still has at least one even factor. Always even. ✓</li>
+              <li><strong>Statement III:</strong> not always. If <code>a = 1, b = 1, c = 2</code>, then <code>a × c = 2</code>, which is even. ✗</li>
+            </ol>
+            <p class="answer">Answer: <b>I and II only</b>.</p>
+          </div>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 03 · Remainder cycle</div>
+            <p class="stem">What is the units digit of <code>7<sup>83</sup></code>?</p>
+            <ol>
+              <li>The units digit is exactly the remainder when divided by 10. So this is a remainder-mod-10 problem on a power.</li>
+              <li>Compute the cycle: <code>7¹ → 7</code>; <code>7² → 49</code>, units 9; <code>7³ → 343</code>, units 3; <code>7⁴</code>, units 1; <code>7⁵</code>, units 7. Cycle length 4.</li>
+              <li>Reduce the exponent mod 4: <code>83 mod 4 = 3</code>.</li>
+              <li>So <code>7<sup>83</sup></code> has the same units digit as <code>7³</code>, which is 3.</li>
+            </ol>
+            <p class="answer">Answer: <b>3</b>.</p>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-practice" class="practice-set">
+          <h2>Practice set · 10 questions</h2>
+          <p>Each question links to its full explanation in the next section. Each explanation links back. Time yourself: target 90 seconds per question, hard cap 2 minutes.</p>
+
+          <article class="q-card" id="q-01">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>n</code> is a positive integer and <code>3n</code> is a multiple of 5, then <code>n</code> must be a multiple of which of the following?</p>
+              <ol class="choices">
+                <li>2</li>
+                <li>3</li>
+                <li>5</li>
+                <li>6</li>
+                <li>15</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-01">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-02">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>How many positive factors does 540 have?</p>
+              <ol class="choices">
+                <li>16</li>
+                <li>18</li>
+                <li>20</li>
+                <li>24</li>
+                <li>30</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-02">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-03">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>p</code> is a prime number greater than 3, what is the remainder when <code>p²</code> is divided by 12?</p>
+              <ol class="choices">
+                <li>0</li>
+                <li>1</li>
+                <li>3</li>
+                <li>5</li>
+                <li>7</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-03">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-04">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>x</code> and <code>y</code> are positive integers and <code>x × y</code> is even, which of the following <em>must</em> also be even?</p>
+              <p style="margin-top:.4rem">I. &nbsp; <code>x + y</code><br/>
+                 II. &nbsp;<code>x × y × (x + y)</code><br/>
+                 III. &nbsp;<code>x² + y²</code></p>
+              <ol class="choices">
+                <li>I only</li>
+                <li>II only</li>
+                <li>III only</li>
+                <li>I and III only</li>
+                <li>I, II, and III</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-04">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-05">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>What is the units digit of <code>17<sup>40</sup> × 23<sup>15</sup></code>?</p>
+              <ol class="choices">
+                <li>1</li>
+                <li>3</li>
+                <li>5</li>
+                <li>7</li>
+                <li>9</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-05">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-06">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>n = 2<sup>4</sup> × 3<sup>2</sup> × 5<sup>3</sup></code>, how many positive factors of <code>n</code> are perfect squares?</p>
+              <ol class="choices">
+                <li>4</li>
+                <li>6</li>
+                <li>8</li>
+                <li>12</li>
+                <li>18</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-06">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-07">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>The integer <code>n</code> leaves a remainder of 5 when divided by 7 and a remainder of 2 when divided by 5. Which of the following could be <code>n</code>?</p>
+              <ol class="choices">
+                <li>32</li>
+                <li>37</li>
+                <li>42</li>
+                <li>47</li>
+                <li>52</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-07">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-08">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>k</code> is a non-negative integer, which of the following is the smallest value of <code>k</code> for which <code>200 × k</code> is a perfect square?</p>
+              <ol class="choices">
+                <li>0</li>
+                <li>2</li>
+                <li>5</li>
+                <li>8</li>
+                <li>10</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-08">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-09">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>a</code> and <code>b</code> are positive integers with <code>a &gt; b</code> and <code>a × b = 84</code>, what is the largest possible value of <code>a − b</code>?</p>
+              <ol class="choices">
+                <li>83</li>
+                <li>78</li>
+                <li>40</li>
+                <li>17</li>
+                <li>5</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-09">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-10">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>How many integers between 1 and 200 inclusive are divisible by neither 2 nor 5?</p>
+              <ol class="choices">
+                <li>40</li>
+                <li>60</li>
+                <li>80</li>
+                <li>100</li>
+                <li>120</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-10">Solution →</a>
+          </article>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-explanations" class="explanations">
+          <h2>Explanations · with structural reasoning</h2>
+
+          <article class="x-card" id="x-01">
+            <div class="x-head"><span>Explanation · 01</span><a class="back-link" href="#q-01">↑ back to Q01</a></div>
+            <div class="answer-pill">Answer · C · 5</div>
+            <p>Apply prime-factor logic. <code>3n</code> is a multiple of 5 means 5 appears in the prime factorization of <code>3n</code>. Since 5 does not appear in 3, it must appear in <code>n</code>. Therefore <code>n</code> is a multiple of 5.</p>
+            <p>This is a clean application of the Fundamental Theorem of Arithmetic: primes do not appear or disappear from a product, so any prime in the product must come from one of the factors. Trap to avoid: do <em>not</em> conclude <code>n</code> is a multiple of 15. The 3 already lives in the 3, so <code>n</code> only needs the 5.</p>
+          </article>
+
+          <article class="x-card" id="x-02">
+            <div class="x-head"><span>Explanation · 02</span><a class="back-link" href="#q-02">↑ back to Q02</a></div>
+            <div class="answer-pill">Answer · D · 24</div>
+            <p>Prime-factor 540: <code>540 = 4 × 135 = 2² × 27 × 5 = 2² × 3³ × 5¹</code>. Apply the count formula: <code>(2+1)(3+1)(1+1) = 3 × 4 × 2 = 24</code>.</p>
+          </article>
+
+          <article class="x-card" id="x-03">
+            <div class="x-head"><span>Explanation · 03</span><a class="back-link" href="#q-03">↑ back to Q03</a></div>
+            <div class="answer-pill">Answer · B · 1</div>
+            <p>Any prime <code>p &gt; 3</code> is not divisible by 2 or by 3. So <code>p</code> is one more or one less than a multiple of 6. Write <code>p = 6k ± 1</code>. Then <code>p² = 36k² ± 12k + 1</code>. Both <code>36k²</code> and <code>12k</code> are divisible by 12, so <code>p²</code> leaves remainder <strong>1</strong> when divided by 12.</p>
+            <p>Test it: <code>5² = 25 = 12 × 2 + 1</code>; <code>7² = 49 = 12 × 4 + 1</code>; <code>11² = 121 = 12 × 10 + 1</code>. The pattern holds.</p>
+          </article>
+
+          <article class="x-card" id="x-04">
+            <div class="x-head"><span>Explanation · 04</span><a class="back-link" href="#q-04">↑ back to Q04</a></div>
+            <div class="answer-pill">Answer · B · II only</div>
+            <p>"<code>x × y</code> is even" means at least one of <code>x</code>, <code>y</code> is even. Test each statement structurally.</p>
+            <p><strong>Statement II</strong> contains <code>x × y</code> as a factor. We are told <code>xy</code> is even, so <code>xy × (x + y)</code> is even × anything = <strong>even</strong>. Always. ✓</p>
+            <p><strong>Statement I</strong> fails by counterexample: <code>x = 2, y = 1</code> gives <code>x + y = 3</code>, odd. ✗</p>
+            <p><strong>Statement III</strong> fails by the same counterexample: <code>4 + 1 = 5</code>, odd. ✗</p>
+            <p>The structural insight: any expression that <em>contains</em> the factor <code>xy</code> inherits the parity of <code>xy</code>. Sums and differences of <code>x</code> and <code>y</code> do not — they depend on individual parities, which the constraint does not pin down.</p>
+          </article>
+
+          <article class="x-card" id="x-05">
+            <div class="x-head"><span>Explanation · 05</span><a class="back-link" href="#q-05">↑ back to Q05</a></div>
+            <div class="answer-pill">Answer · D · 7</div>
+            <p>The units digit of a product is the product of units digits, mod 10. So we need the units digits of <code>17<sup>40</sup></code> and <code>23<sup>15</sup></code>, which are the same as the units digits of <code>7<sup>40</sup></code> and <code>3<sup>15</sup></code>.</p>
+            <p>Cycle for 7: 7, 9, 3, 1 (length 4). <code>40 mod 4 = 0</code>, so <code>7<sup>40</sup></code> ends in the 4th cycle slot, which is <strong>1</strong>.</p>
+            <p>Cycle for 3: 3, 9, 7, 1 (length 4). <code>15 mod 4 = 3</code>, so <code>3<sup>15</sup></code> ends in the 3rd slot, which is <strong>7</strong>.</p>
+            <p>Product of units digits: <code>1 × 7 = 7</code>.</p>
+          </article>
+
+          <article class="x-card" id="x-06">
+            <div class="x-head"><span>Explanation · 06</span><a class="back-link" href="#q-06">↑ back to Q06</a></div>
+            <div class="answer-pill">Answer · D · 12</div>
+            <p>A factor of <code>n = 2⁴ × 3² × 5³</code> has the form <code>2<sup>a</sup> × 3<sup>b</sup> × 5<sup>c</sup></code> with <code>0 ≤ a ≤ 4</code>, <code>0 ≤ b ≤ 2</code>, <code>0 ≤ c ≤ 3</code>. For it to be a perfect square, every exponent must be <em>even</em>.</p>
+            <p>Even values of <code>a</code> in <code>[0, 4]</code>: <code>{0, 2, 4}</code> → 3 choices. Even values of <code>b</code> in <code>[0, 2]</code>: <code>{0, 2}</code> → 2 choices. Even values of <code>c</code> in <code>[0, 3]</code>: <code>{0, 2}</code> → 2 choices.</p>
+            <p>Total: <code>3 × 2 × 2 = 12</code>.</p>
+          </article>
+
+          <article class="x-card" id="x-07">
+            <div class="x-head"><span>Explanation · 07</span><a class="back-link" href="#q-07">↑ back to Q07</a></div>
+            <div class="answer-pill">Answer · D · 47</div>
+            <p>Translate both conditions structurally rather than back-solving.</p>
+            <p>Condition 1: <code>n = 7k + 5</code> for some non-negative integer <code>k</code>. So <code>n ∈ {5, 12, 19, 26, 33, 40, 47, 54, …}</code>.</p>
+            <p>Condition 2: <code>n = 5m + 2</code>, so <code>n ∈ {2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, …}</code>.</p>
+            <p>The intersection of the two lists is <code>{12, 47, 82, …}</code> — values spaced by <code>lcm(5, 7) = 35</code>. Among the choices, only <strong>47</strong> appears.</p>
+            <p>Method note: back-solving works but takes longer. Structurally listing <code>n = 7k + 5</code> first (the larger modulus) and then filtering for <code>≡ 2 (mod 5)</code> is the cleanest path.</p>
+          </article>
+
+          <article class="x-card" id="x-08">
+            <div class="x-head"><span>Explanation · 08</span><a class="back-link" href="#q-08">↑ back to Q08</a></div>
+            <div class="answer-pill">Answer · A · 0 (the Zero Trap)</div>
+            <p>This is the Zero Trap in its purest form. <code>200 × 0 = 0</code>, and <code>0 = 0²</code> is a perfect square. So <code>k = 0</code> works, and 0 is smaller than every other choice.</p>
+            <p>Most students "feel" that the answer should be C · 2, because <code>200 × 2 = 400 = 20²</code>. That is correct for the smallest <em>positive</em> value. But the question said <strong>non-negative</strong>, which includes zero. Always read the constraint clause exactly. Cross-reference: <a href="appendix-trap-library.html#trap-zero">Zero Trap appendix entry</a>.</p>
+          </article>
+
+          <article class="x-card" id="x-09">
+            <div class="x-head"><span>Explanation · 09</span><a class="back-link" href="#q-09">↑ back to Q09</a></div>
+            <div class="answer-pill">Answer · A · 83</div>
+            <p>List the factor pairs of 84: <code>(1, 84), (2, 42), (3, 28), (4, 21), (6, 14), (7, 12)</code>. To maximize <code>a − b</code> (with <code>a &gt; b</code>), pick the most lopsided pair. That is <code>(84, 1)</code>, giving <code>84 − 1 = 83</code>.</p>
+            <p>Structural takeaway: "max difference of factor pair" always corresponds to the <code>(N, 1)</code> pair. "Min difference" always corresponds to the pair closest to <code>√N</code>.</p>
+          </article>
+
+          <article class="x-card" id="x-10">
+            <div class="x-head"><span>Explanation · 10</span><a class="back-link" href="#q-10">↑ back to Q10</a></div>
+            <div class="answer-pill">Answer · C · 80</div>
+            <p>Use complementary counting. Total integers from 1 to 200 is 200. Subtract those divisible by 2 or 5 (inclusion–exclusion):</p>
+            <pre>Divisible by 2:        200 / 2  = 100
+Divisible by 5:        200 / 5  = 40
+Divisible by both 10:  200 / 10 = 20
+Divisible by 2 or 5:   100 + 40 − 20 = 120
+Divisible by neither:  200 − 120 = 80</pre>
+          </article>
+        </section>
+
+        <!-- ============================================================ -->
+        <section id="s-errorlog">
+          <div class="error-log">
+            <h2>Error Log · Chapter 01</h2>
+            <p class="log-intro">Log every question you missed or had to guess on. Re-test each row in 7 days. The error log is the highest-leverage habit in this whole book.</p>
+
+            <div class="log-row head">
+              <div>Question #</div>
+              <div>What I missed (mistake type)</div>
+              <div>The correct structural approach</div>
+              <div>Re-test on (date)</div>
+            </div>
+
+            <div class="log-row"><input type="text" name="q1-q"   placeholder="e.g. Q03"/><input type="text" name="q1-m" placeholder="e.g. forgot 2 is the only even prime"/><input type="text" name="q1-c" placeholder="e.g. apply parity rule first"/><input type="date" name="q1-d"/></div>
+            <div class="log-row"><input type="text" name="q2-q"/><input type="text" name="q2-m"/><input type="text" name="q2-c"/><input type="date" name="q2-d"/></div>
+            <div class="log-row"><input type="text" name="q3-q"/><input type="text" name="q3-m"/><input type="text" name="q3-c"/><input type="date" name="q3-d"/></div>
+            <div class="log-row"><input type="text" name="q4-q"/><input type="text" name="q4-m"/><input type="text" name="q4-c"/><input type="date" name="q4-d"/></div>
+            <div class="log-row"><input type="text" name="q5-q"/><input type="text" name="q5-m"/><input type="text" name="q5-c"/><input type="date" name="q5-d"/></div>
+            <div class="log-row"><input type="text" name="q6-q"/><input type="text" name="q6-m"/><input type="text" name="q6-c"/><input type="date" name="q6-d"/></div>
+
+            <div class="log-actions">
+              <button data-action="save">Save</button>
+              <button class="secondary" data-action="export">Export CSV</button>
+              <button class="secondary" data-action="clear">Clear</button>
+              <span class="log-status"></span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-foot">
+          <a href="../index.html">← Previous<b>Contents</b></a>
+          <a href="02-quant-algebraic-logic.html" class="next">Next →<b>Ch. 02 · Algebraic Logic</b></a>
+        </nav>
+
+      </main>
+    </div>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+</body>
+</html>

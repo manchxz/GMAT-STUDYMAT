@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flashcards · The Logic Field Guide</title>
+  <meta name="description" content="GMAT formula and trap flashcards. Click a card to flip. Press space for next." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+  <style>
+    .card-controls { display: flex; gap: .8rem; align-items: center; flex-wrap: wrap; margin: 1rem 0 2rem; font-family: var(--mono); font-size: .78rem; letter-spacing: .15em; text-transform: uppercase; }
+    .card-controls button { font: inherit; background: var(--ink); color: var(--paper); border: none; padding: .55rem 1rem; cursor: pointer; font-weight: 700; }
+    .card-controls button:hover { background: var(--vermillion); }
+    .card-controls button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+    .card-controls .progress { font-family: var(--mono); color: var(--ink-mute); }
+    .card-controls select { font: inherit; background: var(--paper); color: var(--ink); border: 1px solid var(--ink); padding: .5rem .7rem; cursor: pointer; }
+
+    .card-stage { perspective: 1400px; max-width: 600px; margin: 0 auto; }
+    .card { position: relative; width: 100%; aspect-ratio: 8 / 5; cursor: pointer; transform-style: preserve-3d; transition: transform .55s var(--ease); }
+    .card.flipped { transform: rotateY(180deg); }
+    .card-face { position: absolute; inset: 0; backface-visibility: hidden; padding: 2.4rem 2rem; border: 2px solid var(--ink); background: var(--paper); display: flex; flex-direction: column; justify-content: center; box-shadow: 0 6px 0 var(--paper-edge); }
+    .card-face.back { background: var(--paper-deep); transform: rotateY(180deg); border-left: 6px solid var(--vermillion); }
+    .card-tag { font-family: var(--mono); font-size: .68rem; letter-spacing: .22em; text-transform: uppercase; color: var(--vermillion); font-weight: 700; }
+    .card-front .term { font-family: var(--display); font-size: clamp(1.4rem, 3.5vw, 2.2rem); font-weight: 600; line-height: 1.2; margin: .8rem 0 0; color: var(--ink); }
+    .card-back .definition { font-family: var(--body); font-size: 1.05rem; line-height: 1.55; margin: .8rem 0 0; color: var(--ink-soft); overflow-y: auto; }
+    .card-back .definition code { background: var(--paper); padding: .1em .35em; }
+    .card-hint { position: absolute; bottom: .8rem; right: 1.2rem; font-family: var(--mono); font-size: .65rem; color: var(--ink-faint); letter-spacing: .15em; text-transform: uppercase; }
+
+    .deck-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; }
+    .deck-nav button { font-family: var(--mono); font-size: .78rem; letter-spacing: .15em; text-transform: uppercase; padding: .8rem 1.2rem; background: transparent; border: 1px solid var(--ink); color: var(--ink); cursor: pointer; flex: 1; font-weight: 700; }
+    .deck-nav button:hover { background: var(--ink); color: var(--paper); }
+  </style>
+</head>
+<body data-chapter="flashcards">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Flashcards</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="diagnostic.html">Diagnostic</a>
+        <a href="cheatsheet.html">Cheatsheet</a>
+      </nav>
+    </header>
+
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Tool · 02 <span class="dot">·</span> Active Recall</div>
+      <h1 class="chapter-title">The <em>Flashcards</em></h1>
+      <p class="chapter-deck">Two decks: formulas and traps. Click the card to flip. Use the keyboard — Space flips, Arrow keys navigate. Spaced-recall friendly: cycle until everything feels boring.</p>
+      <div class="chapter-meta">
+        <span>Formulas <b>20 cards</b></span>
+        <span>Traps <b>12 cards</b></span>
+        <span>Recommended use <b>5 minutes / day</b></span>
+      </div>
+    </section>
+
+    <main style="max-width: 720px; margin: 0 auto;">
+      <div class="card-controls">
+        <label>Deck:
+          <select id="deck-select">
+            <option value="formulas">Formulas (20)</option>
+            <option value="traps">Traps (12)</option>
+          </select>
+        </label>
+        <button id="shuffle-btn">Shuffle</button>
+        <button class="ghost" id="reset-btn">Restart</button>
+        <span class="progress" id="progress"></span>
+      </div>
+
+      <div class="card-stage">
+        <div class="card" id="card">
+          <div class="card-face card-front">
+            <span class="card-tag" id="tag-front"></span>
+            <div class="term" id="term"></div>
+            <div class="card-hint">click to flip · space</div>
+          </div>
+          <div class="card-face card-back">
+            <span class="card-tag" id="tag-back">Definition</span>
+            <div class="definition" id="definition"></div>
+            <div class="card-hint">click to flip back</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="deck-nav">
+        <button id="prev-btn">← Previous</button>
+        <button id="next-btn">Next →</button>
+      </div>
+
+      <p style="margin-top: 2rem; font-family: var(--display); font-style: italic; color: var(--ink-mute); text-align: center;">
+        A card is "learned" when you can recall the back without flipping. Cycle through, marking nothing. When the deck feels boring, you have learned it.
+      </p>
+    </main>
+
+  </div>
+
+  <script src="../assets/textbook.js"></script>
+  <script>
+    const decks = {
+      formulas: [
+        { tag: 'Number Properties', term: 'Number of factors of N',                back: 'If <code>N = p<sup>a</sup> × q<sup>b</sup> × r<sup>c</sup></code>, then number of positive factors = <code>(a+1)(b+1)(c+1)</code>.' },
+        { tag: 'Number Properties', term: 'Perfect square test',                   back: 'A positive integer is a perfect square iff every exponent in its prime factorization is even.' },
+        { tag: 'Number Properties', term: 'Perfect cube test',                     back: 'A positive integer is a perfect cube iff every exponent in its prime factorization is divisible by 3.' },
+        { tag: 'Number Properties', term: 'Divisibility by 3 / 9',                 back: 'Sum of digits divisible by 3 / 9. Works because 10 ≡ 1 (mod 9).' },
+        { tag: 'Number Properties', term: 'Divisibility by 11',                    back: 'Alternating-digit sum (a − b + c − d…) divisible by 11.' },
+        { tag: 'Number Properties', term: 'Even × anything',                       back: '= Even. The "absorbing" rule. One even factor makes the whole product even.' },
+        { tag: 'Number Properties', term: 'p² mod 12 for prime p > 3',             back: 'Always 1. Because <code>p = 6k ± 1</code>, so <code>p²= 36k² ± 12k + 1 ≡ 1 (mod 12)</code>.' },
+        { tag: 'Algebraic Logic',   term: 'Inequality sign-flip rule',             back: 'When you multiply or divide both sides of an inequality by a negative, flip the sign.' },
+        { tag: 'Algebraic Logic',   term: 'Quadratic discriminant',                back: '<code>D = b² − 4ac</code>. <code>D &gt; 0</code>: two real roots. <code>D = 0</code>: one repeated root. <code>D &lt; 0</code>: no real roots.' },
+        { tag: 'Algebraic Logic',   term: 'Sum and product of roots',              back: 'For <code>ax² + bx + c = 0</code>: sum of roots = <code>−b/a</code>; product = <code>c/a</code>. (Vieta\'s formulas.)' },
+        { tag: 'Algebraic Logic',   term: 'Difference of squares',                 back: '<code>a² − b² = (a + b)(a − b)</code>. The most-used identity in GMAT algebra.' },
+        { tag: 'Algebraic Logic',   term: 'Absolute value as distance',            back: '<code>|x| = a</code> &rarr; <code>x = ±a</code>. <code>|x − k| &lt; r</code> &rarr; <code>x</code> is within <code>r</code> of <code>k</code>.' },
+        { tag: 'Word Problems',     term: 'Rate × time = distance',                back: '<code>d = r × t</code>. Always check units before computing.' },
+        { tag: 'Word Problems',     term: 'Combined work time',                    back: 'Two workers (a, b hours each): combined time = <code>(a × b) / (a + b)</code>.' },
+        { tag: 'Word Problems',     term: 'Combined rate (toward / apart)',        back: 'Combined rate = <code>r₁ + r₂</code>. Catch-up rate = <code>r_fast − r_slow</code>.' },
+        { tag: 'Word Problems',     term: 'Mixture conservation',                  back: 'Amount of substance = volume × concentration. Substance is conserved when mixing.' },
+        { tag: 'Data Sufficiency',  term: 'AD / BCE elimination',                  back: 'Test S1 alone first. If sufficient → A or D. If not → B, C, or E. Then test S2.' },
+        { tag: 'Data Sufficiency',  term: 'Sufficient = consistent',               back: 'Value question: one and only one numeric answer. Yes/No: always yes or always no.' },
+        { tag: 'Data Insights',     term: 'Triangulation rule',                    back: 'In MSR, the answer is at the intersection of 2+ tabs. Single-tab answers are usually traps.' },
+        { tag: 'Data Insights',     term: 'Mean vs. median',                       back: 'Mean is sensitive to outliers. Median is robust. When they differ, the data is skewed.' }
+      ],
+      traps: [
+        { tag: 'Trap · 01', term: 'The Zero Trap',              back: 'Zero is even, neither positive nor negative, and a multiple of every integer. Always ask "could this variable be zero?".' },
+        { tag: 'Trap · 02', term: 'Reverse Logic Trap',          back: '"A implies B" is not the same as "B implies A". Check the reverse before assuming.' },
+        { tag: 'Trap · 03', term: 'Extreme Word Trap',           back: 'Answer choices with "always", "never", "all", "none", "must" rarely match passages that say "most" or "tends to".' },
+        { tag: 'Trap · 04', term: 'Compound Divisibility Trap',  back: 'Divisibility by <code>k</code> requires divisibility by <em>each</em> prime-power factor of <code>k</code>. <code>n</code> div by 6 ⇔ div by 2 AND by 3.' },
+        { tag: 'Trap · 05', term: 'Extraneous Solution Trap',    back: 'Squaring both sides of an equation can introduce false solutions. Always plug back into the original.' },
+        { tag: 'Trap · 06', term: 'Outside-Scope Trap',          back: 'In RC and CR, the right answer is what the passage says — not what is true in the world. Eliminate real-world-true but unsupported choices.' },
+        { tag: 'Trap · 07', term: 'Opinion-as-Fact Trap',        back: 'In MSR, "we expect", "we anticipate", "I believe" are opinions, not facts. Use only fact-tagged tabs for factual questions.' },
+        { tag: 'Trap · 08', term: 'Units Trap',                  back: 'Different columns may use different units (millions vs. raw, percent vs. count). Read every parenthetical in headers.' },
+        { tag: 'Trap · 09', term: 'Truncated Axis Trap',         back: 'A bar chart whose y-axis does not start at 0 visually exaggerates differences. Always read the numerical values.' },
+        { tag: 'Trap · 10', term: 'C-Trap (Data Sufficiency)',   back: 'Two statements that look incomplete may not need each other. Always test each alone first.' },
+        { tag: 'Trap · 11', term: 'Sign-Flip Trap',              back: 'When multiplying or dividing an inequality, check the multiplier\'s sign. Flip if negative. If unknown sign, do not multiply.' },
+        { tag: 'Trap · 12', term: 'Less-Than Reversal Trap',     back: '"5 less than x" = <code>x − 5</code>, not <code>5 − x</code>. The number after "less than" is the one you subtract <em>from</em>.' }
+      ]
+    };
+
+    let current = { deck: 'formulas', index: 0, order: null };
+
+    function buildOrder(shuffle = false) {
+      const len = decks[current.deck].length;
+      current.order = Array.from({ length: len }, (_, i) => i);
+      if (shuffle) {
+        for (let i = len - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [current.order[i], current.order[j]] = [current.order[j], current.order[i]];
+        }
+      }
+    }
+
+    function render() {
+      const card = decks[current.deck][current.order[current.index]];
+      document.getElementById('tag-front').textContent = card.tag;
+      document.getElementById('term').innerHTML = card.term;
+      document.getElementById('definition').innerHTML = card.back;
+      document.getElementById('progress').textContent = `${current.index + 1} / ${current.order.length}`;
+      document.getElementById('card').classList.remove('flipped');
+    }
+
+    document.getElementById('card').addEventListener('click', () => {
+      document.getElementById('card').classList.toggle('flipped');
+    });
+
+    document.getElementById('next-btn').addEventListener('click', () => {
+      current.index = (current.index + 1) % current.order.length;
+      render();
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      current.index = (current.index - 1 + current.order.length) % current.order.length;
+      render();
+    });
+
+    document.getElementById('shuffle-btn').addEventListener('click', () => {
+      buildOrder(true);
+      current.index = 0;
+      render();
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      buildOrder(false);
+      current.index = 0;
+      render();
+    });
+
+    document.getElementById('deck-select').addEventListener('change', (e) => {
+      current.deck = e.target.value;
+      buildOrder(false);
+      current.index = 0;
+      render();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT') return;
+      if (e.code === 'Space') { e.preventDefault(); document.getElementById('card').classList.toggle('flipped'); }
+      else if (e.code === 'ArrowRight') { document.getElementById('next-btn').click(); }
+      else if (e.code === 'ArrowLeft')  { document.getElementById('prev-btn').click(); }
+    });
+
+    buildOrder(false);
+    render();
+  </script>
+</body>
+</html>

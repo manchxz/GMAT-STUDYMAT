@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cheatsheet · The Logic Field Guide</title>
+  <meta name="description" content="One-page printable GMAT Focus Edition cheatsheet covering every formula and trap in the textbook." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+  <style>
+    @page { size: A4 portrait; margin: 12mm; }
+
+    .cheat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; max-width: 1100px; margin: 0 auto; font-size: .9rem; }
+    @media (max-width: 760px) { .cheat-grid { grid-template-columns: 1fr; } }
+    .cheat-block { border: 1px solid var(--rule); padding: 1rem 1.2rem; background: var(--paper); break-inside: avoid; }
+    .cheat-block h3 { font-family: var(--mono); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--vermillion); margin: 0 0 .8rem; padding-bottom: .4rem; border-bottom: 1px solid var(--ink); font-weight: 700; }
+    .cheat-block ul { padding-left: 1.1rem; margin: 0; }
+    .cheat-block li { margin-bottom: .5rem; line-height: 1.45; font-size: .88rem; }
+    .cheat-block code { font-size: .9em; background: var(--paper-deep); padding: .05em .25em; }
+    .cheat-block strong { color: var(--vermillion-d); }
+
+    .cheat-header { text-align: center; margin: 0 auto 2rem; max-width: 1100px; }
+    .cheat-header h1 { font-family: var(--display); font-size: 2.6rem; margin: 0; }
+    .cheat-header h1 em { color: var(--vermillion); font-style: italic; }
+    .cheat-header p { font-family: var(--display); font-style: italic; color: var(--ink-soft); margin: .4rem 0 0; }
+    .cheat-header .stamp { font-family: var(--mono); font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; color: var(--mustard-d); font-weight: 700; }
+
+    @media print {
+      .book-header, nav, .cheat-print-hide { display: none !important; }
+      .cheat-grid { grid-template-columns: 1fr 1fr; gap: .6rem; font-size: .68rem; }
+      .cheat-block { padding: .55rem .7rem; }
+      .cheat-block h3 { font-size: .58rem; margin-bottom: .35rem; }
+      .cheat-block li { font-size: .68rem; margin-bottom: .25rem; line-height: 1.3; }
+      .cheat-header h1 { font-size: 1.6rem; margin: 0; }
+      .cheat-header p { font-size: .8rem; margin: .15rem 0 0; }
+      body { background: white !important; }
+    }
+  </style>
+</head>
+<body data-chapter="cheatsheet">
+  <div class="page">
+
+    <header class="book-header cheat-print-hide">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Cheatsheet</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="diagnostic.html">Diagnostic</a>
+        <a href="flashcards.html">Flashcards</a>
+        <button onclick="window.print()" style="font-family:var(--mono); font-size:.78rem; letter-spacing:.15em; text-transform:uppercase; padding:.5rem 1rem; background:var(--ink); color:var(--paper); border:none; cursor:pointer; font-weight:700;">Print</button>
+      </nav>
+    </header>
+
+    <div class="cheat-header">
+      <div class="stamp">Tool · 03 · One-Page Reference</div>
+      <h1>The <em>Cheatsheet</em></h1>
+      <p>Every formula, every trap, on a single sheet. Print at A4 portrait. Tape next to your monitor.</p>
+    </div>
+
+    <div class="cheat-grid">
+
+      <div class="cheat-block">
+        <h3>Number Properties</h3>
+        <ul>
+          <li>Factors of <code>N = p<sup>a</sup>q<sup>b</sup>r<sup>c</sup></code>: <code>(a+1)(b+1)(c+1)</code></li>
+          <li>Perfect square: all exponents even. Perfect cube: all exponents divisible by 3.</li>
+          <li>Primes &lt; 50: 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47</li>
+          <li>2 is the only even prime; 1 is not prime.</li>
+          <li>Even × anything = Even. Odd × Odd = Odd. Odd ± Odd = Even.</li>
+          <li>For prime <code>p &gt; 3</code>: <code>p² ≡ 1 (mod 12)</code>.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Divisibility &amp; Remainders</h3>
+        <ul>
+          <li>Div by 3 / 9: digit sum div by 3 / 9.</li>
+          <li>Div by 4: last two digits div by 4. Div by 8: last three.</li>
+          <li>Div by 11: alternating-digit sum div by 11.</li>
+          <li>Div by 6: must be div by both 2 AND 3. (Compound trap.)</li>
+          <li>Powers cycle: find length L, reduce exponent mod L.</li>
+          <li>Sum / product remainders: combine remainders, then mod.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Algebraic Logic</h3>
+        <ul>
+          <li>Inequality flip rule: × or ÷ by negative reverses sign.</li>
+          <li>Discriminant <code>D = b² − 4ac</code>: &gt;0 two roots, =0 one, &lt;0 none.</li>
+          <li>Vieta: sum of roots <code>= −b/a</code>; product <code>= c/a</code>.</li>
+          <li>Difference of squares: <code>a² − b² = (a+b)(a−b)</code>.</li>
+          <li>Perfect square: <code>(p+q)² = p² + 2pq + q²</code>.</li>
+          <li>Identity: <code>(p+q)² − (p−q)² = 4pq</code>.</li>
+          <li><code>|x| = a</code> &rarr; <code>x = ±a</code>; <code>|x − k| &lt; r</code> &rarr; <code>k − r &lt; x &lt; k + r</code>.</li>
+          <li>For <code>0 &lt; x &lt; 1</code>: <code>x² &lt; x &lt; √x</code> and <code>1/x &gt; 1</code>.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Word Problems</h3>
+        <ul>
+          <li>Rate × Time = Distance / Work.</li>
+          <li>Combined work time: <code>(a × b) / (a + b)</code>.</li>
+          <li>Toward / apart: combined rate = <code>r₁ + r₂</code>.</li>
+          <li>Catch-up rate: <code>r_fast − r_slow</code>.</li>
+          <li>Boat in still water = <code>(downstream + upstream) / 2</code>.</li>
+          <li>Mixture: substance = volume × concentration; substance is conserved.</li>
+          <li>"5 less than <code>x</code>" = <code>x − 5</code>, never <code>5 − x</code>.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Critical Reasoning</h3>
+        <ul>
+          <li>Argument = Premise(s) + Assumption + Conclusion.</li>
+          <li>Find conclusion first. Pre-think the gap before reading choices.</li>
+          <li>Strengthen = reinforce the assumption; Weaken = cut it.</li>
+          <li>Common flaws: correlation/causation, alternate cause, sample bias, equivocation, percent vs. number, necessary vs. sufficient.</li>
+          <li>"Comparison group" answers are classic strengtheners.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Reading Comprehension</h3>
+        <ul>
+          <li>Six archetypes: Phenomenon &amp; Explanation; Old vs. New; Argument &amp; Counter; Comparison; Problem &amp; Solution; Survey.</li>
+          <li>Map paragraphs by purpose, not content.</li>
+          <li>Question types: Main Idea, Detail, Inference, Function, Tone, Structure.</li>
+          <li>Right answer = supported by passage. Outside-scope choices are wrong even if true in real life.</li>
+          <li>Beware extreme words: "always", "never", "only".</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Data Sufficiency</h3>
+        <ul>
+          <li>Test S1 alone first → A or D vs. B/C/E.</li>
+          <li>Then S2 alone → narrow further.</li>
+          <li>Combine only if both fail individually.</li>
+          <li>Value: sufficient = exactly one numeric answer.</li>
+          <li>Yes/No: sufficient = always yes or always no.</li>
+          <li>C-Trap: do not combine before testing alone.</li>
+          <li>Always check: could this variable be zero / fraction / negative?</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Multi-Source Reasoning</h3>
+        <ul>
+          <li>Read all 3 tabs before answering. Build a what-lives-where index.</li>
+          <li>Most answers triangulate across 2+ tabs.</li>
+          <li>Distinguish FACT vs. OPINION in each tab.</li>
+          <li>"Cannot be determined" is a real answer. Use it.</li>
+          <li>Time budget: 6–7 minutes for the whole set.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Table Analysis</h3>
+        <ul>
+          <li>Read column headers and units before any row.</li>
+          <li>Sort by the column the question cares about.</li>
+          <li>Median: sort, take middle row (or average of two middles for even count).</li>
+          <li>Watch boundary words: "above" / "at least" / "more than" — strict vs. non-strict.</li>
+          <li>Mean is sensitive to outliers; median is robust.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Graphics Interpretation</h3>
+        <ul>
+          <li>Read both axes (and units) before any data point.</li>
+          <li>Truncated y-axis exaggerates differences. Compute <code>(big − small) / small</code>.</li>
+          <li>Pie chart: shares of a whole. Bar chart: counts or shares (check axis).</li>
+          <li>Scatter trends: positive / negative / no correlation. Causation is not correlation.</li>
+          <li>Time budget: 2:30 to 3:00 per chart.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>Strategy · The Skip</h3>
+        <ul>
+          <li>90-second rule: stuck at 90s → eliminate, guess, move on.</li>
+          <li>Per-Q budget: Quant ≈ 2:09; Verbal ≈ 1:57; DI ≈ 2:15.</li>
+          <li>Sunk-cost prompt: "would I now begin this with only the time left?"</li>
+          <li>Bookmarks (3): save for on-the-fence and high-stakes Qs.</li>
+          <li>Mid-section checkpoint: reset pace if &gt; 2 min off.</li>
+        </ul>
+      </div>
+
+      <div class="cheat-block">
+        <h3>The 12 Trap Names</h3>
+        <ul>
+          <li>1 · Zero Trap (var could be 0)</li>
+          <li>2 · Reverse Logic Trap (A→B vs. B→A)</li>
+          <li>3 · Extreme Word Trap ("all"/"never")</li>
+          <li>4 · Compound Divisibility (need every prime power)</li>
+          <li>5 · Extraneous Solution (after squaring)</li>
+          <li>6 · Outside Scope (real-world-true but unsupported)</li>
+          <li>7 · Opinion as Fact (MSR emails)</li>
+          <li>8 · Units Trap (mixed units)</li>
+          <li>9 · Truncated Axis (eyeball lies)</li>
+          <li>10 · C-Trap (over-combining DS)</li>
+          <li>11 · Sign-Flip Trap (inequality)</li>
+          <li>12 · Less-Than Reversal ("5 less than x")</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+</body>
+</html>

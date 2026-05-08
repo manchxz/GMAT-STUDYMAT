@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diagnostic · The Logic Field Guide</title>
+  <meta name="description" content="20-question placement diagnostic for the GMAT Focus Edition. Routes you to your weakest chapters." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+  <style>
+    .diag-q { border-top: 1px solid var(--rule); padding: 1.5rem 0; }
+    .diag-q .q-tag { font-family: var(--mono); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--vermillion); font-weight: 700; }
+    .diag-q .q-num { font-family: var(--display); font-weight: 600; font-size: 1.1rem; }
+    .diag-q p { margin: .5rem 0; }
+    .diag-q .choices { list-style: none; padding: 0; margin: .5rem 0; }
+    .diag-q .choices li { margin-bottom: .35rem; }
+    .diag-q .choices label { display: flex; gap: .8rem; padding: .55rem .8rem; border: 1px solid var(--rule); cursor: pointer; font-family: var(--body); font-size: .98rem; transition: all .15s var(--ease); }
+    .diag-q .choices label:hover { border-color: var(--vermillion); background: color-mix(in srgb, var(--vermillion) 5%, var(--paper)); }
+    .diag-q .choices input { accent-color: var(--vermillion); }
+    .diag-cta { margin-top: 2.5rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    .diag-cta button { font-family: var(--mono); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; padding: .8rem 1.5rem; background: var(--ink); color: var(--paper); border: none; cursor: pointer; font-weight: 700; }
+    .diag-cta button:hover { background: var(--vermillion); }
+    .diag-cta button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+    .diag-result { display: none; border: 2px solid var(--ink); padding: 2rem; margin-top: 2rem; background: var(--paper-deep); }
+    .diag-result.show { display: block; }
+    .diag-result h2 { margin-top: 0; }
+    .diag-result h2::before { content: ''; counter-increment: none; display: none; }
+    .diag-result .score { font-family: var(--display); font-size: 3rem; font-weight: 600; color: var(--vermillion); margin: 0; line-height: 1; }
+    .diag-result .ranks { display: grid; gap: .4rem; margin: 1.5rem 0; }
+    .diag-result .rank-row { display: grid; grid-template-columns: 30px 1fr auto auto; gap: 1rem; align-items: center; padding: .6rem .8rem; background: var(--paper); border: 1px solid var(--rule); }
+    .diag-result .rank-row .rank-num { font-family: var(--mono); font-size: .72rem; letter-spacing: .15em; color: var(--ink-mute); font-weight: 700; }
+    .diag-result .rank-row .ch-name { font-family: var(--display); font-size: 1.05rem; font-weight: 600; }
+    .diag-result .rank-row .pct { font-family: var(--mono); font-size: .85rem; color: var(--ink-soft); }
+    .diag-result .rank-row.weak { border-left: 4px solid var(--vermillion); }
+    .diag-result .rank-row a { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; padding: .4rem .7rem; border: 1px solid var(--ink); color: var(--ink); border-bottom: 1px solid var(--ink); }
+    .diag-result .rank-row a:hover { background: var(--ink); color: var(--paper); }
+  </style>
+</head>
+<body data-chapter="diagnostic">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Diagnostic</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="flashcards.html">Flashcards</a>
+        <a href="cheatsheet.html">Cheatsheet</a>
+      </nav>
+    </header>
+
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Tool · 01 <span class="dot">·</span> Placement</div>
+      <h1 class="chapter-title">The <em>Diagnostic</em></h1>
+      <p class="chapter-deck">Twenty short questions. Roughly two per chapter. We do not grade you on score — we grade you on <em>which chapters you should study first</em>.</p>
+      <div class="chapter-meta">
+        <span>Time <b>≈ 25 min</b></span>
+        <span>Questions <b>20</b></span>
+        <span>Output <b>ranked weak-area list</b></span>
+      </div>
+    </section>
+
+    <main style="max-width: 760px; margin: 0 auto;">
+      <p>Answer all 20 questions. When you click <b>Score</b>, your answers are graded locally (no data sent anywhere) and you get a ranked list of chapters from your weakest to your strongest. Start with the weakest.</p>
+
+      <form id="diagnostic-form">
+
+        <!-- 20 questions follow, 2 per chapter. The data-ch attribute maps to chapter id. -->
+
+        <div class="diag-q" data-ch="01" data-correct="C">
+          <div class="q-tag">Q01 · Ch. 01 · Number Properties</div>
+          <p>If <code>n = 2³ × 3 × 5²</code>, how many positive factors does <code>n</code> have?</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q01" value="A"/>10</label></li>
+            <li><label><input type="radio" name="q01" value="B"/>16</label></li>
+            <li><label><input type="radio" name="q01" value="C"/>24</label></li>
+            <li><label><input type="radio" name="q01" value="D"/>30</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="01" data-correct="B">
+          <div class="q-tag">Q02 · Ch. 01 · Number Properties</div>
+          <p>What is the units digit of <code>3<sup>27</sup></code>?</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q02" value="A"/>1</label></li>
+            <li><label><input type="radio" name="q02" value="B"/>7</label></li>
+            <li><label><input type="radio" name="q02" value="C"/>3</label></li>
+            <li><label><input type="radio" name="q02" value="D"/>9</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="02" data-correct="C">
+          <div class="q-tag">Q03 · Ch. 02 · Algebraic Logic</div>
+          <p>If <code>−4x + 5 &lt; 13</code>, then:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q03" value="A"/>x &lt; −2</label></li>
+            <li><label><input type="radio" name="q03" value="B"/>x &lt; 2</label></li>
+            <li><label><input type="radio" name="q03" value="C"/>x &gt; −2</label></li>
+            <li><label><input type="radio" name="q03" value="D"/>x &gt; 2</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="02" data-correct="A">
+          <div class="q-tag">Q04 · Ch. 02 · Algebraic Logic</div>
+          <p>If <code>x² + 6x + 9 = 0</code>, then <code>x</code> equals:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q04" value="A"/>−3 only</label></li>
+            <li><label><input type="radio" name="q04" value="B"/>3 only</label></li>
+            <li><label><input type="radio" name="q04" value="C"/>±3</label></li>
+            <li><label><input type="radio" name="q04" value="D"/>0</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="03" data-correct="C">
+          <div class="q-tag">Q05 · Ch. 03 · Word Problems</div>
+          <p>Worker A finishes a job in 6 hrs alone, Worker B in 12 hrs alone. Working together, they finish in:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q05" value="A"/>3 hrs</label></li>
+            <li><label><input type="radio" name="q05" value="B"/>3.5 hrs</label></li>
+            <li><label><input type="radio" name="q05" value="C"/>4 hrs</label></li>
+            <li><label><input type="radio" name="q05" value="D"/>9 hrs</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="03" data-correct="B">
+          <div class="q-tag">Q06 · Ch. 03 · Word Problems</div>
+          <p>A 100 mL solution is 30% acid. To dilute to 20% acid, how much water must be added?</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q06" value="A"/>30 mL</label></li>
+            <li><label><input type="radio" name="q06" value="B"/>50 mL</label></li>
+            <li><label><input type="radio" name="q06" value="C"/>70 mL</label></li>
+            <li><label><input type="radio" name="q06" value="D"/>100 mL</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="04" data-correct="B">
+          <div class="q-tag">Q07 · Ch. 04 · Critical Reasoning</div>
+          <p>Argument: "Workers who eat breakfast are leaner than those who skip. Therefore, eating breakfast causes weight loss." Best weakener:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q07" value="A"/>Breakfast cereals are high in sugar.</label></li>
+            <li><label><input type="radio" name="q07" value="B"/>Breakfast eaters tend to exercise more, which independently affects weight.</label></li>
+            <li><label><input type="radio" name="q07" value="C"/>The study lasted 12 weeks.</label></li>
+            <li><label><input type="radio" name="q07" value="D"/>Breakfast is the most important meal.</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="04" data-correct="C">
+          <div class="q-tag">Q08 · Ch. 04 · Critical Reasoning</div>
+          <p>A bookstore raised prices 20% and revenue rose 15% even though sales volume fell. Best explanation:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q08" value="A"/>Sales volume rose.</label></li>
+            <li><label><input type="radio" name="q08" value="B"/>The price hike caused a marketing surge.</label></li>
+            <li><label><input type="radio" name="q08" value="C"/>The volume drop was small enough that the price hike more than compensated.</label></li>
+            <li><label><input type="radio" name="q08" value="D"/>Customers do not respond to prices.</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="05" data-correct="B">
+          <div class="q-tag">Q09 · Ch. 05 · Reading Comp</div>
+          <p>An RC passage opens "For decades, biologists believed X. Recent research, however, has cast doubt on X." This passage's archetype is most likely:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q09" value="A"/>Argument &amp; Counter-Argument</label></li>
+            <li><label><input type="radio" name="q09" value="B"/>Old View vs. New View</label></li>
+            <li><label><input type="radio" name="q09" value="C"/>Survey / Catalog</label></li>
+            <li><label><input type="radio" name="q09" value="D"/>Comparison / Two-Concept</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="05" data-correct="A">
+          <div class="q-tag">Q10 · Ch. 05 · Reading Comp</div>
+          <p>An answer choice in an RC inference question reads "All economists prior to 1980 ignored institutional differences." The passage said "most." This choice is most likely:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q10" value="A"/>Wrong — extreme word trap</label></li>
+            <li><label><input type="radio" name="q10" value="B"/>Right — close paraphrase</label></li>
+            <li><label><input type="radio" name="q10" value="C"/>Cannot be determined</label></li>
+            <li><label><input type="radio" name="q10" value="D"/>Right if the passage agrees with it</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="06" data-correct="C">
+          <div class="q-tag">Q11 · Ch. 06 · Data Sufficiency</div>
+          <p>What is the value of integer <code>n</code>?<br/>(1) <code>n²= 49</code> &nbsp;&nbsp; (2) <code>n &gt; 0</code></p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q11" value="A"/>(1) alone sufficient</label></li>
+            <li><label><input type="radio" name="q11" value="B"/>(2) alone sufficient</label></li>
+            <li><label><input type="radio" name="q11" value="C"/>Both together sufficient; neither alone</label></li>
+            <li><label><input type="radio" name="q11" value="D"/>Each alone sufficient</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="06" data-correct="D">
+          <div class="q-tag">Q12 · Ch. 06 · Data Sufficiency</div>
+          <p>Is <code>x &gt; y</code>?<br/>(1) <code>x − y &gt; 0</code> &nbsp;&nbsp; (2) <code>3x &gt; 3y</code></p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q12" value="A"/>(1) alone sufficient</label></li>
+            <li><label><input type="radio" name="q12" value="B"/>(2) alone sufficient</label></li>
+            <li><label><input type="radio" name="q12" value="C"/>Both together sufficient; neither alone</label></li>
+            <li><label><input type="radio" name="q12" value="D"/>Each alone sufficient</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="07" data-correct="A">
+          <div class="q-tag">Q13 · Ch. 07 · MSR</div>
+          <p>An MSR email tab says "we expect Q4 to grow 20%". The data tab shows Q4 actual growth of 8%. The question asks "what was Q4 growth?" Best answer:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q13" value="A"/>8% (use the data tab, not the email)</label></li>
+            <li><label><input type="radio" name="q13" value="B"/>20% (the VP said so)</label></li>
+            <li><label><input type="radio" name="q13" value="C"/>14% (average them)</label></li>
+            <li><label><input type="radio" name="q13" value="D"/>Cannot be determined</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="07" data-correct="B">
+          <div class="q-tag">Q14 · Ch. 07 · MSR</div>
+          <p>You are starting an MSR question with three tabs. Best approach:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q14" value="A"/>Read Tab 1, answer Q1; read Tab 2, answer Q2; etc.</label></li>
+            <li><label><input type="radio" name="q14" value="B"/>Skim all three tabs first, build a what-lives-where index, then answer.</label></li>
+            <li><label><input type="radio" name="q14" value="C"/>Read only the tab the question references.</label></li>
+            <li><label><input type="radio" name="q14" value="D"/>Guess on all three sub-questions.</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="08" data-correct="C">
+          <div class="q-tag">Q15 · Ch. 08 · Table Analysis</div>
+          <p>Five values: 60, 70, 80, 90, 100. The median is:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q15" value="A"/>60</label></li>
+            <li><label><input type="radio" name="q15" value="B"/>70</label></li>
+            <li><label><input type="radio" name="q15" value="C"/>80</label></li>
+            <li><label><input type="radio" name="q15" value="D"/>90</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="08" data-correct="A">
+          <div class="q-tag">Q16 · Ch. 08 · Table Analysis</div>
+          <p>Statement: "Every employee with tenure &gt; 7 years has salary &gt; $90K." An employee with tenure 12 years and salary exactly $90K is in the table. The statement is:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q16" value="A"/>False (90 is not above 90)</label></li>
+            <li><label><input type="radio" name="q16" value="B"/>True</label></li>
+            <li><label><input type="radio" name="q16" value="C"/>Cannot be determined</label></li>
+            <li><label><input type="radio" name="q16" value="D"/>The data is internally inconsistent.</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="09" data-correct="A">
+          <div class="q-tag">Q17 · Ch. 09 · Graphics Interpretation</div>
+          <p>A bar chart's y-axis runs from 80 to 110 instead of 0 to 110. Two bars appear: one at 90, one at 100. The eyeballed visual difference is roughly 2× — but the actual numerical difference is only:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q17" value="A"/>About 11% (10/90)</label></li>
+            <li><label><input type="radio" name="q17" value="B"/>100%</label></li>
+            <li><label><input type="radio" name="q17" value="C"/>50%</label></li>
+            <li><label><input type="radio" name="q17" value="D"/>Cannot be determined</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="09" data-correct="C">
+          <div class="q-tag">Q18 · Ch. 09 · Graphics Interpretation</div>
+          <p>A scatter plot of ad spend vs sales shows points trending upward and to the right in a tight band. Best description:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q18" value="A"/>Strong negative correlation</label></li>
+            <li><label><input type="radio" name="q18" value="B"/>No correlation</label></li>
+            <li><label><input type="radio" name="q18" value="C"/>Strong positive correlation, but not necessarily causation</label></li>
+            <li><label><input type="radio" name="q18" value="D"/>Causation proven</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="10" data-correct="C">
+          <div class="q-tag">Q19 · Ch. 10 · The Art of the Skip</div>
+          <p>You are 90 seconds into a Quant question with no clear path. Best decision:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q19" value="A"/>Spend another 60 seconds</label></li>
+            <li><label><input type="radio" name="q19" value="B"/>Skip without trying</label></li>
+            <li><label><input type="radio" name="q19" value="C"/>Eliminate wrong choices for 15 sec, guess from remaining, move on</label></li>
+            <li><label><input type="radio" name="q19" value="D"/>Bookmark and re-read</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-q" data-ch="10" data-correct="B">
+          <div class="q-tag">Q20 · Ch. 10 · The Art of the Skip</div>
+          <p>You finish a section with 4 minutes left and one unused bookmark. Best decision:</p>
+          <ul class="choices">
+            <li><label><input type="radio" name="q20" value="A"/>Submit immediately</label></li>
+            <li><label><input type="radio" name="q20" value="B"/>Return to your bookmarked question</label></li>
+            <li><label><input type="radio" name="q20" value="C"/>Re-read every question</label></li>
+            <li><label><input type="radio" name="q20" value="D"/>Pick a random question and re-do</label></li>
+          </ul>
+        </div>
+
+        <div class="diag-cta">
+          <button type="button" id="score-btn">Score My Diagnostic</button>
+          <button type="button" class="ghost" id="reset-btn">Reset</button>
+        </div>
+      </form>
+
+      <div class="diag-result" id="result"></div>
+    </main>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+  <script>
+    const chapterMeta = {
+      '01': { name: 'Number Properties',          file: '../chapters/01-quant-number-properties.html' },
+      '02': { name: 'Algebraic Logic',            file: '../chapters/02-quant-algebraic-logic.html' },
+      '03': { name: 'Word Problems',              file: '../chapters/03-quant-word-problems.html' },
+      '04': { name: 'Critical Reasoning',         file: '../chapters/04-verbal-critical-reasoning.html' },
+      '05': { name: 'Reading Comprehension',      file: '../chapters/05-verbal-reading-comp.html' },
+      '06': { name: 'Data Sufficiency 2.0',       file: '../chapters/06-di-data-sufficiency.html' },
+      '07': { name: 'Multi-Source Reasoning',     file: '../chapters/07-di-multi-source-reasoning.html' },
+      '08': { name: 'Table Analysis',             file: '../chapters/08-di-table-analysis.html' },
+      '09': { name: 'Graphics Interpretation',    file: '../chapters/09-di-graphics-interpretation.html' },
+      '10': { name: 'The Art of the Skip',        file: '../chapters/10-strategy-art-of-skip.html' }
+    };
+
+    document.getElementById('score-btn').addEventListener('click', () => {
+      const results = {};
+      Object.keys(chapterMeta).forEach(ch => results[ch] = { correct: 0, total: 0 });
+
+      let totalCorrect = 0, totalQs = 0;
+      document.querySelectorAll('.diag-q').forEach(q => {
+        const ch = q.dataset.ch;
+        const correct = q.dataset.correct;
+        const picked = q.querySelector('input[type=radio]:checked');
+        results[ch].total++;
+        totalQs++;
+        if (picked && picked.value === correct) {
+          results[ch].correct++;
+          totalCorrect++;
+        }
+      });
+
+      const ranks = Object.entries(results)
+        .map(([ch, r]) => ({ ch, ...r, pct: r.total ? r.correct / r.total : 0 }))
+        .sort((a, b) => a.pct - b.pct);
+
+      const result = document.getElementById('result');
+      result.innerHTML = `
+        <h2>Diagnostic Results</h2>
+        <p class="score">${totalCorrect} / ${totalQs}</p>
+        <p style="font-family: var(--display); font-style: italic; color: var(--ink-soft); margin: .5rem 0 0;">
+          Your weakest areas (top of list) deserve your first study sessions. Click any chapter to start.
+        </p>
+        <div class="ranks">
+          ${ranks.map((r, i) => `
+            <div class="rank-row ${r.pct < 0.5 ? 'weak' : ''}">
+              <span class="rank-num">#${String(i+1).padStart(2,'0')}</span>
+              <span class="ch-name">Ch. ${r.ch} · ${chapterMeta[r.ch].name}</span>
+              <span class="pct">${r.correct}/${r.total} (${Math.round(r.pct*100)}%)</span>
+              <a href="${chapterMeta[r.ch].file}">Study →</a>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      result.classList.add('show');
+      result.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      document.querySelectorAll('input[type=radio]').forEach(i => i.checked = false);
+      document.getElementById('result').classList.remove('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

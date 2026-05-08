@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Appendix · Trap Library — The Logic Field Guide</title>
+  <meta name="description" content="GMAT Focus Edition Trap Library: Zero Trap, Reverse Logic, Extreme Word, C-Trap, and more." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+  <style>
+    .trap-entry { border-top: 2px solid var(--mustard); padding: 1.5rem 0 2rem; scroll-margin-top: 2rem; }
+    .trap-entry:first-of-type { border-top-color: var(--ink); }
+    .trap-entry h3 { font-family: var(--display); font-size: 1.6rem; margin-top: 0; color: var(--ink); display: flex; align-items: baseline; gap: 1rem; }
+    .trap-entry h3 .num { font-family: var(--mono); font-size: .78rem; letter-spacing: .2em; color: var(--mustard-d); font-weight: 700; }
+    .trap-entry .meta { font-family: var(--mono); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--ink-mute); margin: -.6rem 0 1rem; }
+    .trap-entry .pattern, .trap-entry .example, .trap-entry .defense { margin: 1rem 0; padding: .8rem 1.1rem; border-left: 3px solid var(--rule); background: var(--paper-deep); }
+    .trap-entry .pattern { border-left-color: var(--mustard-d); }
+    .trap-entry .example { border-left-color: var(--vermillion); }
+    .trap-entry .defense { border-left-color: var(--teal); }
+    .trap-entry .label { display: block; font-family: var(--mono); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; margin-bottom: .4rem; }
+    .trap-entry .pattern .label { color: var(--mustard-d); }
+    .trap-entry .example .label { color: var(--vermillion); }
+    .trap-entry .defense .label { color: var(--teal); }
+  </style>
+</head>
+<body data-chapter="appendix-trap-library">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Appendix</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="../extras/cheatsheet.html">Cheatsheet</a>
+        <a href="10-strategy-art-of-skip.html">Strategy</a>
+      </nav>
+    </header>
+
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Appendix <span class="dot">·</span> Reference <span class="dot">·</span> Cross-Section</div>
+      <h1 class="chapter-title">The Trap <em>Library</em></h1>
+      <p class="chapter-deck">A field guide to the recurring logical traps the GMAT relies on. Each trap is named, dissected, and given a defense. Cross-referenced from every chapter that uses it.</p>
+      <div class="chapter-meta">
+        <span>Total traps <b>12</b></span>
+        <span>Format <b>reference</b></span>
+        <span>Use <b>before every official mock</b></span>
+      </div>
+    </section>
+
+    <div class="chapter-grid">
+
+      <aside class="chapter-side">
+        <div class="tier-toggles">
+          <button data-tier="eli5"   aria-pressed="true"><span>ELI5 tier</span><span class="glyph">☀</span></button>
+          <button data-tier="expert" aria-pressed="true"><span>Expert tier</span><span class="glyph">◈</span></button>
+        </div>
+
+        <h4>Trap index</h4>
+        <ol>
+          <li><a href="#trap-zero">Zero Trap</a></li>
+          <li><a href="#trap-reverse-logic">Reverse Logic</a></li>
+          <li><a href="#trap-extreme-word">Extreme Word</a></li>
+          <li><a href="#trap-compound-divisibility">Compound Divisibility</a></li>
+          <li><a href="#trap-extraneous">Extraneous Solution</a></li>
+          <li><a href="#trap-outside-scope">Outside Scope</a></li>
+          <li><a href="#trap-opinion-as-fact">Opinion as Fact</a></li>
+          <li><a href="#trap-units">Units Trap</a></li>
+          <li><a href="#trap-truncated-axis">Truncated Axis</a></li>
+          <li><a href="#trap-c-trap">The C-Trap</a></li>
+          <li><a href="#trap-sign-flip">Sign-Flip Trap</a></li>
+          <li><a href="#trap-less-than">Less-Than Reversal</a></li>
+        </ol>
+      </aside>
+
+      <main class="chapter-main">
+
+        <section>
+          <h2>How to use this library</h2>
+          <p>Each entry follows the same template:</p>
+          <ol>
+            <li><strong>Name + where it appears.</strong> The name is the mental tag you should attach to every miss caused by this pattern.</li>
+            <li><strong>Pattern.</strong> The structural shape of the trap — what the question looks like.</li>
+            <li><strong>Example.</strong> A concrete instance, written like a real GMAT prompt.</li>
+            <li><strong>Defense.</strong> The exact countermove. Memorize the defense, not the example.</li>
+          </ol>
+          <p>Before every full-length mock, scan the trap names. You do not need to re-read every entry. The mental tags are the value; the entries are the deep reference when a tag does not feel sharp.</p>
+        </section>
+
+        <section class="trap-entry" id="trap-zero">
+          <h3><span class="num">Trap · 01</span> The Zero Trap</h3>
+          <div class="meta">Quant · Number Properties · Data Sufficiency · Algebraic Logic</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>A problem allows a variable to be zero, but the student silently assumes the variable is positive (or non-zero). Since zero behaves differently from every other number — it is even, it is a multiple of everything, it is neither positive nor negative — the assumption breaks the answer.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>"If <code>k</code> is a non-negative integer, what is the smallest value of <code>k</code> for which <code>200 × k</code> is a perfect square?" The "obvious" answer is <code>k = 2</code>, since <code>200 × 2 = 400 = 20²</code>. But <code>k = 0</code> works too — <code>200 × 0 = 0 = 0²</code> — and 0 is smaller.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>For every variable in the problem, ask: "Could this be zero?" If the constraint is "non-negative", yes. If "non-zero", no. If unstated, default to assuming yes and check whether the answer changes.</p>
+            <p>Cross-references: <a href="01-quant-number-properties.html#s-parity">Ch. 01 · Parity &amp; Sign</a>; <a href="06-di-data-sufficiency.html#s-traps">Ch. 06 · DS Traps</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-reverse-logic">
+          <h3><span class="num">Trap · 02</span> The Reverse Logic Trap</h3>
+          <div class="meta">Critical Reasoning · Data Sufficiency · Algebraic Logic</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>The author or the question reverses the direction of an inference. "A implies B" gets confused with "B implies A". In CR this shows up as reverse causation. In algebra this shows up as confusing necessary with sufficient conditions.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>CR: "Workers who use standing desks have less back pain. Therefore, standing desks reduce back pain." Reverse logic: maybe people who already had less back pain were more likely to choose standing desks (reverse causation).</p>
+            <p>Algebra: "If <code>x &gt; 5</code>, then <code>x &gt; 0</code>." True. The reverse, "If <code>x &gt; 0</code>, then <code>x &gt; 5</code>," is false. Confusing the two costs you DS questions.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>Whenever you encounter "A implies B", ask out loud whether the reverse "B implies A" also holds. The answer is almost always no — and the test-writer is hoping you assume yes.</p>
+            <p>Cross-reference: <a href="04-verbal-critical-reasoning.html#s-flaws">Ch. 04 · CR · Reverse Causation</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-extreme-word">
+          <h3><span class="num">Trap · 03</span> The Extreme Word Trap</h3>
+          <div class="meta">Critical Reasoning · Reading Comprehension · Inference questions</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>An answer choice contains an absolute, total, or extreme word: "always", "never", "all", "none", "the only", "must", "exactly", "uniquely". The passage rarely supports such absolutes. These choices look authoritative but usually overshoot.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>RC inference question. Choice: "The author believes that <em>all</em> economists prior to 1980 ignored institutional differences." But the passage said "most economic historians" — not "all". The choice is too strong. Eliminate.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>Highlight every absolute word in every answer choice. For each, ask: "does the passage actually support this absolute?" If even one counterexample is allowed, the choice is wrong. Prefer answers with hedged language ("often", "tend to", "may", "in some cases") — they match the passage's typical caution.</p>
+            <p>Cross-reference: <a href="05-verbal-reading-comp.html#s-questions">Ch. 05 · RC Question Types</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-compound-divisibility">
+          <h3><span class="num">Trap · 04</span> The Compound Divisibility Trap</h3>
+          <div class="meta">Number Properties · Data Sufficiency</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>Divisibility by a composite number requires divisibility by <em>each</em> of its prime-power factors. Students check one factor and forget the others.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>"Is <code>n</code> divisible by 6?" Statement: "<code>n</code> is divisible by 3." This is insufficient because divisibility by 6 also requires divisibility by 2. <code>n = 9</code> is divisible by 3 but not 6.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>For divisibility by <code>k</code>, write <code>k</code> in prime-power form. <code>6 = 2 × 3</code>; <code>12 = 2² × 3</code>; <code>15 = 3 × 5</code>; <code>72 = 2³ × 3²</code>. <code>n</code> is divisible by <code>k</code> if and only if <code>n</code> is divisible by every prime-power piece of <code>k</code>.</p>
+            <p>Cross-reference: <a href="01-quant-number-properties.html#s-divisibility">Ch. 01 · Divisibility Rules</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-extraneous">
+          <h3><span class="num">Trap · 05</span> The Extraneous Solution Trap</h3>
+          <div class="meta">Algebraic Logic · Equation Solving</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>Squaring both sides of an equation can introduce solutions that did not satisfy the original. Multiplying both sides by an expression that could be zero can do the same.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>Solve <code>√(x + 3) = x − 3</code>. Square both sides: <code>x + 3 = (x − 3)² = x² − 6x + 9</code>, giving <code>x² − 7x + 6 = 0</code>, so <code>x = 1</code> or <code>x = 6</code>. Plug back into the original: <code>x = 6</code> works (<code>√9 = 3 = 6 − 3</code>) but <code>x = 1</code> does not (<code>√4 = 2 ≠ 1 − 3 = −2</code>). <code>x = 1</code> is extraneous.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>After squaring or multiplying both sides, always plug each candidate back into the <em>original</em> equation. Discard any that do not check.</p>
+            <p>Cross-reference: <a href="02-quant-algebraic-logic.html#s-equations">Ch. 02 · Equations &amp; Symmetry</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-outside-scope">
+          <h3><span class="num">Trap · 06</span> The Outside-Scope Trap</h3>
+          <div class="meta">Reading Comprehension · Critical Reasoning · MSR</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>An answer choice contains a true-sounding fact that the passage never actually supports. Students who know the topic in real life often select these because the choice "sounds right" — but the passage does not say it.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>RC passage about Britain's Industrial Revolution. Choice: "Britain's colonial trade networks were the primary cause of industrialization." This is plausible in real history but the passage never argues it. Outside scope. Eliminate.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>For RC and CR, the right answer is what the passage <em>says</em> or directly implies — not what is true in the world. If you find yourself reasoning "this is true in real life", that is a red flag. Return to the text.</p>
+            <p>Cross-reference: <a href="05-verbal-reading-comp.html#s-questions">Ch. 05 · RC Question Types</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-opinion-as-fact">
+          <h3><span class="num">Trap · 07</span> The Opinion-as-Fact Trap</h3>
+          <div class="meta">Multi-Source Reasoning · Reading Comprehension</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>A tab or paragraph quotes a person stating an opinion, expectation, or projection — not a fact. The student treats the quoted statement as established truth.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>MSR Tab 1 (email): "We expect Q4 sales to grow 20%." Tab 2 (data): "Q4 actual growth: 8%." A question asks "what was Q4 growth?" The right answer is 8% (from data), not 20% (from email expectation).</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>Tag every statement in a tab as either FACT or OPINION on first read. For factual questions, use only the FACT tags. Opinion language: "we expect", "I believe", "it should", "we anticipate", "the team thinks".</p>
+            <p>Cross-reference: <a href="07-di-multi-source-reasoning.html#s-conflict">Ch. 07 · Conflicting Evidence</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-units">
+          <h3><span class="num">Trap · 08</span> The Units Trap</h3>
+          <div class="meta">Table Analysis · Word Problems · Graphics</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>One column or quantity is in a different unit from another, but the units are not visually obvious. Mixed units (thousands vs. raw, percentage vs. count, hours vs. minutes) silently corrupt every calculation.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>A revenue column labeled "Revenue ($M)" — millions — and a customer column labeled "Customers" — raw counts. The student computes "revenue per customer" without converting and gets a value 1,000,000× too small.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>Read every column header word for word, including parentheticals. For word problems, write units next to each variable when you define them. Always sanity-check your answer's order of magnitude — if a "revenue per customer" is $0.0003, you missed a unit.</p>
+            <p>Cross-reference: <a href="08-di-table-analysis.html#s-traps">Ch. 08 · Table Analysis Traps</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-truncated-axis">
+          <h3><span class="num">Trap · 09</span> The Truncated-Axis Trap</h3>
+          <div class="meta">Graphics Interpretation</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>A bar chart's y-axis does not start at zero — it starts at some elevated value (e.g., 80). The visual difference between bars is exaggerated relative to the actual numerical difference. The student "eyeballs" the difference and mis-reads.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>Bars of height 90 and 100 plotted on an axis from 80 to 110 look like one bar is twice as tall as the other. The actual numerical difference is 10, or about 11% of the smaller bar — not 100%.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>Read the y-axis numbers, not the bar heights. Compute every percentage difference numerically: <code>(big − small) / small</code>. Never eyeball the percent difference between bars on a truncated axis.</p>
+            <p>Cross-reference: <a href="09-di-graphics-interpretation.html#s-traps">Ch. 09 · Graphics Traps</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-c-trap">
+          <h3><span class="num">Trap · 10</span> The C-Trap</h3>
+          <div class="meta">Data Sufficiency</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>Two DS statements look incomplete individually and "obviously" need to be combined. Student picks C without testing each statement alone — and misses that one statement was sufficient by itself (so the answer is A, B, or D).</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>Stem: "Is <code>x &gt; 0</code>?" Statement 1: "<code>x²&gt; 0</code>" (insufficient). Statement 2: "<code>x³&gt; 0</code>" (sufficient — cubes preserve sign). Looks like you need both, but Statement 2 alone is sufficient. Answer: B, not C.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>Always test each statement in isolation first. Combine only when both individually fail. The procedure is in <a href="06-di-data-sufficiency.html#s-procedure">Ch. 06 · DS Procedure</a>. Run it every single time.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-sign-flip">
+          <h3><span class="num">Trap · 11</span> The Sign-Flip Trap</h3>
+          <div class="meta">Algebraic Logic · Inequalities</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>The student multiplies or divides both sides of an inequality by a negative quantity but forgets to flip the inequality sign. Or worse, multiplies by a variable whose sign is unknown.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>Solve <code>−2x &lt; 6</code>. Wrong: divide by −2 to get <code>x &lt; −3</code>. Right: divide by −2 AND flip the sign to get <code>x &gt; −3</code>.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>Whenever you multiply or divide an inequality, ask "is the multiplier negative?" If yes, flip. If the multiplier is a variable of unknown sign, do not multiply at all — use a sign chart instead.</p>
+            <p>Cross-reference: <a href="02-quant-algebraic-logic.html#s-inequalities">Ch. 02 · Inequalities</a>.</p>
+          </div>
+        </section>
+
+        <section class="trap-entry" id="trap-less-than">
+          <h3><span class="num">Trap · 12</span> The Less-Than Reversal Trap</h3>
+          <div class="meta">Word Problems · Translation</div>
+
+          <div class="pattern">
+            <span class="label">Pattern</span>
+            <p>"5 less than <code>x</code>" gets translated as <code>5 − x</code> instead of <code>x − 5</code>. The English phrase reverses the order; the student reads left-to-right and gets it backwards.</p>
+          </div>
+
+          <div class="example">
+            <span class="label">Example</span>
+            <p>"Anna is 5 years younger than Ben. Ben is 20." Wrong translation: <code>Anna = 5 − 20 = −15</code>. Right: <code>Anna = 20 − 5 = 15</code>.</p>
+          </div>
+
+          <div class="defense">
+            <span class="label">Defense</span>
+            <p>Whenever you see "less than", "fewer than", "younger than", "shorter than", read the phrase twice and identify the <em>subject</em> versus the <em>reference</em>. The subject is what you are computing; subtract from the reference. "Anna is 5 less than Ben" &rarr; <code>Anna = Ben − 5</code>, not <code>5 − Ben</code>.</p>
+            <p>Cross-reference: <a href="03-quant-word-problems.html#s-alphabet">Ch. 03 · Translation Alphabet</a>.</p>
+          </div>
+        </section>
+
+        <nav class="chapter-foot">
+          <a href="10-strategy-art-of-skip.html">← Previous<b>Ch. 10 · Art of the Skip</b></a>
+          <a href="../index.html" class="next">Next →<b>Contents · Master TOC</b></a>
+        </nav>
+
+      </main>
+    </div>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+// GMAT Focus Trainer — Prisma schema for CAT, concepts, and granular analytics
+// PostgreSQL recommended. Run: npx prisma migrate dev
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Auth identity (swap for NextAuth / Clerk userId as needed)
+model User {
+  id        String   @id @default(cuid())
+  email     String?  @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  skillStates     UserSkillState[]
+  sessions        StudySession[]
+  sprints         SprintSummary[]
+  examAttempts    ExamAttempt[]
+  preferences     UserPreference?
+}
+
+model UserPreference {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  theme             String  @default("dark") // dark | light | system
+  mockExamHighFidelity Boolean @default(true)
+  maxHintSteps      Int     @default(3) // cap scaffold depth
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+/// Coarse section: QUANT | VERBAL | DATA_INSIGHTS
+enum Section {
+  QUANT
+  VERBAL
+  DATA_INSIGHTS
+}
+
+/// Fine-grained skill node (IRT / routing graph)
+model Skill {
+  id          String  @id @default(cuid())
+  code        String  @unique // e.g. NUMBER_PROPERTIES, DS_LOGIC
+  name        String
+  section     Section
+  parentId    String?
+  parent      Skill?  @relation("SkillTree", fields: [parentId], references: [id])
+  children    Skill[] @relation("SkillTree")
+  sortOrder   Int     @default(0)
+
+  questions      QuestionSkill[]
+  concepts       Concept[]
+  userSkillState UserSkillState[]
+}
+
+/// Theory content — ELI5 + Expert; never includes the answer key
+model Concept {
+  id          String  @id @default(cuid())
+  skillId     String
+  skill       Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  slug        String  @unique
+  title       String
+  eli5Md      String  @db.Text // markdown
+  expertMd    String  @db.Text
+  formulaRefs Json? // string[] quick refs
+  sortOrder   Int     @default(0)
+
+  questions Question[]
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  DATA_SUFFICIENCY
+  MULTI_PART_MSQ
+}
+
+/// Item bank entry (content may be imported from your HTML/PDF pipeline)
+model Question {
+  id            String       @id @default(cuid())
+  externalKey   String?      @unique // stable id from content CMS
+  section       Section
+  type          QuestionType
+  stemMd        String       @db.Text
+  choicesJson   Json // [{ key: "A", text: "..." }, ...]
+  correctKey    String
+  difficulty    Float        @default(0) // IRT-like theta of item (higher = harder)
+  discrimination Float       @default(1.0) // IRT a-parameter (simplified)
+  guessing      Float        @default(0.2) // IRT c-parameter (3PL-lite)
+  conceptId     String?
+  concept       Concept?     @relation(fields: [conceptId], references: [id])
+  timeTargetSec Int? // expected solve time for calibration
+  isActive      Boolean      @default(true)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  skills         QuestionSkill[]
+  attempts       QuestionAttempt[]
+  examSelections ExamQuestionSelection[]
+}
+
+model QuestionSkill {
+  questionId String
+  skillId    String
+  weight     Float  @default(1.0) // contribution to skill estimate
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  skill      Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([questionId, skillId])
+}
+
+/// Per-user skill proficiency (EAP / MAP estimate on latent scale)
+model UserSkillState {
+  id               String   @id @default(cuid())
+  userId           String
+  skillId          String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill            Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  theta            Float    @default(0) // ability estimate (−3 .. +3 typical)
+  standardError    Float    @default(1)
+  totalAttempts    Int      @default(0)
+  correctAttempts  Int      @default(0)
+  streakCorrect    Int      @default(0)
+  /// Rolling accuracy (0–1) for scaffolding decay (recent window — update in app)
+  recentAccuracy   Float    @default(0.5)
+  lastCalibratedAt DateTime?
+  updatedAt        DateTime @updatedAt
+
+  @@unique([userId, skillId])
+}
+
+/// Behavioral root-cause for incorrect / uncertain attempts
+enum ErrorBehaviorTag {
+  MISREAD_PROMPT
+  CARELESS_CALC
+  CONCEPT_GAP
+  TRAP_ANSWER
+  TIME_PRESSURE_GUESS
+  OVERCONFIDENT_SKIP_REVIEW
+  DS_LOGIC_ERROR
+  OTHER
+}
+
+model StudySession {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mode      String // practice | review | sprint | cat_drill
+  section   Section?
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+
+  attempts QuestionAttempt[]
+}
+
+model QuestionAttempt {
+  id         String @id @default(cuid())
+  sessionId  String
+  session    StudySession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  startedAt       DateTime
+  answeredAt      DateTime?
+  timeMs          Int?
+  selectedKey     String?
+  isCorrect       Boolean?
+  /// First-flag analytics: suspicion before reveal
+  wasFlaggedGuess Boolean @default(false)
+  reviewedConcept Boolean @default(false)
+  scaffoldStepsUsed Int   @default(0)
+
+  errorTag ErrorBehaviorTag?
+  notes    String? @db.Text
+
+  @@index([sessionId])
+  @@index([questionId])
+}
+
+/// Aggregated rolling stats every ~15 minutes of focused study (triggered client or cron)
+model SprintSummary {
+  id        String @id @default(cuid())
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  windowStart DateTime
+  windowEnd   DateTime
+  durationSec Int
+
+  attemptsInt    Int
+  correctInt     Int
+  avgTimeMs      Float
+  panicGuessRate Float // share of attempts flagged OR very fast wrong
+  overInvestRate Float // share of very slow (even if correct)
+
+  /// Model output: projected section score delta or composite index
+  predictedScoreDelta Float?
+  /// JSON blob: per-skill theta snapshot, trend arrows
+  metricsJson         Json?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, windowEnd])
+}
+
+/// Full mock exam / CAT section
+model ExamAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  section     Section
+  startedAt   DateTime @default(now())
+  submittedAt DateTime?
+  /// Final estimated ability for section
+  finalTheta  Float?
+  rawCorrect  Int?
+  totalItems  Int?
+
+  selections ExamQuestionSelection[]
+}
+
+/// Ordered adaptive picks for one exam attempt
+model ExamQuestionSelection {
+  id             String      @id @default(cuid())
+  examAttemptId  String
+  examAttempt    ExamAttempt @relation(fields: [examAttemptId], references: [id], onDelete: Cascade)
+  questionId     String
+  question       Question    @relation(fields: [questionId], references: [id])
+  sequenceIndex  Int
+  /// User ability estimate *before* this item (for audit / replay)
+  thetaBefore    Float
+  information    Float?
+
+  @@unique([examAttemptId, sequenceIndex])
+  @@index([examAttemptId])
+}

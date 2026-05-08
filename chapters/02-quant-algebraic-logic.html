@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 02 · Algebraic Logic — The Logic Field Guide</title>
+  <meta name="description" content="GMAT Focus Edition Algebraic Logic chapter: inequalities, quadratics, absolute value, sign analysis, smart substitution." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+</head>
+<body data-chapter="02-algebraic-logic">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Chapter 02</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="../extras/cheatsheet.html">Cheatsheet</a>
+        <a href="appendix-trap-library.html">Traps</a>
+      </nav>
+    </header>
+
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Block 01 <span class="dot">·</span> Quantitative <span class="dot">·</span> Chapter 02</div>
+      <h1 class="chapter-title">Algebraic <em>Logic</em></h1>
+      <p class="chapter-deck">Inequalities have one rule that breaks them. Quadratics have one form they always reduce to. Algebra on the GMAT is a logic test wearing a math costume.</p>
+      <div class="chapter-meta">
+        <span>Reading time <b>≈ 35 min</b></span>
+        <span>Practice questions <b>10</b></span>
+        <span>Prerequisite <b>Ch. 01</b></span>
+        <span>Unlocks <b>Ch. 03 · Word Problems</b></span>
+      </div>
+    </section>
+
+    <div class="chapter-grid">
+
+      <aside class="chapter-side">
+        <div class="tier-toggles">
+          <button data-tier="eli5"   aria-pressed="true"><span>ELI5 tier</span><span class="glyph">☀</span></button>
+          <button data-tier="expert" aria-pressed="true"><span>Expert tier</span><span class="glyph">◈</span></button>
+        </div>
+
+        <h4>In this chapter</h4>
+        <ol>
+          <li><a href="#s-overview">Why algebraic logic</a></li>
+          <li><a href="#s-variables">Variables &amp; domains</a></li>
+          <li><a href="#s-equations">Equations &amp; symmetry</a></li>
+          <li><a href="#s-inequalities">Inequalities &amp; sign-flip</a></li>
+          <li><a href="#s-absvalue">Absolute value</a></li>
+          <li><a href="#s-quadratics">Quadratics</a></li>
+          <li><a href="#s-signchart">Sign analysis</a></li>
+          <li><a href="#s-substitution">Smart substitution</a></li>
+          <li><a href="#s-worked">Worked examples</a></li>
+          <li><a href="#s-practice">Practice set</a></li>
+          <li><a href="#s-explanations">Explanations</a></li>
+          <li><a href="#s-errorlog">Error log</a></li>
+        </ol>
+      </aside>
+
+      <main class="chapter-main">
+
+        <section id="s-overview">
+          <h2>Why algebraic logic, not algebraic computation</h2>
+          <p>The GMAT is not a high-school algebra test. It does not reward you for solving cleanly when you could have side-stepped the algebra entirely. Almost every "algebra question" on the Focus Edition is really one of three things in disguise: an inequality whose solution is a <em>region</em>, a quadratic whose solution is a <em>pair</em>, or an expression that simplifies in <em>one specific algebraic move</em>. Once you classify, the answer follows in seconds.</p>
+
+          <p class="dropcap">This chapter teaches you the classification reflex and the three or four moves that resolve almost every question. You will spend more time learning when <em>not</em> to do algebra than learning algebra itself.</p>
+
+          <div class="glance">
+            <h4>The five rules that solve 90% of algebra questions</h4>
+            <ul>
+              <li><span class="formula">Equation</span> do the same thing to both sides. Symmetry is preserved.</li>
+              <li><span class="formula">Inequality</span> do the same thing to both sides — but if you multiply or divide by a negative, <strong>flip the sign</strong>.</li>
+              <li><span class="formula">|x| = a</span> &rarr; <code>x = a</code> or <code>x = −a</code>. Absolute value is distance from zero.</li>
+              <li><span class="formula">ax² + bx + c = 0</span> &rarr; factor if possible; otherwise discriminant <code>b² − 4ac</code> tells you how many real solutions exist.</li>
+              <li><span class="formula">Sign chart</span> for any inequality with multiple factors: place all roots on a number line, test each region, take the answer set.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="s-variables">
+          <h2>Variables and their hidden domains</h2>
+          <p>A variable is a placeholder for a number. But on the GMAT, the placeholder always comes with a hidden constraint — "positive integer", "real number", "non-zero", "between 0 and 1" — and the constraint is often where the question lives.</p>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the lunch order.</strong> A waiter says, "I have a number in mind, between 1 and 5, and it's a whole number." That is exactly what a constrained variable is. There are only five possibilities, not infinity. Knowing the domain (whole, between 1 and 5) shrinks the world the variable could live in.</p>
+            <p><strong>Example 2 · the locker padlock.</strong> A padlock has a 3-digit combination, each digit from 0 to 9. Each digit is a variable, but its <em>domain</em> is the set <code>{0, 1, 2, …, 9}</code>. You would never test "the digit is 14" — the constraint forbids it. GMAT variables come with constraints exactly like this. Always read the line that defines them before you start solving.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the constraint checklist</span>
+            <p>For every variable in a problem, log:</p>
+            <ol>
+              <li><strong>Type</strong> — integer, real, positive integer, non-negative real, etc.</li>
+              <li><strong>Range</strong> — bounded above? bounded below? open or closed?</li>
+              <li><strong>Forbidden values</strong> — denominator non-zero, log argument positive, even-root argument non-negative.</li>
+            </ol>
+            <p>The most-missed constraints on the Focus Edition: "positive integer" excludes zero (zero is non-negative, not positive); "non-zero" allows fractions; "real" allows irrationals.</p>
+          </div>
+        </section>
+
+        <section id="s-equations">
+          <h2>Equations and the symmetry of operations</h2>
+          <p>An equation is a balance scale. Whatever you do to one side, you do to the other. Add 5 to both sides: still balanced. Multiply both sides by 7: still balanced. Take both sides to the power of 3: still balanced. The single golden rule of equation-solving is symmetry preservation.</p>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the seesaw.</strong> Imagine a seesaw, perfectly balanced, with three apples on the left and three apples on the right. If you take one apple off the left, you must take one off the right or the seesaw tips. That is solving for a variable: every operation is one move on each side, keeping the balance.</p>
+            <p><strong>Example 2 · the twin bank accounts.</strong> Two siblings have identical bank accounts: $300 each. Their parents say "we will always credit or debit you the same amount." If $50 is added to one, $50 is added to the other. Whatever happens to one side of the equation, the same operation happens to the other. The accounts (sides) stay equal.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · squaring both sides</span>
+            <p>Squaring both sides of an equation can <em>introduce</em> solutions that did not satisfy the original. Example: <code>x = −3</code> squared gives <code>x² = 9</code>, which has solutions <code>x = ±3</code>. The +3 is an extraneous solution. After squaring, always plug your answers back into the <em>original</em> to verify. See <a href="appendix-trap-library.html#trap-extraneous">the Extraneous Solution Trap</a>.</p>
+          </div>
+        </section>
+
+        <section id="s-inequalities">
+          <h2>Inequalities — and the one rule that breaks them</h2>
+          <p>An inequality behaves like an equation 95% of the time. The 5% that breaks it is the rule everyone forgets in the middle of a problem.</p>
+
+          <div class="glance">
+            <h4>The sign-flip rule</h4>
+            <ul>
+              <li><span class="formula">Multiply or divide both sides by a positive</span> &rarr; sign stays the same.</li>
+              <li><span class="formula">Multiply or divide both sides by a negative</span> &rarr; <strong>sign flips</strong>: <code>&lt;</code> becomes <code>&gt;</code>, and vice versa.</li>
+              <li><span class="formula">If the variable's sign is unknown</span> &rarr; you may not multiply or divide by it. Period.</li>
+            </ul>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the elevator analogy.</strong> Going up an elevator, the higher floor stays higher. Now imagine the elevator <em>flips upside down</em>. The floor that was on top is now on the bottom. Multiplying by a negative is exactly that flip — what was bigger is now smaller. The order reverses.</p>
+            <p><strong>Example 2 · scoring in a race.</strong> If runners A and B finish the race and A is faster (a smaller time), then A &lt; B. Now imagine you score the race by "minus their time" instead. A's score is bigger because his negative time is closer to zero. The same comparison, multiplied by −1, flips. That is exactly the inequality sign-flip.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · multiplying by a variable of unknown sign</span>
+            <p>If you have <code>1/x &lt; 5</code> and multiply both sides by <code>x</code>, you cannot conclude <code>1 &lt; 5x</code> — because <code>x</code> might be negative, in which case the sign should have flipped. Whenever a variable's sign is not known, do not multiply or divide by it. Use a sign chart instead. See <a href="#s-signchart">Sign analysis</a>, below.</p>
+          </div>
+        </section>
+
+        <section id="s-absvalue">
+          <h2>Absolute value — distance, not magic</h2>
+          <p>Students fear absolute-value problems more than they should. The fear comes from treating <code>| · |</code> as a special operator with mysterious rules. It is not. <strong>Absolute value is just distance from zero.</strong></p>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · steps from the front door.</strong> If your house's front door is at position 0 and you walk 3 steps in <em>either direction</em>, you have walked a distance of 3. <code>|3| = 3</code> and <code>|−3| = 3</code> both mean "3 steps from the front door". Distance does not care about direction.</p>
+            <p><strong>Example 2 · GPS distance.</strong> Your phone says you are 5 km from home. That number does not tell you whether you are north or south — only that you are 5 km away. <code>|x| = 5</code> says <em>exactly</em> the same thing: <code>x</code> is 5 units from zero, but the sign is open. So <code>x = 5</code> or <code>x = −5</code>.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the three forms you will actually see</span>
+            <ol>
+              <li><strong><code>|x| = a</code></strong> (with <code>a ≥ 0</code>) &rarr; <code>x = a</code> or <code>x = −a</code>.</li>
+              <li><strong><code>|x| &lt; a</code></strong> &rarr; <code>−a &lt; x &lt; a</code>. Inside the band.</li>
+              <li><strong><code>|x| &gt; a</code></strong> &rarr; <code>x &lt; −a</code> or <code>x &gt; a</code>. Outside the band.</li>
+            </ol>
+            <p>For <code>|x − k|</code>, just replace "distance from 0" with "distance from <code>k</code>". <code>|x − 4| &lt; 3</code> means <code>x</code> is within 3 of 4, i.e. <code>1 &lt; x &lt; 7</code>.</p>
+          </div>
+        </section>
+
+        <section id="s-quadratics">
+          <h2>Quadratics — three forms, one game</h2>
+          <p>A quadratic is any expression of the form <code>ax² + bx + c</code>, with <code>a ≠ 0</code>. On the GMAT, you will face quadratics in three structural forms. Recognize the form, take one move, and you are done.</p>
+
+          <div class="glance">
+            <h4>The three forms of a quadratic</h4>
+            <ul>
+              <li><span class="formula">Factored:</span> <code>(x − r)(x − s) = 0</code> &rarr; roots are <code>r, s</code>.</li>
+              <li><span class="formula">Standard:</span> <code>ax² + bx + c = 0</code> &rarr; sum of roots <code>= −b/a</code>; product of roots <code>= c/a</code>.</li>
+              <li><span class="formula">Vertex / completed square:</span> <code>(x − h)² + k</code> &rarr; minimum (or maximum) at <code>x = h</code>.</li>
+            </ul>
+            <p style="margin-top:.8rem"><span class="formula">Discriminant:</span> <code>D = b² − 4ac</code>. <br/><code>D &gt; 0</code> &rarr; two real roots. <code>D = 0</code> &rarr; one repeated real root. <code>D &lt; 0</code> &rarr; no real roots.</p>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the U-shaped slide.</strong> A quadratic looks like a U-shaped slide on a graph. The two roots are the spots where the slide touches the ground. If the slide is high above the ground, it never touches — that is "no real roots". If the slide just kisses the ground in one spot, that is "one repeated root". If it dips below the ground, it crosses in two places — two roots.</p>
+            <p><strong>Example 2 · two prices that multiply to 12.</strong> If <code>(x − 4)(x − 3) = 0</code>, the only way for the product of two prices to be zero is if at least one price is zero. So <code>x − 4 = 0</code> (giving <code>x = 4</code>) or <code>x − 3 = 0</code> (giving <code>x = 3</code>). That is the entire factoring trick: a product is zero exactly when one of the factors is zero.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the patterns to recognize on sight</span>
+            <pre>(x + a)² = x² + 2ax + a²
+(x − a)² = x² − 2ax + a²
+(x + a)(x − a) = x² − a²        ← the difference of squares
+(x + a)(x + b) = x² + (a+b)x + ab</pre>
+            <p>The fourth pattern is the key to most GMAT factoring questions. To factor <code>x² + 7x + 12</code>, ask: which pair of integers multiplies to 12 and adds to 7? Answer: 3 and 4. So <code>x² + 7x + 12 = (x + 3)(x + 4)</code>.</p>
+          </div>
+        </section>
+
+        <section id="s-signchart">
+          <h2>Sign analysis — the sign-chart method</h2>
+          <p>When an inequality involves a product or a quotient of factors, do not solve algebraically. Use a sign chart. It is faster, more reliable, and protects you from the multiply-by-unknown-sign trap.</p>
+
+          <div class="flowchart">
+            <div class="fc-caption">Sign-Chart Procedure</div>
+            <div class="flow-row">
+              <div class="flow-node start">Inequality with product or quotient of factors</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row">
+              <div class="flow-node">1 · Find roots of every factor (where each = 0)</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row">
+              <div class="flow-node">2 · Mark roots on a number line. They split it into regions.</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row">
+              <div class="flow-node">3 · Pick a test value in each region. Check the sign of the full expression.</div>
+            </div>
+            <div class="flow-arrow">↓ <span class="label">Result</span></div>
+            <div class="flow-row">
+              <div class="flow-node outcome">Take the union of regions whose sign matches the inequality.</div>
+            </div>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · worked sign chart</span>
+            <p>Solve <code>(x − 1)(x + 2) &gt; 0</code>.</p>
+            <pre>Roots:  x = 1,  x = −2.
+Regions: (−∞, −2),  (−2, 1),  (1, ∞).
+Test:    x = −3:  (−4)(−1) = +4   → positive ✓
+         x = 0:   (−1)(+2) = −2   → negative ✗
+         x = 2:   (+1)(+4) = +4   → positive ✓
+Solution: x &lt; −2  or  x &gt; 1.</pre>
+            <p>This generalizes: any inequality with two or more factors collapses to a sign chart. Three factors make three roots and four regions. The structure is identical.</p>
+          </div>
+        </section>
+
+        <section id="s-substitution">
+          <h2>Smart substitution — when to put the algebra down</h2>
+          <p>For "must be true" or "could be true" problems, plugging in numbers is often <em>faster and safer</em> than algebra. The art is in knowing when to substitute, what numbers to choose, and how many cases to test.</p>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the toy machine.</strong> Imagine a toy machine where you put in a coin and out comes a different coin, but you do not know the rule. Instead of guessing the rule, you just <em>try a few coins</em> and see what comes out. Same with algebra: instead of solving "what does <code>3a + 2</code> evaluate to?", just try <code>a = 1</code>, then <code>a = 2</code>, and see the pattern.</p>
+            <p><strong>Example 2 · the test-tasting at a bakery.</strong> Before buying a whole cake, you taste a small sample. The sample is your "test value". On the GMAT, plugging in <code>x = 2</code> or <code>x = −1</code> is like sampling — it tells you whether a statement is true without baking the whole cake.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the substitution discipline</span>
+            <p>When substituting:</p>
+            <ol>
+              <li><strong>Pick small, distinct, easy values</strong> — usually 0, 1, 2, −1 — that obey every constraint of the problem.</li>
+              <li><strong>Test multiple categories.</strong> If the variable could be positive or negative or zero, test all three. If it could be integer or fraction, test both.</li>
+              <li><strong>Use values that make the answer choices distinguishable.</strong> If picking 1 makes three answer choices evaluate to the same number, pick something else.</li>
+              <li><strong>Stop substituting once one choice fails.</strong> "Must be true" eliminations are absolute.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="s-worked">
+          <h2>Worked examples</h2>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 01 · Inequality with sign-flip</div>
+            <p class="stem">Solve <code>−3x + 7 &gt; 1</code> for <code>x</code>.</p>
+            <ol>
+              <li>Subtract 7: <code>−3x &gt; −6</code>.</li>
+              <li>Divide both sides by <code>−3</code> — the divisor is negative, so flip the sign.</li>
+              <li>Result: <code>x &lt; 2</code>.</li>
+            </ol>
+            <p class="answer">Answer: <code>x &lt; 2</code>.</p>
+          </div>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 02 · Quadratic by recognition</div>
+            <p class="stem">If <code>x² − 5x − 14 = 0</code>, what are the values of <code>x</code>?</p>
+            <ol>
+              <li>Standard form. Look for two integers whose product is −14 and sum is −5: that is −7 and 2.</li>
+              <li>Factor: <code>(x − 7)(x + 2) = 0</code>.</li>
+              <li>Set each factor to zero: <code>x = 7</code> or <code>x = −2</code>.</li>
+            </ol>
+            <p class="answer">Answer: <b>x = 7 or x = −2</b>.</p>
+          </div>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 03 · Absolute-value inequality</div>
+            <p class="stem">Find all <code>x</code> such that <code>|x − 4| &lt; 3</code>.</p>
+            <ol>
+              <li>Translate to distance: "<code>x</code> is within 3 of 4".</li>
+              <li>Write as a band: <code>4 − 3 &lt; x &lt; 4 + 3</code>.</li>
+              <li>Simplify: <code>1 &lt; x &lt; 7</code>.</li>
+            </ol>
+            <p class="answer">Answer: <code>1 &lt; x &lt; 7</code>.</p>
+          </div>
+        </section>
+
+        <section id="s-practice" class="practice-set">
+          <h2>Practice set · 10 questions</h2>
+
+          <article class="q-card" id="q-01">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>5 − 2x &lt; 9</code>, which of the following must be true?</p>
+              <ol class="choices">
+                <li><code>x &gt; −2</code></li>
+                <li><code>x &lt; −2</code></li>
+                <li><code>x &gt; 2</code></li>
+                <li><code>x &lt; 2</code></li>
+                <li><code>x &gt; 7</code></li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-01">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-02">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>x² − 3x − 10 = 0</code>, what is the sum of all possible values of <code>x</code>?</p>
+              <ol class="choices">
+                <li>−10</li>
+                <li>−3</li>
+                <li>2</li>
+                <li>3</li>
+                <li>5</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-02">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-03">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>|2x − 5| ≤ 3</code>, which of the following describes the full set of values of <code>x</code>?</p>
+              <ol class="choices">
+                <li><code>x ≤ 4</code></li>
+                <li><code>x ≥ 1</code></li>
+                <li><code>1 ≤ x ≤ 4</code></li>
+                <li><code>−1 ≤ x ≤ 4</code></li>
+                <li><code>−4 ≤ x ≤ 1</code></li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-03">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-04">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>For which values of <code>x</code> is <code>(x − 2)(x + 5) &gt; 0</code>?</p>
+              <ol class="choices">
+                <li><code>x &lt; −5</code> or <code>x &gt; 2</code></li>
+                <li><code>−5 &lt; x &lt; 2</code></li>
+                <li><code>x &gt; 2</code> only</li>
+                <li><code>x &lt; −5</code> only</li>
+                <li>All real <code>x</code></li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-04">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-05">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>x</code> and <code>y</code> are real numbers and <code>x² = y²</code>, which of the following must be true?</p>
+              <ol class="choices">
+                <li><code>x = y</code></li>
+                <li><code>x = −y</code></li>
+                <li><code>|x| = |y|</code></li>
+                <li><code>x + y = 0</code></li>
+                <li><code>x &gt; y</code></li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-05">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-06">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>2x + 3y = 12</code> and <code>x − y = 1</code>, what is the value of <code>x + y</code>?</p>
+              <ol class="choices">
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-06">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-07">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>For what value of <code>k</code> does <code>x² + kx + 16 = 0</code> have exactly one real solution?</p>
+              <ol class="choices">
+                <li>−16 only</li>
+                <li>−8 only</li>
+                <li>0 only</li>
+                <li>8 only</li>
+                <li>−8 or 8</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-07">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-08">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>0 &lt; x &lt; 1</code>, which of the following must be true?</p>
+              <ol class="choices">
+                <li><code>x² &gt; x</code></li>
+                <li><code>x² &lt; x</code></li>
+                <li><code>1/x &lt; 1</code></li>
+                <li><code>√x &lt; x</code></li>
+                <li><code>x³ &gt; x</code></li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-08">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-09">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>(x + 3)² = 25</code>, what is the sum of all possible values of <code>x</code>?</p>
+              <ol class="choices">
+                <li>−6</li>
+                <li>−2</li>
+                <li>0</li>
+                <li>2</li>
+                <li>6</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-09">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-10">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>The expression <code>(a + b)² − (a − b)²</code> is equivalent to which of the following?</p>
+              <ol class="choices">
+                <li><code>0</code></li>
+                <li><code>2ab</code></li>
+                <li><code>4ab</code></li>
+                <li><code>2a² + 2b²</code></li>
+                <li><code>a² + b²</code></li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-10">Solution →</a>
+          </article>
+        </section>
+
+        <section id="s-explanations" class="explanations">
+          <h2>Explanations · with structural reasoning</h2>
+
+          <article class="x-card" id="x-01">
+            <div class="x-head"><span>Explanation · 01</span><a class="back-link" href="#q-01">↑ back to Q01</a></div>
+            <div class="answer-pill">Answer · A · x &gt; −2</div>
+            <p>Subtract 5: <code>−2x &lt; 4</code>. Divide both sides by −2 — divisor is negative, so flip the sign: <code>x &gt; −2</code>. The flip is the <em>only</em> trick in this question.</p>
+          </article>
+
+          <article class="x-card" id="x-02">
+            <div class="x-head"><span>Explanation · 02</span><a class="back-link" href="#q-02">↑ back to Q02</a></div>
+            <div class="answer-pill">Answer · D · 3</div>
+            <p>For <code>ax² + bx + c = 0</code>, sum of roots <code>= −b/a = −(−3)/1 = 3</code>. No factoring needed.</p>
+            <p>Verification by factoring: <code>(x − 5)(x + 2) = 0</code> &rarr; roots <code>5, −2</code>. Sum = 3. ✓</p>
+          </article>
+
+          <article class="x-card" id="x-03">
+            <div class="x-head"><span>Explanation · 03</span><a class="back-link" href="#q-03">↑ back to Q03</a></div>
+            <div class="answer-pill">Answer · C · 1 ≤ x ≤ 4</div>
+            <p>Translate the absolute-value inequality to a band: <code>−3 ≤ 2x − 5 ≤ 3</code>. Add 5: <code>2 ≤ 2x ≤ 8</code>. Divide by 2: <code>1 ≤ x ≤ 4</code>.</p>
+          </article>
+
+          <article class="x-card" id="x-04">
+            <div class="x-head"><span>Explanation · 04</span><a class="back-link" href="#q-04">↑ back to Q04</a></div>
+            <div class="answer-pill">Answer · A · x &lt; −5 or x &gt; 2</div>
+            <p>Sign chart. Roots are <code>x = 2</code> and <code>x = −5</code>. Test regions:</p>
+            <pre>x = −6:  (−8)(−1) = +8  → positive ✓
+x = 0:   (−2)(+5) = −10 → negative ✗
+x = 3:   (+1)(+8) = +8  → positive ✓</pre>
+            <p>Take regions where the product is positive: <code>x &lt; −5</code> or <code>x &gt; 2</code>.</p>
+          </article>
+
+          <article class="x-card" id="x-05">
+            <div class="x-head"><span>Explanation · 05</span><a class="back-link" href="#q-05">↑ back to Q05</a></div>
+            <div class="answer-pill">Answer · C · |x| = |y|</div>
+            <p><code>x² = y²</code> means <code>x</code> and <code>y</code> are the same distance from zero — possibly with different signs. Test <code>x = 3, y = −3</code>: <code>x² = y² = 9</code> ✓; A fails (3 ≠ −3); D fails (3 + −3 = 0 here, but try <code>x = 2, y = 2</code>: x+y = 4 ≠ 0). The structurally correct statement is <code>|x| = |y|</code>.</p>
+          </article>
+
+          <article class="x-card" id="x-06">
+            <div class="x-head"><span>Explanation · 06</span><a class="back-link" href="#q-06">↑ back to Q06</a></div>
+            <div class="answer-pill">Answer · C · 5</div>
+            <p>From <code>x − y = 1</code>: <code>x = y + 1</code>. Substitute into <code>2x + 3y = 12</code>: <code>2(y+1) + 3y = 12</code> &rarr; <code>5y + 2 = 12</code> &rarr; <code>y = 2</code>. Then <code>x = 3</code>, so <code>x + y = 5</code>.</p>
+            <p>Faster path: add the two equations after multiplying. <code>2x + 3y = 12</code>; multiply <code>x − y = 1</code> by 2: <code>2x − 2y = 2</code>. Subtract: <code>5y = 10</code> &rarr; <code>y = 2</code>. Same answer.</p>
+          </article>
+
+          <article class="x-card" id="x-07">
+            <div class="x-head"><span>Explanation · 07</span><a class="back-link" href="#q-07">↑ back to Q07</a></div>
+            <div class="answer-pill">Answer · E · −8 or 8</div>
+            <p>"Exactly one real solution" means the discriminant is zero: <code>b² − 4ac = 0</code>. Here <code>a = 1, b = k, c = 16</code>, so <code>k² − 64 = 0</code> &rarr; <code>k² = 64</code> &rarr; <code>k = ±8</code>. Both values give one repeated root.</p>
+          </article>
+
+          <article class="x-card" id="x-08">
+            <div class="x-head"><span>Explanation · 08</span><a class="back-link" href="#q-08">↑ back to Q08</a></div>
+            <div class="answer-pill">Answer · B · x² &lt; x</div>
+            <p>Substitute <code>x = 0.5</code>. Then <code>x² = 0.25</code>, <code>√x ≈ 0.71</code>, <code>1/x = 2</code>, <code>x³ = 0.125</code>.</p>
+            <p>Check each: A says <code>x² &gt; x</code> — false (0.25 &lt; 0.5). B says <code>x² &lt; x</code> — true (0.25 &lt; 0.5). C says <code>1/x &lt; 1</code> — false (2 &gt; 1). D says <code>√x &lt; x</code> — false (0.71 &gt; 0.5). E says <code>x³ &gt; x</code> — false.</p>
+            <p>Structural insight: between 0 and 1, raising to a power <em>shrinks</em> the number, and dividing by it <em>grows</em>. This is the most-tested non-intuition in GMAT algebra.</p>
+          </article>
+
+          <article class="x-card" id="x-09">
+            <div class="x-head"><span>Explanation · 09</span><a class="back-link" href="#q-09">↑ back to Q09</a></div>
+            <div class="answer-pill">Answer · A · −6</div>
+            <p>Take square roots, remembering the ±: <code>x + 3 = ±5</code>. So <code>x = 2</code> or <code>x = −8</code>. Sum = <code>2 + (−8) = −6</code>.</p>
+            <p>Vieta shortcut: expand to <code>x² + 6x + 9 = 25</code>, i.e. <code>x² + 6x − 16 = 0</code>. Sum of roots = <code>−b/a = −6</code>. Same answer, no listing required.</p>
+          </article>
+
+          <article class="x-card" id="x-10">
+            <div class="x-head"><span>Explanation · 10</span><a class="back-link" href="#q-10">↑ back to Q10</a></div>
+            <div class="answer-pill">Answer · C · 4ab</div>
+            <p>Expand both squares: <code>(a+b)² = a² + 2ab + b²</code>; <code>(a−b)² = a² − 2ab + b²</code>. Subtract: <code>(a² + 2ab + b²) − (a² − 2ab + b²) = 4ab</code>.</p>
+            <p>Pattern to memorize: <code>(p + q)² − (p − q)² = 4pq</code>. Recognizing this expression on sight saves 30 seconds.</p>
+          </article>
+        </section>
+
+        <section id="s-errorlog">
+          <div class="error-log">
+            <h2>Error Log · Chapter 02</h2>
+            <p class="log-intro">Log every miss. The Sign-Flip Trap and the Squaring Trap are the two most common errors in this chapter — flag them by name when they bite.</p>
+
+            <div class="log-row head">
+              <div>Question #</div>
+              <div>What I missed (mistake type)</div>
+              <div>The correct structural approach</div>
+              <div>Re-test on (date)</div>
+            </div>
+            <div class="log-row"><input type="text" name="q1-q" placeholder="e.g. Q04"/><input type="text" name="q1-m" placeholder="e.g. forgot to flip sign"/><input type="text" name="q1-c" placeholder="e.g. sign chart, regions"/><input type="date" name="q1-d"/></div>
+            <div class="log-row"><input type="text" name="q2-q"/><input type="text" name="q2-m"/><input type="text" name="q2-c"/><input type="date" name="q2-d"/></div>
+            <div class="log-row"><input type="text" name="q3-q"/><input type="text" name="q3-m"/><input type="text" name="q3-c"/><input type="date" name="q3-d"/></div>
+            <div class="log-row"><input type="text" name="q4-q"/><input type="text" name="q4-m"/><input type="text" name="q4-c"/><input type="date" name="q4-d"/></div>
+            <div class="log-row"><input type="text" name="q5-q"/><input type="text" name="q5-m"/><input type="text" name="q5-c"/><input type="date" name="q5-d"/></div>
+            <div class="log-row"><input type="text" name="q6-q"/><input type="text" name="q6-m"/><input type="text" name="q6-c"/><input type="date" name="q6-d"/></div>
+            <div class="log-actions">
+              <button data-action="save">Save</button>
+              <button class="secondary" data-action="export">Export CSV</button>
+              <button class="secondary" data-action="clear">Clear</button>
+              <span class="log-status"></span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-foot">
+          <a href="01-quant-number-properties.html">← Previous<b>Ch. 01 · Number Properties</b></a>
+          <a href="03-quant-word-problems.html" class="next">Next →<b>Ch. 03 · Word Problems</b></a>
+        </nav>
+
+      </main>
+    </div>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0d0f12;
+  --panel: #161a1f;
+  --border: #2a323c;
+  --ink: #eef2f7;
+  --muted: #93a4ba;
+  --accent: #e85d3a;
+  --accent-mute: rgba(232, 93, 58, 0.15);
+}
+
+html.theme-light {
+  --bg: #f8f6f3;
+  --panel: #ffffff;
+  --border: #d8d4ce;
+  --ink: #161512;
+  --muted: #5c5a57;
+  --accent: #c03b1c;
+  --accent-mute: rgba(192, 59, 28, 0.1);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-feature-settings: 'cv02' on, 'cv03' on, 'cv04' on;
+}
+
+.theme-vue body {
+  --bg: #1a1d21;
+  --panel: #22262b;
+  --border: #363b42;
+  --ink: #eceff1;
+  --muted: #9aa7b8;
+  --accent: #0d9488;
+  --accent-mute: rgba(13, 148, 136, 0.14);
+}
+
+@layer utilities {
+  .pane-shell {
+    border-radius: 0.75rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--border);
+    background-color: var(--panel);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  }
+}
+
+.custom-scroll {
+  scrollbar-width: thin;
+}

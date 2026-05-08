@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 07 · Multi-Source Reasoning — The Logic Field Guide</title>
+  <meta name="description" content="GMAT Focus Edition Multi-Source Reasoning: tab discipline, source triangulation, conflicting evidence." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+  <style>
+    /* MSR-specific tab simulation */
+    .msr-frame { border: 2px solid var(--ink); background: var(--paper); margin: 1.5rem 0 2rem; }
+    .msr-tabs { display: flex; border-bottom: 2px solid var(--ink); }
+    .msr-tab { font-family: var(--mono); font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; padding: .8rem 1.2rem; cursor: pointer; border: none; background: var(--paper-deep); color: var(--ink-mute); border-right: 1px solid var(--ink); font-weight: 700; }
+    .msr-tab:last-child { border-right: none; }
+    .msr-tab.active { background: var(--ink); color: var(--paper); }
+    .msr-tab:hover:not(.active) { background: color-mix(in srgb, var(--vermillion) 12%, var(--paper-deep)); color: var(--vermillion-d); }
+    .msr-panel { padding: 1.5rem 1.75rem; display: none; font-size: .96rem; line-height: 1.6; }
+    .msr-panel.active { display: block; }
+    .msr-panel h4 { margin-top: 0; color: var(--vermillion); }
+    @media print {
+      .msr-tabs { display: none; }
+      .msr-panel { display: block !important; border-top: 1px dashed var(--ink-mute); padding-top: 1rem; }
+      .msr-panel::before { content: 'Tab — ' attr(data-tab-name); display: block; font-family: var(--mono); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--vermillion); font-weight: 700; margin-bottom: .5rem; }
+    }
+  </style>
+</head>
+<body data-chapter="07-multi-source-reasoning">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Chapter 07</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="../extras/cheatsheet.html">Cheatsheet</a>
+        <a href="appendix-trap-library.html">Traps</a>
+      </nav>
+    </header>
+
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Block 03 <span class="dot">·</span> Data Insights <span class="dot">·</span> Chapter 07</div>
+      <h1 class="chapter-title">Multi-Source <em>Reasoning</em></h1>
+      <p class="chapter-deck">Three tabs. Three questions. Each answer hides at the intersection of two or more tabs. Read all three first; answer none of them yet.</p>
+      <div class="chapter-meta">
+        <span>Reading time <b>≈ 32 min</b></span>
+        <span>Practice questions <b>10</b></span>
+        <span>Prerequisite <b>Ch. 04, 06</b></span>
+        <span>Unlocks <b>Ch. 08 · Table Analysis</b></span>
+      </div>
+    </section>
+
+    <div class="chapter-grid">
+
+      <aside class="chapter-side">
+        <div class="tier-toggles">
+          <button data-tier="eli5"   aria-pressed="true"><span>ELI5 tier</span><span class="glyph">☀</span></button>
+          <button data-tier="expert" aria-pressed="true"><span>Expert tier</span><span class="glyph">◈</span></button>
+        </div>
+
+        <h4>In this chapter</h4>
+        <ol>
+          <li><a href="#s-overview">What MSR is</a></li>
+          <li><a href="#s-tabs">Tab discipline</a></li>
+          <li><a href="#s-triangulation">Source triangulation</a></li>
+          <li><a href="#s-types">MSR question types</a></li>
+          <li><a href="#s-conflict">Conflicting evidence</a></li>
+          <li><a href="#s-pdf">PDF layout directives</a></li>
+          <li><a href="#s-worked">Worked example</a></li>
+          <li><a href="#s-practice">Practice scenarios</a></li>
+          <li><a href="#s-explanations">Explanations</a></li>
+          <li><a href="#s-errorlog">Error log</a></li>
+        </ol>
+      </aside>
+
+      <main class="chapter-main">
+
+        <section id="s-overview">
+          <h2>What Multi-Source Reasoning actually is</h2>
+          <p>An MSR question gives you three tabs of information — usually some combination of an email thread, a spreadsheet, a chart, a memo, or a research summary — and asks three questions about the combined contents. The trap is that no single tab contains the answer to any of the three questions. Each answer requires <strong>triangulating across at least two tabs.</strong></p>
+
+          <p class="dropcap">Students fail MSR by reading one tab at a time, answering as they go. By the time they reach Tab 3, they have already misanswered Q1 because Q1 quietly required Tab 3. Read all three tabs first. Build a mental index of "Tab A contains X, Tab B contains Y, Tab C contains Z". Then answer all three questions.</p>
+
+          <div class="glance">
+            <h4>The MSR core principles</h4>
+            <ul>
+              <li><span class="formula">Read all three tabs before answering any question.</span></li>
+              <li><span class="formula">Build a quick "what-lives-where" index</span> as you read.</li>
+              <li><span class="formula">Triangulate by default.</span> Single-source answers are usually traps.</li>
+              <li><span class="formula">Distinguish facts from opinions in each tab.</span> Especially when emails or memos are involved.</li>
+              <li><span class="formula">Time budget · 6–7 minutes total for the set.</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="s-tabs">
+          <h2>Tab discipline — read each tab once, well</h2>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the three-page menu.</strong> Imagine a restaurant with three menu pages: appetizers, mains, desserts. You are placing one combined order. You would never order an appetizer before glancing at the desserts to see if you have room. MSR works the same way — you must scan all three "menus" before deciding what to "order".</p>
+            <p><strong>Example 2 · piecing together a story from three letters.</strong> You receive three letters from three different family members about a wedding. None of them tells the whole story. One mentions the date, another the venue, the third a guest list. To answer "who is invited and where is it on Saturday?", you have to read all three and stitch the answer together.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the per-tab read</span>
+            <p>For each tab, in 30–45 seconds:</p>
+            <ol>
+              <li><strong>Identify the source type</strong> — email? memo? table? chart? Each has different reliability characteristics.</li>
+              <li><strong>Note the entities</strong> — who or what is being discussed?</li>
+              <li><strong>Note the numbers</strong> — but do not memorize them. You will return.</li>
+              <li><strong>Note any opinions, hedges, or conditional language</strong> — "we believe", "if X, then Y", "assuming…".</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="s-triangulation">
+          <h2>Source triangulation — the answer is at the intersection</h2>
+          <p>The hardest MSR questions cannot be answered by any single tab. The question forces you to combine, for example, a sales figure in Tab A with a price in Tab B and a margin definition in Tab C. The "intersection" of all three is the answer.</p>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the recipe with split ingredients.</strong> A recipe is divided across three index cards: card A has the dry ingredients, card B has the wet ingredients, card C has the steps. You cannot bake from any one card alone. You need all three. MSR is exactly this: each tab is one card.</p>
+            <p><strong>Example 2 · a budget across receipts.</strong> You want to know how much you spent on lunch this week. The receipts are split among three pockets — one in your bag, one on your desk, one in your jacket. You have to gather all three before you can total. The "answer" is at the intersection of three pockets, not in any one.</p>
+          </div>
+        </section>
+
+        <section id="s-types">
+          <h2>The three MSR question types</h2>
+
+          <div class="glance">
+            <h4>What each type asks for</h4>
+            <ul>
+              <li><span class="formula">True / False / Cannot be determined</span> — a series of statements; mark each. Usually three statements per question.</li>
+              <li><span class="formula">Single-best-answer multiple choice</span> — five choices, find the one supported by the tabs.</li>
+              <li><span class="formula">Calculation</span> — compute a value using data spread across tabs.</li>
+            </ul>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · "cannot be determined" is a real answer</span>
+            <p>For T/F/CBD questions, "cannot be determined" is correct surprisingly often. If the tabs do not give you the data to mark a statement true or false, the right call is "cannot be determined" — not a guess in either direction.</p>
+          </div>
+        </section>
+
+        <section id="s-conflict">
+          <h2>When tabs conflict — choose the more authoritative source</h2>
+          <p>Sometimes tabs <em>seem</em> to disagree. Maybe an email opinion contradicts a spreadsheet value. The rule: data &gt; opinion. If a chart, table, or formal report disagrees with a person's email-stated opinion, side with the data unless the question is specifically asking about the opinion itself.</p>
+
+          <div class="trap">
+            <span class="trap-label">Trap · opinion-as-fact</span>
+            <p>An email may say "we expect sales to grow 20%". Even if the email is in a tab, the 20% is an <em>expectation</em>, not a fact. If a question asks "what was the actual sales growth?", look at the data tab, not the email. See <a href="appendix-trap-library.html#trap-opinion-as-fact">Opinion-as-Fact Trap</a>.</p>
+          </div>
+        </section>
+
+        <section id="s-pdf">
+          <h2>PDF layout directives — print fidelity for tab-based content</h2>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · how the print stylesheet handles MSR</span>
+            <p>In the live HTML, MSR scenarios use clickable tabs (Tab 1, Tab 2, Tab 3). When the textbook is printed:</p>
+            <ol>
+              <li>The tab strip is hidden and all three tab contents are stacked vertically.</li>
+              <li>Each tab is preceded by a tracked-out caps label ("Tab — Email Thread", "Tab — Sales Table", "Tab — Memo") so the reader can still identify which information came from which source.</li>
+              <li>For dynamic datasets that cannot fit on paper, a QR code (rendered via the browser-friendly <code>qrcode-svg</code> library) is embedded next to the relevant tab, linking to the live data resource. In print, the QR code resolves to a static URL the reader can scan with a phone.</li>
+            </ol>
+            <p>This approach lets the same source compile to a working web textbook and a printable book without changing content.</p>
+          </div>
+        </section>
+
+        <section id="s-worked">
+          <h2>Worked example · live MSR scenario</h2>
+
+          <div class="msr-frame">
+            <div class="msr-tabs">
+              <button class="msr-tab active" data-target="msr-w-1">Tab 1 · Email</button>
+              <button class="msr-tab" data-target="msr-w-2">Tab 2 · Sales Table</button>
+              <button class="msr-tab" data-target="msr-w-3">Tab 3 · Memo</button>
+            </div>
+            <div class="msr-panel active" id="msr-w-1" data-tab-name="Email">
+              <h4>Email from VP of Sales · Friday 4:12 PM</h4>
+              <p>Team — Q3 numbers came in stronger than expected. Total unit sales for our flagship product were up year-over-year, and our Northeast region in particular had a standout quarter. We expect Q4 to grow another 10% if current marketing spend is maintained. — Priya</p>
+            </div>
+            <div class="msr-panel" id="msr-w-2" data-tab-name="Sales Table">
+              <h4>Q3 Unit Sales by Region (vs. Q3 prior year)</h4>
+              <pre>Region        Q3 (this yr)   Q3 (last yr)   Change
+Northeast      14,200         11,800         +20%
+Southeast       9,400          9,000          +4%
+Midwest         8,200          8,500          −4%
+West           12,300         12,000          +3%
+Total          44,100         41,300          +7%</pre>
+            </div>
+            <div class="msr-panel" id="msr-w-3" data-tab-name="Memo">
+              <h4>Memo · Marketing Department</h4>
+              <p>Q3 marketing spend totaled $1.2M, of which 45% was allocated to the Northeast region. The Q4 plan reduces total spend to $1.0M, with the same 45% Northeast share, contingent on board approval.</p>
+            </div>
+          </div>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 01 · Triangulate three tabs</div>
+            <p class="stem">Question: "If the board does not approve the Q4 marketing plan, the VP's projection of 10% Q4 growth would be:"</p>
+            <ol>
+              <li>The 10% Q4 growth projection is in Tab 1.</li>
+              <li>The "if current marketing spend is maintained" condition is in Tab 1.</li>
+              <li>Tab 3 reveals that the Q4 plan is contingent on board approval — and the spend is being <em>reduced</em>, not maintained.</li>
+              <li>So if the board does not approve, the spend assumption fails entirely (the plan does not even take effect, but the new lower spend would not happen either; the prior spend continues — wait, re-read). Actually: if the plan is rejected, the new lower spend does not happen and the prior spend (presumably the $1.2M) might continue. The 10% projection would then be more, not less, defensible. The right framing depends on the answer choices.</li>
+            </ol>
+            <p class="answer">Answer (typical wording): <b>"based on an assumption (continued spend) that may or may not hold; the question's answer hinges on whether 'current spend' refers to the new plan's spend or the existing $1.2M."</b> The structural takeaway: every MSR projection is conditional, and you must locate the condition before evaluating the projection.</p>
+          </div>
+        </section>
+
+        <section id="s-practice" class="practice-set">
+          <h2>Practice scenario · 5 questions</h2>
+
+          <div class="msr-frame">
+            <div class="msr-tabs">
+              <button class="msr-tab active" data-target="msr-p-1">Tab 1 · Project Brief</button>
+              <button class="msr-tab" data-target="msr-p-2">Tab 2 · Timeline</button>
+              <button class="msr-tab" data-target="msr-p-3">Tab 3 · Budget Table</button>
+            </div>
+            <div class="msr-panel active" id="msr-p-1" data-tab-name="Project Brief">
+              <h4>Project Brief — "Aurora" Mobile App Launch</h4>
+              <p>Aurora is a consumer mobile app being developed by Lighthouse Software. The product team plans to launch a public beta in October and a full release in February of the following year. The development phase has three subphases: Design (June–July), Engineering (August–November), and QA (December–January). Initial budget is $480,000, and any spend over budget requires CFO approval.</p>
+            </div>
+            <div class="msr-panel" id="msr-p-2" data-tab-name="Timeline">
+              <h4>Project Timeline · as of mid-September</h4>
+              <pre>Subphase      Planned          Status            Notes
+Design        Jun–Jul          Completed         On time
+Engineering   Aug–Nov          50% complete      2 weeks behind
+QA            Dec–Jan          Not started       —
+Public beta   Oct              Delayed to Nov    pending eng.
+Full release  Feb              Delayed to Mar    pending beta
+</pre>
+            </div>
+            <div class="msr-panel" id="msr-p-3" data-tab-name="Budget Table">
+              <h4>Aurora Budget · spend through mid-September</h4>
+              <pre>Category           Allocated   Spent     Remaining
+Design             $80,000     $82,000   −$2,000
+Engineering        $260,000    $145,000  $115,000
+QA                 $90,000     $0        $90,000
+Marketing          $50,000     $20,000   $30,000
+Total              $480,000    $247,000  $233,000
+</pre>
+            </div>
+          </div>
+
+          <article class="q-card" id="q-01">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>For each statement, decide whether the information given supports the conclusion that it is true, false, or cannot be determined from the tabs.</p>
+              <p>Statement: <em>The Design phase is over budget.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-01">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-02">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>The full release date has been pushed back from February to March.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-02">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-03">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>If Engineering finishes its remaining 50% within the original budget allocation, the project as a whole will not require CFO approval for additional spend.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-03">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-04">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Based on the tabs, which of the following is most likely the cause of the public-beta delay?</p>
+              <ol class="choices">
+                <li>QA started behind schedule.</li>
+                <li>Marketing has not been spent.</li>
+                <li>Design ran over budget.</li>
+                <li>Engineering is two weeks behind plan.</li>
+                <li>The CFO has not approved additional spend.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-04">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-05">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Approximately what percentage of the originally planned Engineering budget has been spent so far?</p>
+              <ol class="choices">
+                <li>30%</li>
+                <li>45%</li>
+                <li>56%</li>
+                <li>72%</li>
+                <li>90%</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-05">Solution →</a>
+          </article>
+
+          <h2 style="margin-top: 4rem;">Practice scenario · second set, 5 questions</h2>
+
+          <div class="msr-frame">
+            <div class="msr-tabs">
+              <button class="msr-tab active" data-target="msr-q-1">Tab 1 · Restaurant Concept</button>
+              <button class="msr-tab" data-target="msr-q-2">Tab 2 · Survey Results</button>
+              <button class="msr-tab" data-target="msr-q-3">Tab 3 · Cost Analysis</button>
+            </div>
+            <div class="msr-panel active" id="msr-q-1" data-tab-name="Restaurant Concept">
+              <h4>Concept Note · "Verde Kitchen"</h4>
+              <p>Verde Kitchen is a fast-casual restaurant concept centered on Mediterranean bowls. The owner is deciding between two locations: Downtown (high foot traffic, high rent) and Riverside (medium foot traffic, lower rent). The owner expects an average customer ticket of $14 and is targeting a 20% net profit margin in year one.</p>
+            </div>
+            <div class="msr-panel" id="msr-q-2" data-tab-name="Survey Results">
+              <h4>Customer Survey · 500 respondents</h4>
+              <pre>Question                                Downtown   Riverside
+Have you eaten at a Mediterranean place?  62%        58%
+Would visit weekly?                       28%        24%
+Would visit at least monthly?             65%        70%
+Average willingness to pay (per visit)    $13.50     $15.00
+</pre>
+            </div>
+            <div class="msr-panel" id="msr-q-3" data-tab-name="Cost Analysis">
+              <h4>Annual Operating Cost Estimate</h4>
+              <pre>Cost item             Downtown    Riverside
+Rent                  $180,000    $96,000
+Labor                 $260,000    $230,000
+Cost of goods (35%)   varies      varies
+Other fixed           $40,000     $35,000
+</pre>
+            </div>
+          </div>
+
+          <article class="q-card" id="q-06">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>Riverside has higher willingness-to-pay per visit than Downtown.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-06">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-07">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>The owner's expected average ticket of $14 is consistent with willingness-to-pay data at both locations.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-07">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-08">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>Total fixed costs (excluding cost of goods) at Riverside are lower than at Downtown.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-08">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-09">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If Riverside attracts 20,000 customers in year one at the willingness-to-pay average, approximately what would total annual revenue be?</p>
+              <ol class="choices">
+                <li>$240,000</li>
+                <li>$270,000</li>
+                <li>$300,000</li>
+                <li>$330,000</li>
+                <li>$360,000</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-09">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-10">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Which of the following can the owner most reasonably infer from the tabs?</p>
+              <ol class="choices">
+                <li>Downtown will have a higher net profit margin than Riverside.</li>
+                <li>Riverside has lower fixed costs but a slightly higher per-visit ticket potential, which could offset the lower foot traffic.</li>
+                <li>Riverside will have more weekly visitors than Downtown.</li>
+                <li>Both locations will reach the 20% net profit margin target.</li>
+                <li>Survey respondents at Riverside have eaten at more Mediterranean restaurants.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-10">Solution →</a>
+          </article>
+        </section>
+
+        <section id="s-explanations" class="explanations">
+          <h2>Explanations</h2>
+
+          <article class="x-card" id="x-01">
+            <div class="x-head"><span>Explanation · 01</span><a class="back-link" href="#q-01">↑ back to Q01</a></div>
+            <div class="answer-pill">Answer · True</div>
+            <p>Tab 3 shows Design allocated $80,000, spent $82,000 — that is over by $2,000. True.</p>
+          </article>
+
+          <article class="x-card" id="x-02">
+            <div class="x-head"><span>Explanation · 02</span><a class="back-link" href="#q-02">↑ back to Q02</a></div>
+            <div class="answer-pill">Answer · True</div>
+            <p>Tab 1 says the planned full release was February. Tab 2 shows it has been delayed to March. The combination confirms the statement.</p>
+          </article>
+
+          <article class="x-card" id="x-03">
+            <div class="x-head"><span>Explanation · 03</span><a class="back-link" href="#q-03">↑ back to Q03</a></div>
+            <div class="answer-pill">Answer · False</div>
+            <p>Design has already exceeded its allocation by $2,000. So even if Engineering stays under budget, the project as a whole has already triggered an over-allocation event in Design — which would, under the brief's rule (Tab 1), require CFO approval. False.</p>
+          </article>
+
+          <article class="x-card" id="x-04">
+            <div class="x-head"><span>Explanation · 04</span><a class="back-link" href="#q-04">↑ back to Q04</a></div>
+            <div class="answer-pill">Answer · D</div>
+            <p>Tab 2 says public beta is "delayed to Nov" and notes "pending eng[ineering]". Tab 2 also says Engineering is "2 weeks behind". The most likely cause is Engineering being behind schedule. The other choices are unsupported or unrelated.</p>
+          </article>
+
+          <article class="x-card" id="x-05">
+            <div class="x-head"><span>Explanation · 05</span><a class="back-link" href="#q-05">↑ back to Q05</a></div>
+            <div class="answer-pill">Answer · C · 56%</div>
+            <p>Engineering allocated $260,000, spent $145,000. <code>145 / 260 ≈ 0.558</code>, or about 56%.</p>
+          </article>
+
+          <article class="x-card" id="x-06">
+            <div class="x-head"><span>Explanation · 06</span><a class="back-link" href="#q-06">↑ back to Q06</a></div>
+            <div class="answer-pill">Answer · True</div>
+            <p>Tab 2 shows Riverside willingness-to-pay at $15.00 vs. Downtown $13.50. True.</p>
+          </article>
+
+          <article class="x-card" id="x-07">
+            <div class="x-head"><span>Explanation · 07</span><a class="back-link" href="#q-07">↑ back to Q07</a></div>
+            <div class="answer-pill">Answer · False</div>
+            <p>The owner's $14 expectation is above Downtown's $13.50 willingness-to-pay (so customers there might balk) and below Riverside's $15.00. The expectation is not consistent with both locations — it overestimates Downtown's appetite. False.</p>
+          </article>
+
+          <article class="x-card" id="x-08">
+            <div class="x-head"><span>Explanation · 08</span><a class="back-link" href="#q-08">↑ back to Q08</a></div>
+            <div class="answer-pill">Answer · True</div>
+            <p>Sum the fixed-cost lines (rent + labor + other fixed):</p>
+            <pre>Downtown:  180 + 260 + 40 = $480,000
+Riverside:  96 + 230 + 35 = $361,000</pre>
+            <p>$361K &lt; $480K. True.</p>
+          </article>
+
+          <article class="x-card" id="x-09">
+            <div class="x-head"><span>Explanation · 09</span><a class="back-link" href="#q-09">↑ back to Q09</a></div>
+            <div class="answer-pill">Answer · C · $300,000</div>
+            <p><code>20,000 × $15.00 = $300,000</code>.</p>
+          </article>
+
+          <article class="x-card" id="x-10">
+            <div class="x-head"><span>Explanation · 10</span><a class="back-link" href="#q-10">↑ back to Q10</a></div>
+            <div class="answer-pill">Answer · B</div>
+            <p>B is the only inference fully supported by all three tabs: Riverside has lower fixed costs (Tab 3) and a higher per-visit ticket potential (Tab 2), which could offset lower foot traffic (Tab 1). A and D require profit calculations that depend on customer counts not given. C confuses "would visit at least monthly" with actual visits. E is unsupported.</p>
+          </article>
+        </section>
+
+        <section id="s-errorlog">
+          <div class="error-log">
+            <h2>Error Log · Chapter 07</h2>
+            <p class="log-intro">MSR misses are usually caused by skipping a tab. When you log a miss, write which tab held the data you missed.</p>
+
+            <div class="log-row head">
+              <div>Question #</div>
+              <div>What I missed (mistake type)</div>
+              <div>Tab the answer lived in</div>
+              <div>Re-test on (date)</div>
+            </div>
+            <div class="log-row"><input type="text" name="q1-q" placeholder="e.g. Q03"/><input type="text" name="q1-m" placeholder="e.g. forgot Tab 3 cost rule"/><input type="text" name="q1-c" placeholder="e.g. Tab 1 + Tab 3"/><input type="date" name="q1-d"/></div>
+            <div class="log-row"><input type="text" name="q2-q"/><input type="text" name="q2-m"/><input type="text" name="q2-c"/><input type="date" name="q2-d"/></div>
+            <div class="log-row"><input type="text" name="q3-q"/><input type="text" name="q3-m"/><input type="text" name="q3-c"/><input type="date" name="q3-d"/></div>
+            <div class="log-row"><input type="text" name="q4-q"/><input type="text" name="q4-m"/><input type="text" name="q4-c"/><input type="date" name="q4-d"/></div>
+            <div class="log-row"><input type="text" name="q5-q"/><input type="text" name="q5-m"/><input type="text" name="q5-c"/><input type="date" name="q5-d"/></div>
+            <div class="log-row"><input type="text" name="q6-q"/><input type="text" name="q6-m"/><input type="text" name="q6-c"/><input type="date" name="q6-d"/></div>
+            <div class="log-actions">
+              <button data-action="save">Save</button>
+              <button class="secondary" data-action="export">Export CSV</button>
+              <button class="secondary" data-action="clear">Clear</button>
+              <span class="log-status"></span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-foot">
+          <a href="06-di-data-sufficiency.html">← Previous<b>Ch. 06 · Data Sufficiency</b></a>
+          <a href="08-di-table-analysis.html" class="next">Next →<b>Ch. 08 · Table Analysis</b></a>
+        </nav>
+
+      </main>
+    </div>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+  <script>
+    document.querySelectorAll('.msr-tabs').forEach(tabs => {
+      tabs.querySelectorAll('.msr-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const frame = btn.closest('.msr-frame');
+          frame.querySelectorAll('.msr-tab').forEach(t => t.classList.remove('active'));
+          frame.querySelectorAll('.msr-panel').forEach(p => p.classList.remove('active'));
+          btn.classList.add('active');
+          frame.querySelector('#' + btn.dataset.target).classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

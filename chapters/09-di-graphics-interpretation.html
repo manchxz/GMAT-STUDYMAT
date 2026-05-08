@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 09 · Graphics Interpretation — The Logic Field Guide</title>
+  <meta name="description" content="GMAT Focus Edition Graphics Interpretation: scatter, bar, pie, network charts with drop-down completion strategy." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+  <style>
+    .chart-frame { border: 1px solid var(--rule); padding: 1.5rem; background: var(--paper); margin: 1.5rem 0 2rem; }
+    .chart-title { font-family: var(--mono); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--vermillion); font-weight: 700; margin-bottom: .8rem; }
+    .chart-svg { width: 100%; max-width: 540px; height: auto; display: block; margin: 0 auto; }
+    .axis-label { font-family: var(--mono); font-size: 10px; fill: var(--ink-soft); }
+    .axis-tick { stroke: var(--ink-mute); stroke-width: 1; }
+    .grid-line { stroke: var(--rule); stroke-width: 1; stroke-dasharray: 2 3; }
+    .bar { fill: var(--vermillion); }
+    .bar-alt { fill: var(--teal); }
+    .bar-label { font-family: var(--mono); font-size: 9px; fill: var(--ink); }
+    .point { fill: var(--vermillion); }
+    .legend { font-family: var(--mono); font-size: 10px; fill: var(--ink-soft); }
+    .dropdown-line { font-family: var(--display); font-size: 1.05rem; line-height: 1.7; margin: 1rem 0; padding: 1rem 1.2rem; background: var(--paper-deep); border-left: 3px solid var(--ink); }
+    .dropdown-line .blank { display: inline-block; padding: .15rem .8rem; background: var(--paper); border: 1.5px solid var(--vermillion); color: var(--vermillion-d); font-family: var(--mono); font-weight: 700; font-size: .92rem; margin: 0 .2rem; min-width: 90px; text-align: center; }
+  </style>
+</head>
+<body data-chapter="09-graphics-interpretation">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Chapter 09</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="../extras/cheatsheet.html">Cheatsheet</a>
+        <a href="appendix-trap-library.html">Traps</a>
+      </nav>
+    </header>
+
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Block 03 <span class="dot">·</span> Data Insights <span class="dot">·</span> Chapter 09</div>
+      <h1 class="chapter-title">Graphics <em>Interpretation</em></h1>
+      <p class="chapter-deck">Read the axes before the bars. Read the units before the numbers. Read the scale before the trend. Skip these in order and the chart will lie to you.</p>
+      <div class="chapter-meta">
+        <span>Reading time <b>≈ 28 min</b></span>
+        <span>Practice questions <b>10</b></span>
+        <span>Prerequisite <b>Ch. 06–08</b></span>
+        <span>Unlocks <b>Ch. 10 · Strategy</b></span>
+      </div>
+    </section>
+
+    <div class="chapter-grid">
+
+      <aside class="chapter-side">
+        <div class="tier-toggles">
+          <button data-tier="eli5"   aria-pressed="true"><span>ELI5 tier</span><span class="glyph">☀</span></button>
+          <button data-tier="expert" aria-pressed="true"><span>Expert tier</span><span class="glyph">◈</span></button>
+        </div>
+
+        <h4>In this chapter</h4>
+        <ol>
+          <li><a href="#s-overview">What GI is</a></li>
+          <li><a href="#s-types">Chart types</a></li>
+          <li><a href="#s-procedure">Read-the-axes procedure</a></li>
+          <li><a href="#s-dropdown">Drop-down completions</a></li>
+          <li><a href="#s-traps">Graphics traps</a></li>
+          <li><a href="#s-worked">Worked example</a></li>
+          <li><a href="#s-practice">Practice charts</a></li>
+          <li><a href="#s-explanations">Explanations</a></li>
+          <li><a href="#s-errorlog">Error log</a></li>
+        </ol>
+      </aside>
+
+      <main class="chapter-main">
+
+        <section id="s-overview">
+          <h2>What Graphics Interpretation actually is</h2>
+          <p>A Graphics Interpretation question gives you one chart — bar, scatter, line, pie, or occasionally a network — and asks you to fill in two drop-down menus to complete a sentence based on the chart. Each drop-down has 4 to 7 options. The skill being tested is whether you can extract the right number from the right place under time pressure.</p>
+
+          <p class="dropcap">The format rewards careful reading and punishes careless reading. The single most common mistake is answering before identifying the units on the axes — the second-most-common is answering based on the visual length of a bar without checking the y-axis scale.</p>
+
+          <div class="glance">
+            <h4>The GI core principles</h4>
+            <ul>
+              <li><span class="formula">1. Read both axes (or the legend) before reading any data point.</span></li>
+              <li><span class="formula">2. Note the units (millions, percentages, raw counts).</span></li>
+              <li><span class="formula">3. Note the scale (does the y-axis start at 0 or 100?).</span></li>
+              <li><span class="formula">4. Then answer the question.</span></li>
+              <li><span class="formula">Time budget · 2:30 to 3:00 per chart.</span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="s-types">
+          <h2>The five chart types you will see</h2>
+
+          <div class="glance">
+            <h4>Each chart, what it is best at</h4>
+            <ul>
+              <li><span class="formula">Bar chart</span> compares discrete categories. Good for "which is largest", "ranking".</li>
+              <li><span class="formula">Line chart</span> shows change over time. Good for trends, slopes, peaks.</li>
+              <li><span class="formula">Scatter plot</span> shows relationship between two variables. Good for correlation.</li>
+              <li><span class="formula">Pie chart</span> shows parts of a whole. Good for share / proportion.</li>
+              <li><span class="formula">Network / org chart</span> shows relationships. Good for connection / hierarchy.</li>
+            </ul>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the school cafeteria.</strong> If the lunch lady wants to compare how much food each grade ate, she draws a bar chart. If she wants to see how lunch attendance changed over the school year, she draws a line chart. If she wants to see whether kids who eat lunch also do well on tests, she draws a scatter plot. Different stories want different chart shapes.</p>
+            <p><strong>Example 2 · the family photo album.</strong> A pie chart is "how many photos came from each family member" (parts of a whole). A bar chart is "how many photos each year" (discrete categories). A line chart is "photos per month over time" (a trend). The chart type tells you what kind of question is being asked.</p>
+          </div>
+        </section>
+
+        <section id="s-procedure">
+          <h2>The read-the-axes procedure</h2>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the 30-second pre-read</span>
+            <ol>
+              <li><strong>Title</strong> — what is being shown overall?</li>
+              <li><strong>X-axis</strong> — what is the variable? In what units?</li>
+              <li><strong>Y-axis</strong> — what is the variable? In what units? Does the scale start at 0?</li>
+              <li><strong>Legend</strong> — what does each color, shape, or pattern represent?</li>
+              <li><strong>One reference point</strong> — pick a single bar or dot and confirm you can read it correctly.</li>
+            </ol>
+            <p>Only after this 30-second pre-read should you look at the question.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · truncated y-axis</span>
+            <p>If a bar chart's y-axis starts at, say, 80 instead of 0, the visual difference between bars looks much larger than the actual numeric difference. Do not "eyeball" the difference; read the values. See <a href="appendix-trap-library.html#trap-truncated-axis">Truncated-Axis Trap</a>.</p>
+          </div>
+        </section>
+
+        <section id="s-dropdown">
+          <h2>The drop-down completion strategy</h2>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · fill in the blank with a word.</strong> Imagine a teacher gives you the sentence "The fastest animal in this list is ____" and a list of animals. You do not guess — you check the list. GI drop-downs work the same: do not pick the option that "feels biggest", read the chart and pick the option that matches.</p>
+            <p><strong>Example 2 · the multiple-choice grocery list.</strong> "I bought ____ apples and ____ oranges" with options 3, 5, 7, 10. The receipt is in your hand. You do not guess — you read the receipt. The chart is your receipt.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the two-blank routine</span>
+            <ol>
+              <li><strong>Read the entire sentence first</strong> — both blanks. Understand what the sentence is claiming.</li>
+              <li><strong>Map each blank to a specific chart read.</strong> "Approximately X" usually means a single value. "Increased by Y%" means a comparison.</li>
+              <li><strong>Compute / read in the order that locks faster blanks first.</strong> If one blank is easy, fill it; the other may then be obvious.</li>
+              <li><strong>For percentage-change blanks, use rough math.</strong> The choices are spaced wide enough that <code>(new − old) / old</code> need only be approximate.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="s-traps">
+          <h2>Graphics-specific traps</h2>
+
+          <div class="trap">
+            <span class="trap-label">Trap · "share" vs. "absolute"</span>
+            <p>A pie chart shows shares — percentages of a whole. A bar chart can show either, depending on whether the bars sum to 100% or to absolute counts. Mixing up "share" and "count" is a constant trap. Always check the y-axis label.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · double y-axis</span>
+            <p>Some charts have two y-axes — one on the left, one on the right — with different scales. The bar uses one axis, the line uses the other. If you read both off the same scale, you will be wrong.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · selective time window</span>
+            <p>A line chart that starts in 2018 may hide a bigger trend that began in 2010. The chart shows only what is shown. If the question asks about a longer period, the answer is "cannot be determined" — not "extrapolate".</p>
+          </div>
+        </section>
+
+        <section id="s-worked">
+          <h2>Worked example · live chart</h2>
+
+          <div class="chart-frame">
+            <div class="chart-title">Annual Revenue by Region ($ millions)</div>
+            <svg class="chart-svg" viewBox="0 0 540 320" role="img" aria-label="Bar chart of annual revenue by region">
+              <line x1="60" y1="20" x2="60" y2="280" class="axis-tick"/>
+              <line x1="60" y1="280" x2="520" y2="280" class="axis-tick"/>
+              <text x="55" y="285" text-anchor="end" class="axis-label">0</text>
+              <text x="55" y="225" text-anchor="end" class="axis-label">50</text>
+              <text x="55" y="170" text-anchor="end" class="axis-label">100</text>
+              <text x="55" y="115" text-anchor="end" class="axis-label">150</text>
+              <text x="55" y="60" text-anchor="end" class="axis-label">200</text>
+              <line x1="60" y1="225" x2="520" y2="225" class="grid-line"/>
+              <line x1="60" y1="170" x2="520" y2="170" class="grid-line"/>
+              <line x1="60" y1="115" x2="520" y2="115" class="grid-line"/>
+              <line x1="60" y1="60" x2="520" y2="60" class="grid-line"/>
+
+              <rect x="100" y="115" width="60" height="165" class="bar"/>
+              <text x="130" y="295" text-anchor="middle" class="axis-label">North</text>
+              <text x="130" y="110" text-anchor="middle" class="bar-label">150</text>
+
+              <rect x="200" y="170" width="60" height="110" class="bar"/>
+              <text x="230" y="295" text-anchor="middle" class="axis-label">South</text>
+              <text x="230" y="165" text-anchor="middle" class="bar-label">100</text>
+
+              <rect x="300" y="60" width="60" height="220" class="bar"/>
+              <text x="330" y="295" text-anchor="middle" class="axis-label">East</text>
+              <text x="330" y="55" text-anchor="middle" class="bar-label">200</text>
+
+              <rect x="400" y="148" width="60" height="132" class="bar"/>
+              <text x="430" y="295" text-anchor="middle" class="axis-label">West</text>
+              <text x="430" y="143" text-anchor="middle" class="bar-label">120</text>
+
+              <text x="20" y="160" transform="rotate(-90, 20, 160)" text-anchor="middle" class="axis-label" font-size="11">Revenue ($M)</text>
+            </svg>
+          </div>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 01 · Drop-down completion</div>
+            <p class="stem">Complete the sentence based on the chart above:</p>
+            <div class="dropdown-line">
+              The region with the highest revenue is <span class="blank">East</span>, and its revenue is approximately <span class="blank">100%</span> greater than that of the South region.
+            </div>
+            <ol>
+              <li>First blank: read the bar chart. East = 200, the tallest bar.</li>
+              <li>Second blank: percentage difference between East ($200M) and South ($100M). <code>(200 − 100) / 100 = 100%</code>. East is 100% greater than South.</li>
+            </ol>
+            <p class="answer">Answer: <b>East</b>, <b>100%</b>.</p>
+          </div>
+        </section>
+
+        <section id="s-practice" class="practice-set">
+          <h2>Practice · 2 charts, 10 questions</h2>
+
+          <h3>Chart A · Quarterly revenue, two product lines</h3>
+          <div class="chart-frame">
+            <div class="chart-title">Quarterly Revenue by Product Line ($M)</div>
+            <svg class="chart-svg" viewBox="0 0 540 320" role="img" aria-label="Grouped bar chart of quarterly revenue for two products">
+              <line x1="60" y1="20" x2="60" y2="280" class="axis-tick"/>
+              <line x1="60" y1="280" x2="520" y2="280" class="axis-tick"/>
+              <text x="55" y="285" text-anchor="end" class="axis-label">0</text>
+              <text x="55" y="225" text-anchor="end" class="axis-label">20</text>
+              <text x="55" y="170" text-anchor="end" class="axis-label">40</text>
+              <text x="55" y="115" text-anchor="end" class="axis-label">60</text>
+              <text x="55" y="60" text-anchor="end" class="axis-label">80</text>
+              <line x1="60" y1="225" x2="520" y2="225" class="grid-line"/>
+              <line x1="60" y1="170" x2="520" y2="170" class="grid-line"/>
+              <line x1="60" y1="115" x2="520" y2="115" class="grid-line"/>
+              <line x1="60" y1="60" x2="520" y2="60" class="grid-line"/>
+
+              <!-- Q1: Aurora 30, Borealis 50 -->
+              <rect x="90" y="198" width="30" height="82" class="bar"/>
+              <rect x="125" y="143" width="30" height="137" class="bar-alt"/>
+              <text x="125" y="295" text-anchor="middle" class="axis-label">Q1</text>
+
+              <!-- Q2: Aurora 40, Borealis 55 -->
+              <rect x="195" y="170" width="30" height="110" class="bar"/>
+              <rect x="230" y="129" width="30" height="151" class="bar-alt"/>
+              <text x="230" y="295" text-anchor="middle" class="axis-label">Q2</text>
+
+              <!-- Q3: Aurora 50, Borealis 60 -->
+              <rect x="300" y="143" width="30" height="137" class="bar"/>
+              <rect x="335" y="115" width="30" height="165" class="bar-alt"/>
+              <text x="335" y="295" text-anchor="middle" class="axis-label">Q3</text>
+
+              <!-- Q4: Aurora 70, Borealis 65 -->
+              <rect x="405" y="88" width="30" height="192" class="bar"/>
+              <rect x="440" y="101" width="30" height="179" class="bar-alt"/>
+              <text x="440" y="295" text-anchor="middle" class="axis-label">Q4</text>
+
+              <text x="20" y="160" transform="rotate(-90, 20, 160)" text-anchor="middle" class="axis-label" font-size="11">Revenue ($M)</text>
+
+              <rect x="350" y="20" width="14" height="10" class="bar"/>
+              <text x="370" y="29" class="legend">Aurora</text>
+              <rect x="430" y="20" width="14" height="10" class="bar-alt"/>
+              <text x="450" y="29" class="legend">Borealis</text>
+            </svg>
+          </div>
+
+          <article class="q-card" id="q-01">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Based on Chart A, complete the sentence:</p>
+              <div class="dropdown-line">In Q4, Aurora's revenue was approximately <span class="blank">__%__</span> greater than Borealis's revenue.</div>
+              <ol class="choices">
+                <li>0%</li>
+                <li>5%</li>
+                <li>8%</li>
+                <li>15%</li>
+                <li>25%</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-01">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-02">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Based on Chart A, in which quarter was the gap between Borealis and Aurora largest?</p>
+              <ol class="choices">
+                <li>Q1</li>
+                <li>Q2</li>
+                <li>Q3</li>
+                <li>Q4</li>
+                <li>The gap was the same in every quarter.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-02">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-03">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Based on Chart A, Aurora's revenue grew from Q1 to Q4 by approximately:</p>
+              <ol class="choices">
+                <li>$20M</li>
+                <li>$30M</li>
+                <li>$40M</li>
+                <li>$50M</li>
+                <li>$70M</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-03">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-04">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Based on Chart A, the only quarter in which Aurora's revenue exceeded Borealis's revenue was:</p>
+              <ol class="choices">
+                <li>Q1</li>
+                <li>Q2</li>
+                <li>Q3</li>
+                <li>Q4</li>
+                <li>Aurora never exceeded Borealis.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-04">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-05">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Aurora's annual revenue (sum of all four quarters) was approximately:</p>
+              <ol class="choices">
+                <li>$130M</li>
+                <li>$150M</li>
+                <li>$190M</li>
+                <li>$230M</li>
+                <li>$280M</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-05">Solution →</a>
+          </article>
+
+          <h3 style="margin-top: 3rem;">Chart B · Advertising spend vs. unit sales</h3>
+          <div class="chart-frame">
+            <div class="chart-title">Advertising Spend ($K) vs. Monthly Unit Sales — 8 stores</div>
+            <svg class="chart-svg" viewBox="0 0 540 360" role="img" aria-label="Scatter plot of ad spend versus unit sales">
+              <line x1="60" y1="20" x2="60" y2="320" class="axis-tick"/>
+              <line x1="60" y1="320" x2="520" y2="320" class="axis-tick"/>
+
+              <text x="55" y="325" text-anchor="end" class="axis-label">0</text>
+              <text x="55" y="265" text-anchor="end" class="axis-label">100</text>
+              <text x="55" y="205" text-anchor="end" class="axis-label">200</text>
+              <text x="55" y="145" text-anchor="end" class="axis-label">300</text>
+              <text x="55" y="85" text-anchor="end" class="axis-label">400</text>
+              <line x1="60" y1="265" x2="520" y2="265" class="grid-line"/>
+              <line x1="60" y1="205" x2="520" y2="205" class="grid-line"/>
+              <line x1="60" y1="145" x2="520" y2="145" class="grid-line"/>
+              <line x1="60" y1="85" x2="520" y2="85" class="grid-line"/>
+
+              <text x="60" y="340" class="axis-label">0</text>
+              <text x="160" y="340" class="axis-label">10</text>
+              <text x="260" y="340" class="axis-label">20</text>
+              <text x="360" y="340" class="axis-label">30</text>
+              <text x="460" y="340" class="axis-label">40</text>
+
+              <!-- Points: (5,150), (8,180), (12,220), (15,250), (20,260), (25,300), (32,330), (38,360 → cap at 380) -->
+              <circle cx="110" cy="230" r="5" class="point"/>
+              <circle cx="140" cy="212" r="5" class="point"/>
+              <circle cx="180" cy="188" r="5" class="point"/>
+              <circle cx="210" cy="170" r="5" class="point"/>
+              <circle cx="260" cy="164" r="5" class="point"/>
+              <circle cx="310" cy="140" r="5" class="point"/>
+              <circle cx="380" cy="122" r="5" class="point"/>
+              <circle cx="440" cy="100" r="5" class="point"/>
+
+              <text x="20" y="180" transform="rotate(-90, 20, 180)" text-anchor="middle" class="axis-label" font-size="11">Unit Sales</text>
+              <text x="290" y="356" text-anchor="middle" class="axis-label" font-size="11">Ad Spend ($K)</text>
+            </svg>
+          </div>
+
+          <article class="q-card" id="q-06">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Based on Chart B, the relationship between ad spend and unit sales is best described as:</p>
+              <ol class="choices">
+                <li>Strong positive correlation</li>
+                <li>Strong negative correlation</li>
+                <li>No correlation</li>
+                <li>Cyclical</li>
+                <li>Inverse exponential</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-06">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-07">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Approximately what is the unit-sales value of the store with the lowest ad spend?</p>
+              <ol class="choices">
+                <li>100</li>
+                <li>150</li>
+                <li>200</li>
+                <li>250</li>
+                <li>300</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-07">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-08">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Approximately what is the unit-sales value of the store with the highest ad spend?</p>
+              <ol class="choices">
+                <li>250</li>
+                <li>300</li>
+                <li>360</li>
+                <li>400</li>
+                <li>450</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-08">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-09">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If a new store spends $25K on advertising, the chart suggests its monthly unit sales would most likely be approximately:</p>
+              <ol class="choices">
+                <li>150</li>
+                <li>200</li>
+                <li>270</li>
+                <li>350</li>
+                <li>500</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-09">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-10">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Which of the following can be most reasonably inferred from Chart B?</p>
+              <ol class="choices">
+                <li>Increasing ad spend always causes proportional increases in unit sales.</li>
+                <li>Stores in the data set show a generally increasing trend in unit sales as ad spend rises, but the chart alone does not establish causation.</li>
+                <li>Advertising has no relationship to sales.</li>
+                <li>Stores with low ad spend have higher profit margins.</li>
+                <li>Doubling ad spend will exactly double sales.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-10">Solution →</a>
+          </article>
+        </section>
+
+        <section id="s-explanations" class="explanations">
+          <h2>Explanations</h2>
+
+          <article class="x-card" id="x-01">
+            <div class="x-head"><span>Explanation · 01</span><a class="back-link" href="#q-01">↑ back to Q01</a></div>
+            <div class="answer-pill">Answer · C · 8%</div>
+            <p>Q4: Aurora ≈ $70M, Borealis ≈ $65M. Difference: $5M. Percentage: <code>5 / 65 ≈ 7.7%</code>. Closest choice: 8%.</p>
+          </article>
+
+          <article class="x-card" id="x-02">
+            <div class="x-head"><span>Explanation · 02</span><a class="back-link" href="#q-02">↑ back to Q02</a></div>
+            <div class="answer-pill">Answer · A · Q1</div>
+            <p>Gaps (Borealis − Aurora) by quarter: Q1: 50 − 30 = 20; Q2: 55 − 40 = 15; Q3: 60 − 50 = 10; Q4: 65 − 70 = −5 (Aurora ahead). Largest gap with Borealis ahead is Q1.</p>
+          </article>
+
+          <article class="x-card" id="x-03">
+            <div class="x-head"><span>Explanation · 03</span><a class="back-link" href="#q-03">↑ back to Q03</a></div>
+            <div class="answer-pill">Answer · C · $40M</div>
+            <p>Aurora Q1 ≈ $30M, Q4 ≈ $70M. Growth = $40M.</p>
+          </article>
+
+          <article class="x-card" id="x-04">
+            <div class="x-head"><span>Explanation · 04</span><a class="back-link" href="#q-04">↑ back to Q04</a></div>
+            <div class="answer-pill">Answer · D · Q4</div>
+            <p>From Q1 to Q3, Borealis was ahead. In Q4, Aurora overtook Borealis ($70M vs. $65M).</p>
+          </article>
+
+          <article class="x-card" id="x-05">
+            <div class="x-head"><span>Explanation · 05</span><a class="back-link" href="#q-05">↑ back to Q05</a></div>
+            <div class="answer-pill">Answer · C · $190M</div>
+            <p>Aurora: 30 + 40 + 50 + 70 = 190.</p>
+          </article>
+
+          <article class="x-card" id="x-06">
+            <div class="x-head"><span>Explanation · 06</span><a class="back-link" href="#q-06">↑ back to Q06</a></div>
+            <div class="answer-pill">Answer · A · Strong positive correlation</div>
+            <p>The points trend upward and to the right in a tight band — higher ad spend, higher unit sales. That is the textbook description of a strong positive correlation.</p>
+          </article>
+
+          <article class="x-card" id="x-07">
+            <div class="x-head"><span>Explanation · 07</span><a class="back-link" href="#q-07">↑ back to Q07</a></div>
+            <div class="answer-pill">Answer · B · 150</div>
+            <p>Lowest ad spend is around $5K. Reading the y-axis gives ≈ 150 unit sales.</p>
+          </article>
+
+          <article class="x-card" id="x-08">
+            <div class="x-head"><span>Explanation · 08</span><a class="back-link" href="#q-08">↑ back to Q08</a></div>
+            <div class="answer-pill">Answer · D · 400</div>
+            <p>Highest ad spend is around $38K. Reading the y-axis gives ≈ 380–400 unit sales. Closest choice: 400.</p>
+          </article>
+
+          <article class="x-card" id="x-09">
+            <div class="x-head"><span>Explanation · 09</span><a class="back-link" href="#q-09">↑ back to Q09</a></div>
+            <div class="answer-pill">Answer · C · 270</div>
+            <p>Interpolate. At $20K, sales ≈ 260. At $25K, sales ≈ 280–300. The closest choice is 270.</p>
+          </article>
+
+          <article class="x-card" id="x-10">
+            <div class="x-head"><span>Explanation · 10</span><a class="back-link" href="#q-10">↑ back to Q10</a></div>
+            <div class="answer-pill">Answer · B</div>
+            <p>The chart shows correlation, not causation. B captures both the trend and the limitation. A overstates ("always causes proportional increases"). C contradicts the visible trend. D adds information not in the chart. E overstates exactness.</p>
+            <p>Cross-reference: see <a href="04-verbal-critical-reasoning.html#s-flaws">Ch. 04 · CR · Correlation = Causation flaw</a>. The same pattern appears in DI charts.</p>
+          </article>
+        </section>
+
+        <section id="s-errorlog">
+          <div class="error-log">
+            <h2>Error Log · Chapter 09</h2>
+            <p class="log-intro">Most graphics misses are reading errors — wrong axis, missed unit, eyeballed scale. When you log a miss, write what specifically you misread.</p>
+
+            <div class="log-row head">
+              <div>Question #</div>
+              <div>What I misread</div>
+              <div>The correct read</div>
+              <div>Re-test on (date)</div>
+            </div>
+            <div class="log-row"><input type="text" name="q1-q" placeholder="e.g. Q06"/><input type="text" name="q1-m" placeholder="e.g. eyeballed slope, missed weak correlation"/><input type="text" name="q1-c" placeholder="e.g. count points in tight band"/><input type="date" name="q1-d"/></div>
+            <div class="log-row"><input type="text" name="q2-q"/><input type="text" name="q2-m"/><input type="text" name="q2-c"/><input type="date" name="q2-d"/></div>
+            <div class="log-row"><input type="text" name="q3-q"/><input type="text" name="q3-m"/><input type="text" name="q3-c"/><input type="date" name="q3-d"/></div>
+            <div class="log-row"><input type="text" name="q4-q"/><input type="text" name="q4-m"/><input type="text" name="q4-c"/><input type="date" name="q4-d"/></div>
+            <div class="log-row"><input type="text" name="q5-q"/><input type="text" name="q5-m"/><input type="text" name="q5-c"/><input type="date" name="q5-d"/></div>
+            <div class="log-row"><input type="text" name="q6-q"/><input type="text" name="q6-m"/><input type="text" name="q6-c"/><input type="date" name="q6-d"/></div>
+            <div class="log-actions">
+              <button data-action="save">Save</button>
+              <button class="secondary" data-action="export">Export CSV</button>
+              <button class="secondary" data-action="clear">Clear</button>
+              <span class="log-status"></span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-foot">
+          <a href="08-di-table-analysis.html">← Previous<b>Ch. 08 · Table Analysis</b></a>
+          <a href="10-strategy-art-of-skip.html" class="next">Next →<b>Ch. 10 · Art of the Skip</b></a>
+        </nav>
+
+      </main>
+    </div>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+</body>
+</html>

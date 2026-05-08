@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 08 · Table Analysis — The Logic Field Guide</title>
+  <meta name="description" content="GMAT Focus Edition Table Analysis: sort logic, statistical literacy, T/F grid execution." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+  <style>
+    .data-table { width:100%; border-collapse: collapse; font-family: var(--mono); font-size: .85rem; margin: 1rem 0 1.5rem; background: var(--paper); }
+    .data-table th, .data-table td { border: 1px solid var(--rule); padding: .5rem .7rem; text-align: left; }
+    .data-table th { background: var(--ink); color: var(--paper); font-weight: 700; letter-spacing: .05em; cursor: pointer; user-select: none; }
+    .data-table th:hover { background: var(--vermillion); }
+    .data-table th .arrow { font-size: .75em; color: var(--mustard); margin-left: .3em; }
+    .data-table tbody tr:nth-child(even) { background: var(--paper-deep); }
+    .data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body data-chapter="08-table-analysis">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Chapter 08</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="../extras/cheatsheet.html">Cheatsheet</a>
+        <a href="appendix-trap-library.html">Traps</a>
+      </nav>
+    </header>
+
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Block 03 <span class="dot">·</span> Data Insights <span class="dot">·</span> Chapter 08</div>
+      <h1 class="chapter-title">Table <em>Analysis</em></h1>
+      <p class="chapter-deck">A sortable table is just a spreadsheet you can squint at. Sort by the column the question cares about. Read the answer off the row.</p>
+      <div class="chapter-meta">
+        <span>Reading time <b>≈ 30 min</b></span>
+        <span>Practice questions <b>10</b></span>
+        <span>Prerequisite <b>Ch. 06–07</b></span>
+        <span>Unlocks <b>Ch. 09 · Graphics</b></span>
+      </div>
+    </section>
+
+    <div class="chapter-grid">
+
+      <aside class="chapter-side">
+        <div class="tier-toggles">
+          <button data-tier="eli5"   aria-pressed="true"><span>ELI5 tier</span><span class="glyph">☀</span></button>
+          <button data-tier="expert" aria-pressed="true"><span>Expert tier</span><span class="glyph">◈</span></button>
+        </div>
+
+        <h4>In this chapter</h4>
+        <ol>
+          <li><a href="#s-overview">What Table Analysis is</a></li>
+          <li><a href="#s-sort">Sort discipline</a></li>
+          <li><a href="#s-stats">Statistical literacy</a></li>
+          <li><a href="#s-tfgrid">T/F grid execution</a></li>
+          <li><a href="#s-traps">Table-specific traps</a></li>
+          <li><a href="#s-worked">Worked example</a></li>
+          <li><a href="#s-practice">Practice tables</a></li>
+          <li><a href="#s-explanations">Explanations</a></li>
+          <li><a href="#s-errorlog">Error log</a></li>
+        </ol>
+      </aside>
+
+      <main class="chapter-main">
+
+        <section id="s-overview">
+          <h2>What Table Analysis actually is</h2>
+          <p>Table Analysis questions give you one sortable table — typically with 8 to 15 rows and 4 to 7 columns — followed by three sub-questions, each presented as a True / False / Cannot Be Determined statement. The table is interactive on the live exam: you can sort any column ascending or descending in one click. Sorting is the single most powerful move you have. Use it.</p>
+
+          <p class="dropcap">Table Analysis questions are not testing your statistical knowledge in depth. They are testing whether you can read a table accurately under time pressure. Most misses are caused by reading the wrong row, confusing columns, or sloppy mental arithmetic — not by lack of statistical training.</p>
+
+          <div class="glance">
+            <h4>The Table Analysis core principles</h4>
+            <ul>
+              <li><span class="formula">Read column headers first.</span> Know what each column means before reading any row.</li>
+              <li><span class="formula">Sort by the column the question cares about.</span> Always.</li>
+              <li><span class="formula">Most "median", "max", "min" questions resolve in one sort.</span></li>
+              <li><span class="formula">Double-count nothing.</span> Each row is one entity. Do not sum across rows that represent overlapping data.</li>
+              <li><span class="formula">"Cannot be determined" is real.</span> If the table does not contain the data, that is the answer.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="s-sort">
+          <h2>Sort discipline — your most powerful move</h2>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the bookshelf.</strong> If a librarian asks "which book is the thinnest?", you would not measure each one. You would line them up in order of thickness and look at the first one. Sorting a column does exactly that — it lines the rows up by one feature so you can read off the first or the last.</p>
+            <p><strong>Example 2 · the race results.</strong> A list of runners with their finish times is given to you in order of bib number. To find the winner, you do not need to compute averages — you just sort by time and read the top row. Sorting by the right column is the entire trick.</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · which column to sort, by question type</span>
+            <ul>
+              <li><strong>Highest / lowest / max / min</strong> &rarr; sort that column descending or ascending. Read top or bottom row.</li>
+              <li><strong>Median</strong> &rarr; sort that column. The middle row of the sorted set is the median.</li>
+              <li><strong>Comparisons across two columns</strong> &rarr; sort by one column and visually scan the other.</li>
+              <li><strong>"How many entities meet condition X"</strong> &rarr; sort or filter by the column in X, count.</li>
+              <li><strong>Sum / mean</strong> &rarr; you usually need to compute. The table should give you a sum row at the bottom if it is the answer.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="s-stats">
+          <h2>Statistical literacy — the five concepts you need</h2>
+
+          <div class="glance">
+            <h4>The minimum statistical toolkit</h4>
+            <ul>
+              <li><span class="formula">Mean</span> sum of values ÷ count. Sensitive to outliers.</li>
+              <li><span class="formula">Median</span> middle value when sorted. For even count, average of the two middles. Robust to outliers.</li>
+              <li><span class="formula">Mode</span> most common value. Useful for categorical data.</li>
+              <li><span class="formula">Range</span> max − min. A simple spread measure.</li>
+              <li><span class="formula">Standard deviation</span> on the GMAT, "high SD" = spread out; "low SD" = clustered. Rarely a numeric calculation.</li>
+            </ul>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the test scores.</strong> Five students score 60, 70, 80, 90, 100. The mean is 80 (sum 400, divide 5). The median is 80 (middle value). The range is 40 (100 − 60). When mean equals median, the data is roughly symmetric. When they differ, the data is skewed.</p>
+            <p><strong>Example 2 · the dinner check.</strong> Four people order meals costing $12, $14, $15, $99. The mean is $35 — but no one paid close to that. The median is $14.50, which actually represents what most people paid. Whenever one number is way bigger than the rest, the median is the more honest measure. The GMAT loves this contrast.</p>
+          </div>
+        </section>
+
+        <section id="s-tfgrid">
+          <h2>The T/F grid — how to execute three sub-questions efficiently</h2>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the parallel-eval routine</span>
+            <p>Each Table Analysis prompt usually shows three sub-statements at once. Resist the urge to evaluate all three on the same sort. Instead:</p>
+            <ol>
+              <li><strong>Read all three sub-statements first.</strong> Identify which columns each one needs.</li>
+              <li><strong>Sort once per sub-statement</strong> (or recycle a sort if two sub-statements use the same column).</li>
+              <li><strong>Mark each as T/F/CBD before moving on.</strong> Do not leave any blank.</li>
+              <li><strong>Be skeptical of statements that "feel right".</strong> The wrong answer is often the one the table seems to suggest at a glance.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="s-traps">
+          <h2>Table-specific traps</h2>
+
+          <div class="trap">
+            <span class="trap-label">Trap · category overlap</span>
+            <p>If a table has a "category" column where one entity can belong to multiple categories (e.g., a product tagged "Electronics, Home"), do not sum the categories — you will double-count. Always check whether categorization is exclusive.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · totals row hidden in the data</span>
+            <p>Some tables include a "Total" row at the bottom. If you sort by a numeric column, the total row may end up at the top or bottom and skew your max / min reading. Always check whether the row is an entity or a summary.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · units across columns</span>
+            <p>One column may be in thousands, another in raw counts, another in percentages. Read the header carefully — including the parenthetical (e.g., "Revenue ($M)" vs. "Customer Count"). See <a href="appendix-trap-library.html#trap-units">Units Trap</a>.</p>
+          </div>
+        </section>
+
+        <section id="s-worked">
+          <h2>Worked example · live table</h2>
+
+          <table class="data-table" id="worked-table">
+            <thead>
+              <tr>
+                <th data-col="store">Store</th>
+                <th data-col="region">Region</th>
+                <th data-col="rev" class="num">Q4 Revenue ($K)</th>
+                <th data-col="customers" class="num">Customers</th>
+                <th data-col="margin" class="num">Margin (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Alpha</td><td>North</td><td class="num">420</td><td class="num">5,100</td><td class="num">22</td></tr>
+              <tr><td>Beta</td><td>South</td><td class="num">310</td><td class="num">3,900</td><td class="num">18</td></tr>
+              <tr><td>Gamma</td><td>North</td><td class="num">280</td><td class="num">4,200</td><td class="num">25</td></tr>
+              <tr><td>Delta</td><td>East</td><td class="num">510</td><td class="num">7,300</td><td class="num">15</td></tr>
+              <tr><td>Epsilon</td><td>West</td><td class="num">370</td><td class="num">5,000</td><td class="num">20</td></tr>
+            </tbody>
+          </table>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 01 · Use sort, not arithmetic</div>
+            <p class="stem">Question: Which store has the highest margin?</p>
+            <ol>
+              <li>Sort by Margin descending (click the column header in the live HTML; in print, scan the column).</li>
+              <li>Top row after sort: Gamma, 25%.</li>
+            </ol>
+            <p class="answer">Answer: <b>Gamma</b>. Total time: 5 seconds. No arithmetic.</p>
+          </div>
+        </section>
+
+        <section id="s-practice" class="practice-set">
+          <h2>Practice · 2 tables, 10 questions</h2>
+
+          <h3>Table A · Regional sales by store</h3>
+          <table class="data-table" id="table-a">
+            <thead>
+              <tr>
+                <th data-col="store">Store</th>
+                <th data-col="region">Region</th>
+                <th class="num">Q1</th>
+                <th class="num">Q2</th>
+                <th class="num">Q3</th>
+                <th class="num">Q4</th>
+                <th class="num">Year ($K)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Acorn</td><td>North</td><td class="num">120</td><td class="num">140</td><td class="num">150</td><td class="num">170</td><td class="num">580</td></tr>
+              <tr><td>Birch</td><td>North</td><td class="num">90</td><td class="num">95</td><td class="num">105</td><td class="num">110</td><td class="num">400</td></tr>
+              <tr><td>Cedar</td><td>South</td><td class="num">160</td><td class="num">155</td><td class="num">170</td><td class="num">180</td><td class="num">665</td></tr>
+              <tr><td>Dogwood</td><td>South</td><td class="num">200</td><td class="num">210</td><td class="num">220</td><td class="num">230</td><td class="num">860</td></tr>
+              <tr><td>Elm</td><td>East</td><td class="num">130</td><td class="num">125</td><td class="num">120</td><td class="num">115</td><td class="num">490</td></tr>
+              <tr><td>Fir</td><td>East</td><td class="num">75</td><td class="num">85</td><td class="num">95</td><td class="num">100</td><td class="num">355</td></tr>
+              <tr><td>Grove</td><td>West</td><td class="num">110</td><td class="num">120</td><td class="num">125</td><td class="num">130</td><td class="num">485</td></tr>
+              <tr><td>Hickory</td><td>West</td><td class="num">140</td><td class="num">145</td><td class="num">150</td><td class="num">155</td><td class="num">590</td></tr>
+            </tbody>
+          </table>
+
+          <article class="q-card" id="q-01">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>Dogwood had the highest annual revenue of any store in Table A.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-01">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-02">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>The median Q4 revenue across all eight stores is greater than $130K.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-02">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-03">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>Every store in the East region had decreasing quarterly revenue from Q1 to Q4.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-03">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-04">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Approximately what was the South region's total annual revenue?</p>
+              <ol class="choices">
+                <li>$1.2M</li>
+                <li>$1.4M</li>
+                <li>$1.5M</li>
+                <li>$1.6M</li>
+                <li>$1.8M</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-04">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-05">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Which region had the highest single-store annual revenue?</p>
+              <ol class="choices">
+                <li>North</li>
+                <li>South</li>
+                <li>East</li>
+                <li>West</li>
+                <li>Cannot be determined from the table</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-05">Solution →</a>
+          </article>
+
+          <h3 style="margin-top: 3rem;">Table B · Employee tenure and salary</h3>
+          <table class="data-table" id="table-b">
+            <thead>
+              <tr>
+                <th data-col="emp">Employee</th>
+                <th data-col="dept">Department</th>
+                <th class="num">Tenure (yrs)</th>
+                <th class="num">Salary ($K)</th>
+                <th class="num">Last Review (1–5)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>P-001</td><td>Sales</td><td class="num">8</td><td class="num">110</td><td class="num">4</td></tr>
+              <tr><td>P-002</td><td>Sales</td><td class="num">3</td><td class="num">75</td><td class="num">3</td></tr>
+              <tr><td>P-003</td><td>Engineering</td><td class="num">5</td><td class="num">130</td><td class="num">5</td></tr>
+              <tr><td>P-004</td><td>Engineering</td><td class="num">10</td><td class="num">170</td><td class="num">4</td></tr>
+              <tr><td>P-005</td><td>Engineering</td><td class="num">2</td><td class="num">95</td><td class="num">3</td></tr>
+              <tr><td>P-006</td><td>HR</td><td class="num">12</td><td class="num">90</td><td class="num">5</td></tr>
+              <tr><td>P-007</td><td>HR</td><td class="num">6</td><td class="num">70</td><td class="num">4</td></tr>
+              <tr><td>P-008</td><td>Marketing</td><td class="num">4</td><td class="num">80</td><td class="num">3</td></tr>
+              <tr><td>P-009</td><td>Marketing</td><td class="num">7</td><td class="num">95</td><td class="num">4</td></tr>
+              <tr><td>P-010</td><td>Marketing</td><td class="num">1</td><td class="num">60</td><td class="num">2</td></tr>
+            </tbody>
+          </table>
+
+          <article class="q-card" id="q-06">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>Engineering has the highest median salary of any department in Table B.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-06">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-07">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>Every employee with tenure greater than 7 years has a salary above $90K.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-07">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-08">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Statement: <em>Marketing has the lowest median Last Review score of any department.</em></p>
+              <ol class="choices">
+                <li>True</li>
+                <li>False</li>
+                <li>Cannot be determined</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-08">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-09">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Approximately what is the mean salary of all 10 employees?</p>
+              <ol class="choices">
+                <li>$80K</li>
+                <li>$92K</li>
+                <li>$98K</li>
+                <li>$105K</li>
+                <li>$115K</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-09">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-10">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>How many employees have both tenure of at least 5 years AND a Last Review score of 4 or 5?</p>
+              <ol class="choices">
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-10">Solution →</a>
+          </article>
+        </section>
+
+        <section id="s-explanations" class="explanations">
+          <h2>Explanations</h2>
+
+          <article class="x-card" id="x-01">
+            <div class="x-head"><span>Explanation · 01</span><a class="back-link" href="#q-01">↑ back to Q01</a></div>
+            <div class="answer-pill">Answer · True</div>
+            <p>Sort the Year column descending. Dogwood is at the top with $860K. True.</p>
+          </article>
+
+          <article class="x-card" id="x-02">
+            <div class="x-head"><span>Explanation · 02</span><a class="back-link" href="#q-02">↑ back to Q02</a></div>
+            <div class="answer-pill">Answer · True</div>
+            <p>Sort Q4 ascending: 100, 110, 115, 130, 155, 170, 180, 230. With 8 values, median is the average of the 4th and 5th: <code>(130 + 155) / 2 = 142.5</code>. <code>142.5 &gt; 130</code>. True.</p>
+          </article>
+
+          <article class="x-card" id="x-03">
+            <div class="x-head"><span>Explanation · 03</span><a class="back-link" href="#q-03">↑ back to Q03</a></div>
+            <div class="answer-pill">Answer · False</div>
+            <p>East has two stores. Elm goes 130 → 125 → 120 → 115 (decreasing ✓). Fir goes 75 → 85 → 95 → 100 (increasing ✗). Therefore not every East store had decreasing revenue. False.</p>
+          </article>
+
+          <article class="x-card" id="x-04">
+            <div class="x-head"><span>Explanation · 04</span><a class="back-link" href="#q-04">↑ back to Q04</a></div>
+            <div class="answer-pill">Answer · C · $1.5M</div>
+            <p>Cedar 665 + Dogwood 860 = 1525 (in $K), or about $1.5M.</p>
+          </article>
+
+          <article class="x-card" id="x-05">
+            <div class="x-head"><span>Explanation · 05</span><a class="back-link" href="#q-05">↑ back to Q05</a></div>
+            <div class="answer-pill">Answer · B · South</div>
+            <p>Sort the Year column descending: Dogwood ($860K) is at the top. Dogwood is in the South. So the highest single-store annual revenue is in the South.</p>
+          </article>
+
+          <article class="x-card" id="x-06">
+            <div class="x-head"><span>Explanation · 06</span><a class="back-link" href="#q-06">↑ back to Q06</a></div>
+            <div class="answer-pill">Answer · True</div>
+            <p>Engineering salaries: 130, 170, 95 → sorted: 95, 130, 170 → median 130. Sales: 110, 75 → median 92.5. HR: 90, 70 → median 80. Marketing: 80, 95, 60 → median 80. Engineering's median (130) is the highest. True.</p>
+          </article>
+
+          <article class="x-card" id="x-07">
+            <div class="x-head"><span>Explanation · 07</span><a class="back-link" href="#q-07">↑ back to Q07</a></div>
+            <div class="answer-pill">Answer · False</div>
+            <p>Filter to tenure &gt; 7:</p>
+            <pre>P-001: 8 yrs, $110K  → above $90K ✓
+P-004: 10 yrs, $170K → above $90K ✓
+P-006: 12 yrs, $90K  → exactly $90K, NOT above ✗</pre>
+            <p>P-006 has tenure greater than 7 (12 years) but a salary of exactly $90K — which is not "above" $90K. The statement fails on this employee. <strong>False</strong>.</p>
+            <p>Structural takeaway: read every "above" / "at least" / "more than" boundary carefully. Strict (&gt;) and non-strict (≥) are different.</p>
+          </article>
+
+          <article class="x-card" id="x-08">
+            <div class="x-head"><span>Explanation · 08</span><a class="back-link" href="#q-08">↑ back to Q08</a></div>
+            <div class="answer-pill">Answer · True</div>
+            <p>Marketing reviews: 3, 4, 2 → median 3. Sales: 4, 3 → median 3.5. Engineering: 5, 4, 3 → median 4. HR: 5, 4 → median 4.5. Marketing's median (3) is the lowest. True.</p>
+          </article>
+
+          <article class="x-card" id="x-09">
+            <div class="x-head"><span>Explanation · 09</span><a class="back-link" href="#q-09">↑ back to Q09</a></div>
+            <div class="answer-pill">Answer · C · $98K</div>
+            <p>Sum of salaries: 110 + 75 + 130 + 170 + 95 + 90 + 70 + 80 + 95 + 60 = 975. Mean: 975 / 10 = $97.5K. Closest choice: $98K.</p>
+          </article>
+
+          <article class="x-card" id="x-10">
+            <div class="x-head"><span>Explanation · 10</span><a class="back-link" href="#q-10">↑ back to Q10</a></div>
+            <div class="answer-pill">Answer · C · 5</div>
+            <p>Filter: tenure ≥ 5 AND review ≥ 4.</p>
+            <pre>P-001:  8 yrs, review 4   ✓
+P-003:  5 yrs, review 5   ✓
+P-004: 10 yrs, review 4   ✓
+P-006: 12 yrs, review 5   ✓
+P-009:  7 yrs, review 4   ✓
+P-002, P-005, P-007, P-008, P-010  →  fail one condition each</pre>
+            <p>Count: <strong>5</strong>.</p>
+            <p>Method note: in the live exam, sort by Tenure descending, then visually mark those with review of 4 or 5. Faster than mental filtering.</p>
+          </article>
+        </section>
+
+        <section id="s-errorlog">
+          <div class="error-log">
+            <h2>Error Log · Chapter 08</h2>
+            <p class="log-intro">Most Table Analysis misses come from reading errors — wrong column, off-by-one boundary, missed unit. Log the read error you actually made.</p>
+
+            <div class="log-row head">
+              <div>Question #</div>
+              <div>What I missed (mistake type)</div>
+              <div>Where the answer actually was</div>
+              <div>Re-test on (date)</div>
+            </div>
+            <div class="log-row"><input type="text" name="q1-q" placeholder="e.g. Q07"/><input type="text" name="q1-m" placeholder="e.g. confused &gt; with ≥"/><input type="text" name="q1-c" placeholder="e.g. read boundary precisely"/><input type="date" name="q1-d"/></div>
+            <div class="log-row"><input type="text" name="q2-q"/><input type="text" name="q2-m"/><input type="text" name="q2-c"/><input type="date" name="q2-d"/></div>
+            <div class="log-row"><input type="text" name="q3-q"/><input type="text" name="q3-m"/><input type="text" name="q3-c"/><input type="date" name="q3-d"/></div>
+            <div class="log-row"><input type="text" name="q4-q"/><input type="text" name="q4-m"/><input type="text" name="q4-c"/><input type="date" name="q4-d"/></div>
+            <div class="log-row"><input type="text" name="q5-q"/><input type="text" name="q5-m"/><input type="text" name="q5-c"/><input type="date" name="q5-d"/></div>
+            <div class="log-row"><input type="text" name="q6-q"/><input type="text" name="q6-m"/><input type="text" name="q6-c"/><input type="date" name="q6-d"/></div>
+            <div class="log-actions">
+              <button data-action="save">Save</button>
+              <button class="secondary" data-action="export">Export CSV</button>
+              <button class="secondary" data-action="clear">Clear</button>
+              <span class="log-status"></span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-foot">
+          <a href="07-di-multi-source-reasoning.html">← Previous<b>Ch. 07 · MSR</b></a>
+          <a href="09-di-graphics-interpretation.html" class="next">Next →<b>Ch. 09 · Graphics</b></a>
+        </nav>
+
+      </main>
+    </div>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+  <script>
+    document.querySelectorAll('.data-table').forEach(table => {
+      table.querySelectorAll('th').forEach((th, idx) => {
+        th.addEventListener('click', () => {
+          const tbody = table.querySelector('tbody');
+          const rows = Array.from(tbody.querySelectorAll('tr'));
+          const isNumeric = th.classList.contains('num');
+          const direction = th.dataset.dir === 'asc' ? 'desc' : 'asc';
+          th.dataset.dir = direction;
+          rows.sort((a, b) => {
+            const av = a.children[idx].textContent.replace(/[$,]/g, '').trim();
+            const bv = b.children[idx].textContent.replace(/[$,]/g, '').trim();
+            if (isNumeric) {
+              return direction === 'asc' ? +av - +bv : +bv - +av;
+            }
+            return direction === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+          });
+          rows.forEach(r => tbody.appendChild(r));
+          table.querySelectorAll('th .arrow').forEach(a => a.remove());
+          const arrow = document.createElement('span');
+          arrow.className = 'arrow';
+          arrow.textContent = direction === 'asc' ? ' ▲' : ' ▼';
+          th.appendChild(arrow);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 06 · Data Sufficiency 2.0 — The Logic Field Guide</title>
+  <meta name="description" content="GMAT Focus Edition Data Sufficiency: the AD/BCE grid, value vs yes-no, the C-trap, sufficiency over arithmetic." />
+  <link rel="stylesheet" href="../assets/textbook.css" />
+</head>
+<body data-chapter="06-data-sufficiency">
+  <div class="page">
+
+    <header class="book-header">
+      <div class="brand"><b>The Logic Field Guide</b> &nbsp;·&nbsp; Chapter 06</div>
+      <nav>
+        <a href="../index.html">Contents</a>
+        <a href="../extras/cheatsheet.html">Cheatsheet</a>
+        <a href="appendix-trap-library.html">Traps</a>
+      </nav>
+    </header>
+
+    <section class="chapter-opener">
+      <div class="chapter-stamp">Block 03 <span class="dot">·</span> Data Insights <span class="dot">·</span> Chapter 06</div>
+      <h1 class="chapter-title">Data <em>Sufficiency 2.0</em></h1>
+      <p class="chapter-deck">DS is the only quant-style question that does not ask you to compute. It asks whether you <em>could</em> compute. The right answer is logical, not arithmetic.</p>
+      <div class="chapter-meta">
+        <span>Reading time <b>≈ 38 min</b></span>
+        <span>Practice questions <b>10</b></span>
+        <span>Prerequisite <b>Ch. 01–03</b></span>
+        <span>Unlocks <b>Ch. 07 · MSR</b></span>
+      </div>
+    </section>
+
+    <div class="chapter-grid">
+
+      <aside class="chapter-side">
+        <div class="tier-toggles">
+          <button data-tier="eli5"   aria-pressed="true"><span>ELI5 tier</span><span class="glyph">☀</span></button>
+          <button data-tier="expert" aria-pressed="true"><span>Expert tier</span><span class="glyph">◈</span></button>
+        </div>
+
+        <h4>In this chapter</h4>
+        <ol>
+          <li><a href="#s-overview">What DS actually tests</a></li>
+          <li><a href="#s-grid">The AD/BCE grid</a></li>
+          <li><a href="#s-types">Value vs Yes/No</a></li>
+          <li><a href="#s-procedure">The DS procedure</a></li>
+          <li><a href="#s-traps">Common DS traps</a></li>
+          <li><a href="#s-flowchart">Decision flowchart</a></li>
+          <li><a href="#s-worked">Worked examples</a></li>
+          <li><a href="#s-practice">Practice set</a></li>
+          <li><a href="#s-explanations">Explanations</a></li>
+          <li><a href="#s-errorlog">Error log</a></li>
+        </ol>
+      </aside>
+
+      <main class="chapter-main">
+
+        <section id="s-overview">
+          <h2>What Data Sufficiency actually tests</h2>
+          <p>Data Sufficiency is the GMAT's signature question type. It does not ask you to find a numeric answer. It asks whether the information given is <strong>enough</strong> to find a unique numeric answer. The skill being tested is logical sufficiency, not arithmetic — and that flips the way you should solve.</p>
+
+          <p class="dropcap">Solving DS the wrong way — by computing each statement to a final number — wastes most of your time on questions where you only needed to check whether a unique answer exists. Solving DS the right way is faster, more reliable, and resistant to nearly every trap. This chapter teaches the right way.</p>
+
+          <div class="glance">
+            <h4>The DS first principles</h4>
+            <ul>
+              <li><span class="formula">Do not solve.</span> Determine sufficiency only.</li>
+              <li><span class="formula">Test each statement in isolation first.</span> Treat them like separate experiments.</li>
+              <li><span class="formula">Combine only if both fail individually.</span></li>
+              <li><span class="formula">For Value questions:</span> sufficient = exactly one numeric answer.</li>
+              <li><span class="formula">For Yes/No questions:</span> sufficient = always yes or always no, never sometimes.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="s-grid">
+          <h2>The AD / BCE grid</h2>
+          <p>Every DS question has the same five answer choices, in the same order. Memorize them so you can run the procedure without looking at the choices.</p>
+
+          <div class="glance">
+            <h4>The five answer choices</h4>
+            <ul>
+              <li><span class="formula">A</span> Statement 1 alone is sufficient; Statement 2 alone is not.</li>
+              <li><span class="formula">B</span> Statement 2 alone is sufficient; Statement 1 alone is not.</li>
+              <li><span class="formula">C</span> Both together are sufficient; neither alone is.</li>
+              <li><span class="formula">D</span> Each statement alone is sufficient.</li>
+              <li><span class="formula">E</span> Together they are still not sufficient.</li>
+            </ul>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · two clue cards.</strong> Imagine a detective gives you two clue cards about a hidden number. You read each card alone. If card 1 alone tells you the number, that's "sufficient by itself". If card 1 alone is too vague, but card 2 narrows it down, that's also sufficient. If neither card alone works but together they do, you need both. The five answers (A, B, C, D, E) are just five different stories about how the two cards interact with your ability to find the number.</p>
+            <p><strong>Example 2 · solving a treasure map.</strong> The map has two halves. With just the top half, can you find the treasure? With just the bottom half, can you? With both? In real life, sometimes one half is enough, sometimes you need both, sometimes neither even together is enough. DS is exactly this question — except instead of treasure, you are looking for "exactly one possible value of x".</p>
+          </div>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the elimination shortcut</span>
+            <p>The "AD / BCE" grouping reflects the fastest elimination strategy:</p>
+            <ol>
+              <li><strong>Test Statement 1 alone.</strong> If sufficient, the answer is A or D. If not, B, C, or E.</li>
+              <li><strong>Then test Statement 2 alone.</strong> Combined with step 1, you can narrow to a single letter or two.</li>
+              <li><strong>Combine only if both individually fail.</strong> Then it is C vs. E.</li>
+            </ol>
+            <p>This procedure prevents the most common mistake: prematurely combining the two statements before testing each alone.</p>
+          </div>
+        </section>
+
+        <section id="s-types">
+          <h2>Value questions vs. Yes/No questions</h2>
+
+          <div class="glance">
+            <h4>The two DS question types</h4>
+            <ul>
+              <li><span class="formula">Value</span> "What is the value of <code>x</code>?" Sufficient = single numeric answer. Two possible values = NOT sufficient.</li>
+              <li><span class="formula">Yes/No</span> "Is <code>x &gt; 5</code>?" Sufficient = consistent answer (always yes, or always no). Mixed = NOT sufficient.</li>
+            </ul>
+          </div>
+
+          <div class="tier eli5">
+            <span class="tier-label">ELI5 · two simple examples</span>
+            <p><strong>Example 1 · the locker number.</strong> Your friend asks you to find a locker number. If they give you a clue and you can name <em>exactly one</em> locker, that is enough. If two lockers fit the clue, it is not — you cannot pick one over the other. That is a <em>value</em> question.</p>
+            <p><strong>Example 2 · is it raining?</strong> If your friend looks outside and says "yes" or "no" without flipping back and forth, that is a sufficient answer. If they say "well, it's raining on the left side of the house but sunny on the right", they have given you mixed information. That is a Yes/No question with insufficient data.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · "yes/no" sometimes has a "yes" answer that means insufficient</span>
+            <p>For Yes/No questions, an answer of "sometimes yes, sometimes no" is <strong>insufficient</strong> — even if "yes" is one of the possible answers. Sufficiency means consistency, not just compatibility.</p>
+          </div>
+        </section>
+
+        <section id="s-procedure">
+          <h2>The DS procedure — every question, every time</h2>
+
+          <div class="tier expert">
+            <span class="tier-label">Expert · the seven-step routine</span>
+            <ol>
+              <li><strong>Read the question stem only.</strong> Identify the question type (Value or Yes/No).</li>
+              <li><strong>Identify any constraints in the stem</strong> — "<code>x</code> is a positive integer", "<code>n</code> is non-zero", etc. Carry these into both statements.</li>
+              <li><strong>Test Statement 1 alone.</strong> Try to construct two scenarios that satisfy Statement 1 but give different answers. If you can, Statement 1 is insufficient.</li>
+              <li><strong>Test Statement 2 alone.</strong> Same drill. Reset — pretend Statement 1 never existed.</li>
+              <li><strong>If both fail individually, combine.</strong> Now use both. Try again to construct two scenarios that satisfy both.</li>
+              <li><strong>If you cannot find conflicting scenarios with both statements together, the answer is C.</strong> Otherwise E.</li>
+              <li><strong>Pick the letter and move on.</strong> Do not go back to compute the actual value.</li>
+            </ol>
+          </div>
+        </section>
+
+        <section id="s-traps">
+          <h2>The four DS traps that break everyone</h2>
+
+          <div class="trap">
+            <span class="trap-label">Trap · the C-trap</span>
+            <p>The "C-trap" is the most common DS error. Students see two statements that <em>look</em> like they need to be combined, automatically pick C, and miss the question. The fix: always test each statement alone, even when they look incomplete. Often one of them is sufficient by itself.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · forgetting zero</span>
+            <p>"<code>x ≠ 0</code>" is rarely stated explicitly. If a statement says "<code>x²</code> = 4", remember it could be <code>x = 2</code> or <code>x = −2</code>. If a statement says "<code>xy &gt; 0</code>", both could be positive or both negative. The Zero Trap (Ch. 01) lives here too: if <code>x = 0</code> is allowed, many product / divisibility statements collapse. See <a href="appendix-trap-library.html#trap-zero">the Zero Trap appendix entry</a>.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · fractions and negatives in the variable's domain</span>
+            <p>If the stem does not say "integer", the variable can be a fraction or negative. "Is <code>x² &gt; x</code>?" has different answers for <code>x = 2</code> (yes), <code>x = 0.5</code> (no), <code>x = −1</code> (yes). Always test all three regions — positive integer, fraction in (0,1), negative — when the stem permits.</p>
+          </div>
+
+          <div class="trap">
+            <span class="trap-label">Trap · the "obvious answer" being a question rephrase</span>
+            <p>Some statements are sneaky restatements of the question. "Is <code>x &gt; y</code>?" with Statement 1 "<code>x − y &gt; 0</code>" is sufficient — they are the same. Recognize equivalence; do not mark insufficient just because the wording is different.</p>
+          </div>
+        </section>
+
+        <section id="s-flowchart">
+          <h2>The DS decision flowchart</h2>
+          <div class="flowchart">
+            <div class="fc-caption">Data Sufficiency Procedure</div>
+            <div class="flow-row"><div class="flow-node start">Read stem · identify type · note constraints</div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row"><div class="flow-node">Test Statement 1 alone</div></div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row">
+              <div class="flow-node decision">Sufficient?</div>
+              <div class="flow-node decision">Insufficient?</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row">
+              <div class="flow-node">Now test Statement 2 alone (S1 ignored)</div>
+              <div class="flow-node">Test Statement 2 alone</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-row">
+              <div class="flow-node outcome">If S2 also sufficient → D. Otherwise A.</div>
+              <div class="flow-node">If S2 sufficient → B. If both fail → combine.</div>
+            </div>
+            <div class="flow-arrow">↓ <span class="label">Combined</span></div>
+            <div class="flow-row">
+              <div class="flow-node trap-out">Both together sufficient? → C</div>
+              <div class="flow-node trap-out">Still insufficient? → E</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="s-worked">
+          <h2>Worked examples</h2>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 01 · Value question</div>
+            <p class="stem">What is the value of <code>x</code>?<br/>(1) <code>2x + 4 = 14</code><br/>(2) <code>x²= 25</code></p>
+            <ol>
+              <li>Question type: Value.</li>
+              <li>Statement 1 alone: <code>2x = 10</code>, so <code>x = 5</code>. Single value &rarr; sufficient. (A or D)</li>
+              <li>Statement 2 alone: <code>x = 5</code> or <code>x = −5</code>. Two values &rarr; insufficient.</li>
+              <li>Answer: A.</li>
+            </ol>
+            <p class="answer">Answer: <b>A</b>. Statement 1 alone is sufficient; Statement 2 is not.</p>
+          </div>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 02 · Yes/No question with the C-trap</div>
+            <p class="stem">Is <code>x &gt; 0</code>?<br/>(1) <code>x²&gt; 0</code><br/>(2) <code>x³&gt; 0</code></p>
+            <ol>
+              <li>Question type: Yes/No.</li>
+              <li>Statement 1: <code>x²&gt; 0</code> means <code>x ≠ 0</code>. <code>x</code> could be positive or negative. Mixed &rarr; insufficient.</li>
+              <li>Statement 2: <code>x³&gt; 0</code> &rarr; <code>x</code> is positive (cube preserves sign). Sufficient.</li>
+              <li>Answer: B. Common C-trap: pairing two statements that look "complementary" when one alone already settles it.</li>
+            </ol>
+            <p class="answer">Answer: <b>B</b>.</p>
+          </div>
+
+          <div class="worked">
+            <div class="worked-label">Worked Example · 03 · Combined sufficiency</div>
+            <p class="stem">If <code>x</code> and <code>y</code> are integers, what is the value of <code>x + y</code>?<br/>(1) <code>x − y = 4</code><br/>(2) <code>x²− y²= 28</code></p>
+            <ol>
+              <li>Statement 1 alone: many possibilities. <code>x = 5, y = 1</code> gives <code>x + y = 6</code>; <code>x = 6, y = 2</code> gives <code>x + y = 8</code>. Insufficient.</li>
+              <li>Statement 2 alone: many factor pairs. <code>(x+y)(x−y) = 28</code>. <code>x+y</code> could be 14, 7, 28, etc. Insufficient.</li>
+              <li>Combined: <code>(x+y)(x−y) = 28</code> and <code>x − y = 4</code>. So <code>x + y = 28 / 4 = 7</code>. Single value &rarr; sufficient.</li>
+              <li>Answer: C.</li>
+            </ol>
+            <p class="answer">Answer: <b>C</b>.</p>
+          </div>
+        </section>
+
+        <section id="s-practice" class="practice-set">
+          <h2>Practice set · 10 questions</h2>
+
+          <article class="q-card" id="q-01">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>What is the value of integer <code>n</code>?<br/>(1) <code>n²= 49</code><br/>(2) <code>n &gt; 0</code></p>
+              <ol class="choices">
+                <li>Statement (1) alone is sufficient; (2) alone is not.</li>
+                <li>Statement (2) alone is sufficient; (1) alone is not.</li>
+                <li>Both together are sufficient; neither alone is.</li>
+                <li>Each alone is sufficient.</li>
+                <li>Together they are still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-01">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-02">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Is <code>x</code> positive?<br/>(1) <code>x²= 16</code><br/>(2) <code>x + 4 &gt; 0</code></p>
+              <ol class="choices">
+                <li>(1) alone sufficient; (2) alone not.</li>
+                <li>(2) alone sufficient; (1) alone not.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-02">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-03">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>a</code> and <code>b</code> are positive integers, what is the value of <code>a + b</code>?<br/>(1) <code>a × b = 12</code><br/>(2) <code>a − b = 1</code></p>
+              <ol class="choices">
+                <li>(1) alone sufficient.</li>
+                <li>(2) alone sufficient.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-03">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-04">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>What is <code>x</code>?<br/>(1) <code>x</code> is the smallest prime number greater than 30.<br/>(2) <code>x</code> is between 30 and 40.</p>
+              <ol class="choices">
+                <li>(1) alone sufficient.</li>
+                <li>(2) alone sufficient.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-04">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-05">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Is <code>k</code> divisible by 6?<br/>(1) <code>k</code> is divisible by 3.<br/>(2) <code>k</code> is divisible by 4.</p>
+              <ol class="choices">
+                <li>(1) alone sufficient.</li>
+                <li>(2) alone sufficient.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-05">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-06">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Train P leaves Station A at 9:00 AM heading east at constant speed. Train Q leaves Station A at 10:00 AM heading east at a constant speed of 60 mph. At what time does Train Q catch Train P?<br/>(1) Train P travels at 40 mph.<br/>(2) Train P traveled 80 miles in 2 hours.</p>
+              <ol class="choices">
+                <li>(1) alone sufficient.</li>
+                <li>(2) alone sufficient.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-06">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-07">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>What is the value of integer <code>m</code>?<br/>(1) <code>m</code> is a multiple of 7.<br/>(2) <code>m</code> is between 50 and 60.</p>
+              <ol class="choices">
+                <li>(1) alone sufficient.</li>
+                <li>(2) alone sufficient.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-07">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-08">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>Is <code>x &gt; y</code>?<br/>(1) <code>x − y &gt; 0</code><br/>(2) <code>2x &gt; 2y</code></p>
+              <ol class="choices">
+                <li>(1) alone sufficient.</li>
+                <li>(2) alone sufficient.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-08">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-09">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>What is the value of <code>x</code>?<br/>(1) <code>x = |x|</code><br/>(2) <code>x²= 16</code></p>
+              <ol class="choices">
+                <li>(1) alone sufficient.</li>
+                <li>(2) alone sufficient.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-09">Solution →</a>
+          </article>
+
+          <article class="q-card" id="q-10">
+            <div class="q-num"></div>
+            <div class="q-body">
+              <p>If <code>x</code> is a positive integer, is <code>x</code> a prime number?<br/>(1) <code>x</code> has exactly two distinct positive factors.<br/>(2) <code>x</code> is odd.</p>
+              <ol class="choices">
+                <li>(1) alone sufficient.</li>
+                <li>(2) alone sufficient.</li>
+                <li>Both together sufficient; neither alone.</li>
+                <li>Each alone sufficient.</li>
+                <li>Together still not sufficient.</li>
+              </ol>
+            </div>
+            <a class="q-jump" href="#x-10">Solution →</a>
+          </article>
+        </section>
+
+        <section id="s-explanations" class="explanations">
+          <h2>Explanations · with structural reasoning</h2>
+
+          <article class="x-card" id="x-01">
+            <div class="x-head"><span>Explanation · 01</span><a class="back-link" href="#q-01">↑ back to Q01</a></div>
+            <div class="answer-pill">Answer · C</div>
+            <p>Statement 1: <code>n²= 49</code> &rarr; <code>n = 7</code> or <code>n = −7</code>. Two values &rarr; insufficient. Statement 2: <code>n &gt; 0</code> alone tells you nothing about the magnitude. Combined: <code>n = 7</code>. C.</p>
+          </article>
+
+          <article class="x-card" id="x-02">
+            <div class="x-head"><span>Explanation · 02</span><a class="back-link" href="#q-02">↑ back to Q02</a></div>
+            <div class="answer-pill">Answer · C</div>
+            <p>Yes/No question.</p>
+            <p>Statement 1: <code>x²= 16</code> &rarr; <code>x = 4</code> (positive: yes) or <code>x = −4</code> (positive: no). Mixed answers &rarr; insufficient.</p>
+            <p>Statement 2: <code>x &gt; −4</code>. This includes <code>x = 0</code> (not positive: no), <code>x = 1</code> (positive: yes), and many other values. Mixed answers &rarr; insufficient.</p>
+            <p>Combined: From Statement 1, <code>x ∈ {4, −4}</code>. Statement 2 rules out −4 (since −4 is not strictly greater than −4). The only surviving value is <code>x = 4</code>, which is positive. Consistent yes &rarr; sufficient.</p>
+            <p>Answer: C. Always list the combined-statement candidates explicitly before declaring E.</p>
+          </article>
+
+          <article class="x-card" id="x-03">
+            <div class="x-head"><span>Explanation · 03</span><a class="back-link" href="#q-03">↑ back to Q03</a></div>
+            <div class="answer-pill">Answer · C</div>
+            <p>Statement 1: factor pairs of 12 with both positive integers are <code>(1,12), (2,6), (3,4)</code>. Three different sums (13, 8, 7). Insufficient. Statement 2: <code>a − b = 1</code> alone has infinite solutions. Insufficient. Combined: among the factor pairs of 12, only <code>(4, 3)</code> has difference 1. So <code>a + b = 7</code>. C.</p>
+          </article>
+
+          <article class="x-card" id="x-04">
+            <div class="x-head"><span>Explanation · 04</span><a class="back-link" href="#q-04">↑ back to Q04</a></div>
+            <div class="answer-pill">Answer · A</div>
+            <p>Statement 1: smallest prime greater than 30 is 31. Single value &rarr; sufficient. Statement 2: <code>x</code> between 30 and 40 has many possibilities. Insufficient. Answer A.</p>
+          </article>
+
+          <article class="x-card" id="x-05">
+            <div class="x-head"><span>Explanation · 05</span><a class="back-link" href="#q-05">↑ back to Q05</a></div>
+            <div class="answer-pill">Answer · C</div>
+            <p>Yes/No. Statement 1: <code>k</code> divisible by 3. <code>k = 3</code> (not div 6), <code>k = 6</code> (yes). Mixed &rarr; insufficient. Statement 2: <code>k</code> divisible by 4. <code>k = 4</code> (no), <code>k = 12</code> (yes). Insufficient. Combined: divisible by both 3 and 4 means divisible by 12, hence by 6. Sufficient. Answer C.</p>
+          </article>
+
+          <article class="x-card" id="x-06">
+            <div class="x-head"><span>Explanation · 06</span><a class="back-link" href="#q-06">↑ back to Q06</a></div>
+            <div class="answer-pill">Answer · D</div>
+            <p>This question rewards spotting equivalence. Statement 1 gives Train P's speed (40 mph) directly. Statement 2 gives 80 miles in 2 hours, which is also 40 mph. Both contain the same information — each is sufficient.</p>
+          </article>
+
+          <article class="x-card" id="x-07">
+            <div class="x-head"><span>Explanation · 07</span><a class="back-link" href="#q-07">↑ back to Q07</a></div>
+            <div class="answer-pill">Answer · C</div>
+            <p>Statement 1 alone: many multiples of 7. Insufficient. Statement 2: <code>m ∈ {51, 52, …, 59}</code>. Insufficient. Combined: only 56 is a multiple of 7 in that range (49 is below 50, 63 is above 60). Single value &rarr; sufficient. C.</p>
+          </article>
+
+          <article class="x-card" id="x-08">
+            <div class="x-head"><span>Explanation · 08</span><a class="back-link" href="#q-08">↑ back to Q08</a></div>
+            <div class="answer-pill">Answer · D</div>
+            <p>Both statements are restatements of the question. <code>x − y &gt; 0</code> &rarr; <code>x &gt; y</code>. <code>2x &gt; 2y</code> &rarr; <code>x &gt; y</code>. Each alone is sufficient. D.</p>
+            <p>This is the "obvious answer is a rephrase" structural pattern. Recognize equivalence early.</p>
+          </article>
+
+          <article class="x-card" id="x-09">
+            <div class="x-head"><span>Explanation · 09</span><a class="back-link" href="#q-09">↑ back to Q09</a></div>
+            <div class="answer-pill">Answer · C</div>
+            <p>Statement 1: <code>x = |x|</code> means <code>x ≥ 0</code>. Many values &rarr; insufficient. Statement 2: <code>x²= 16</code> &rarr; <code>x ∈ {4, −4}</code>. Insufficient. Combined: <code>x ≥ 0</code> rules out −4, leaving <code>x = 4</code>. Sufficient. C.</p>
+          </article>
+
+          <article class="x-card" id="x-10">
+            <div class="x-head"><span>Explanation · 10</span><a class="back-link" href="#q-10">↑ back to Q10</a></div>
+            <div class="answer-pill">Answer · A</div>
+            <p>Statement 1 is the definition of a prime. Sufficient. Statement 2 is not — odd numbers include 9 (not prime) and 7 (prime). Mixed &rarr; insufficient. Answer A.</p>
+            <p>Recognize a definition disguised as a statement. This is one of the easiest DS patterns once you spot it.</p>
+          </article>
+        </section>
+
+        <section id="s-errorlog">
+          <div class="error-log">
+            <h2>Error Log · Chapter 06</h2>
+            <p class="log-intro">Most DS misses are C-traps — combining when one statement alone was sufficient. When you log a miss, write which statement actually sufficed.</p>
+
+            <div class="log-row head">
+              <div>Question #</div>
+              <div>What I missed (mistake type)</div>
+              <div>The correct sufficiency call</div>
+              <div>Re-test on (date)</div>
+            </div>
+            <div class="log-row"><input type="text" name="q1-q" placeholder="e.g. Q08"/><input type="text" name="q1-m" placeholder="e.g. C-trap, missed equivalence"/><input type="text" name="q1-c" placeholder="e.g. each alone sufficient (D)"/><input type="date" name="q1-d"/></div>
+            <div class="log-row"><input type="text" name="q2-q"/><input type="text" name="q2-m"/><input type="text" name="q2-c"/><input type="date" name="q2-d"/></div>
+            <div class="log-row"><input type="text" name="q3-q"/><input type="text" name="q3-m"/><input type="text" name="q3-c"/><input type="date" name="q3-d"/></div>
+            <div class="log-row"><input type="text" name="q4-q"/><input type="text" name="q4-m"/><input type="text" name="q4-c"/><input type="date" name="q4-d"/></div>
+            <div class="log-row"><input type="text" name="q5-q"/><input type="text" name="q5-m"/><input type="text" name="q5-c"/><input type="date" name="q5-d"/></div>
+            <div class="log-row"><input type="text" name="q6-q"/><input type="text" name="q6-m"/><input type="text" name="q6-c"/><input type="date" name="q6-d"/></div>
+            <div class="log-actions">
+              <button data-action="save">Save</button>
+              <button class="secondary" data-action="export">Export CSV</button>
+              <button class="secondary" data-action="clear">Clear</button>
+              <span class="log-status"></span>
+            </div>
+          </div>
+        </section>
+
+        <nav class="chapter-foot">
+          <a href="05-verbal-reading-comp.html">← Previous<b>Ch. 05 · Reading Comp</b></a>
+          <a href="07-di-multi-source-reasoning.html" class="next">Next →<b>Ch. 07 · Multi-Source Reasoning</b></a>
+        </nav>
+
+      </main>
+    </div>
+
+  </div>
+  <script src="../assets/textbook.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Trainer (Next.js)
+trainer/node_modules/
+trainer/.next/
+trainer/out/
+trainer/.vercel/
+trainer/.env
+trainer/.env.local
+trainer/.env.*.local
+trainer/coverage/
+trainer/*.log
+trainer/prisma/dev.db
+trainer/prisma/*.db-journal
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.swo
+
+# Local tooling
+.env
+.env.local
