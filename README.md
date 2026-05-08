@@ -149,7 +149,10 @@ That is it. No build step. No bundler. No framework.
 
 ### Repository
 
-Push this folder as a single repo so the **static textbook** (`index.html`, `chapters/`, `assets/`, `extras/`) and the **Next.js trainer** (`trainer/`) stay versioned together.
+Canonical remote: **[github.com/manchxz/GMAT-STUDYMAT](https://github.com/manchxz/GMAT-STUDYMAT)** — static textbook (`index.html`, `chapters/`, `assets/`, `extras/`) and Next.js trainer (`trainer/`) in one repo.
+
+After you enable **GitHub Pages** on `main` / root, the book is typically at  
+`https://manchxz.github.io/GMAT-STUDYMAT/` (open `index.html` via that host’s root).
 
 ### Static textbook (free)
 
@@ -171,18 +174,13 @@ Paths are relative — keep the same folder layout so `assets/` and `chapters/` 
 
 Local build hit Node heap limits on some machines; Vercel’s build image is usually fine. If needed: Project **Settings → General → Build & Development Settings** and increase or add an install command hook — rarely needed.
 
-### Quick push (first time)
-
-Create an **empty** repo on GitHub (no README), then from this folder:
+### Git remote (this project)
 
 ```powershell
 $env:PATH = "C:\Program Files\Git\cmd;" + $env:PATH
-git remote add origin https://github.com/manchxz/YOUR-REPO.git
-git branch -M main
+git remote add origin https://github.com/manchxz/GMAT-STUDYMAT.git   # if not set yet
 git push -u origin main
 ```
-
-Replace `YOUR-REPO` with the new repository name.
 
 ---
 
