@@ -4,26 +4,35 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3330",
-    "prebuild": "node scripts/sync-textbook.mjs",
+    "prebuild": "node scripts/sync-textbook.mjs && node scripts/index-chapters.mjs",
     "build": "next build",
     "start": "next start -p 3330",
     "lint": "next lint",
     "sync-book": "node scripts/sync-textbook.mjs",
+    "index-book": "node scripts/index-chapters.mjs",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "prisma db seed",
     "verify-bank": "node prisma/verify-bank-run.js"
   },
   "dependencies": {
+    "@ai-sdk/google": "^1.2.22",
     "@prisma/client": "^6.19.2",
+    "ai": "^4.3.19",
     "bcryptjs": "^3.0.3",
     "jose": "^6.2.3",
+    "katex": "^0.16.11",
     "next": "^15.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^9.0.1",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.0",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
+    "@types/katex": "^0.16.7",
     "@types/node": "^20.17.6",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",

@@ -28,6 +28,7 @@ model User {
   preferences     UserPreference?
   learnerProgress    LearnerChapterProgress[]
   learnerDiagnostics LearnerDiagnostic[]
+  tutorConversations TutorConversation[]
 }
 
 model LearnerChapterProgress {
@@ -305,4 +306,70 @@ model ExamQuestionSelection {
 
   @@unique([examAttemptId, sequenceIndex])
   @@index([examAttemptId])
+}
+
+// ─── GMAT Tutor (chat assistant) ────────────────────────────────────────────
+// Streaming Gemini-backed tutor with chapter-aware retrieval.
+// All models are prefixed `Tutor` to keep this surface clearly separable from
+// the existing trainer schema.
+
+enum TutorMessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+enum TutorTier {
+  ELI5
+  EXPERT
+}
+
+model TutorConversation {
+  id          String     @id @default(cuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String     @default("New chat")
+  /// e.g. "04-verbal-critical-reasoning"
+  chapterSlug String?
+  tier        TutorTier  @default(EXPERT)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  messages    TutorMessage[]
+
+  @@index([userId, updatedAt])
+}
+
+model TutorMessage {
+  id             String             @id @default(cuid())
+  conversationId String
+  conversation   TutorConversation  @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           TutorMessageRole
+  content        String             @db.Text
+  /// [{ chapterSlug, anchor, heading }]
+  citations      Json?
+  createdAt      DateTime           @default(now())
+
+  @@index([conversationId, createdAt])
+}
+
+/// Pre-extracted textbook section used for keyword retrieval.
+/// v0.2 will add an `embedding` Vector column via pgvector.
+model TutorChapterChunk {
+  id           String   @id @default(cuid())
+  chapterSlug  String
+  chapterTitle String
+  /// e.g. "Negation Test"
+  heading      String
+  /// HTML anchor / id from the source chapter
+  anchor       String
+  /// 2 for <h2>, 3 for <h3>
+  level        Int
+  /// Order within chapter
+  ordinal      Int
+  text         String   @db.Text
+  createdAt    DateTime @default(now())
+
+  @@unique([chapterSlug, anchor])
+  @@index([chapterSlug, ordinal])
 }

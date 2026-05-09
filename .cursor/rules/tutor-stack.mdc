@@ -1,0 +1,75 @@
+---
+description: Stack conventions for tutor code in trainer/ (Next.js 15 + Prisma + jose + Vercel AI SDK)
+globs: trainer/src/**/{tutor,Tutor,gemini}*.{ts,tsx},trainer/src/app/api/tutor/**/*.ts,trainer/src/app/tutor/**/*.tsx,trainer/src/components/tutor/**/*.{ts,tsx},trainer/src/lib/tutor/**/*.ts,trainer/scripts/index-chapters.mjs
+alwaysApply: false
+---
+
+# Tutor Stack Conventions
+
+These rules apply only to GMAT Tutor (chat assistant) code inside `trainer/`.
+
+## Auth
+
+- Use `getSessionUserId()` from `@/lib/auth-session`. It returns `string | null`.
+- Cookie name: `gmat_session`. JWT payload: `{ sub: userId }`. Do not introduce
+  a second cookie or assume an `email` field on the session.
+- Gate every tutor API route:
+
+```ts
+const userId = await getSessionUserId();
+if (!userId) return new Response('Unauthorized', { status: 401 });
+```
+
+## Prisma
+
+- Single client: `import { prisma } from '@/lib/prisma'`. Never instantiate a new
+  `PrismaClient` in route handlers.
+- Tutor models are prefixed `Tutor*`: `TutorConversation`, `TutorMessage`,
+  `TutorChapterChunk`. Enums are `TutorMessageRole`, `TutorTier`.
+- Schema changes go to `trainer/prisma/schema.prisma` and are applied via
+  `npx prisma db push`.
+
+## Streaming (Vercel AI SDK v4)
+
+- Server: `streamText({ model: google(TUTOR_MODEL), system, messages, ... })`,
+  return `result.toDataStreamResponse()`. Persist the assistant message in
+  `onFinish`. Never invent a custom SSE format.
+- Client: `useChat` from `'ai/react'` with the route at `/api/tutor/chat`.
+
+## Theming
+
+The trainer uses CSS custom properties: `var(--bg)`, `var(--panel)`,
+`var(--border)`, `var(--ink)`, `var(--muted)`, `var(--accent)`,
+`var(--accent-mute)`. New tutor UI must use these — not hard-coded colors and
+not new Tailwind palettes.
+
+## File layout
+
+```
+trainer/
+  src/
+    app/
+      tutor/page.tsx              # split-pane workspace
+      api/tutor/chat/route.ts
+      api/tutor/conversations/[...]
+    components/tutor/             # PascalCase components
+    lib/
+      gemini.ts                   # provider + TUTOR_MODEL
+      tutor/
+        system-prompt.ts
+        retrieve.ts
+  scripts/index-chapters.mjs      # parses chapters into TutorChapterChunk
+```
+
+## Streaming + persistence pattern
+
+Within `POST /api/tutor/chat`:
+
+1. `getSessionUserId()` gate.
+2. Parse `{ messages, conversationId?, chapterSlug?, anchor?, tier }`.
+3. `retrieve({ query, chapterSlug, k: 4 })` to get textbook chunks.
+4. `ensureConversation` (create or load).
+5. Persist the latest user message synchronously.
+6. `streamText` with the system prompt; persist the assistant text in
+   `onFinish`.
+7. Return `toDataStreamResponse()` with `X-Conversation-Id` header.

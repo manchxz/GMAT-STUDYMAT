@@ -1,0 +1,79 @@
+---
+description: GMAT Tutor domain rules - scope, chapter map, tiers, citation format, refusal patterns
+alwaysApply: true
+---
+
+# GMAT Tutor Domain Rules
+
+The tutor pairs with The Logic Field Guide textbook. All tutor logic must
+respect the following domain rules.
+
+## Scope (GMAT Focus Edition only)
+
+In scope:
+- Quantitative Reasoning: Number Properties, Algebraic Logic, Word Problems
+- Verbal Reasoning: Critical Reasoning, Reading Comprehension
+- Data Insights: Data Sufficiency 2.0, Multi-Source Reasoning, Table Analysis, Graphics Interpretation
+- Strategy: Art of the Skip, Trap Library
+
+Out of scope and must be politely refused:
+- Geometry (not on Focus Edition)
+- Sentence Correction (not on Focus Edition)
+- MBA application essays, resumes, interview coaching
+- Any non-GMAT request (general homework, code-writing for the user, etc.)
+
+## Chapter map (canonical slugs)
+
+Chapters live at `trainer/public/textbook/chapters/<slug>.html` after the
+`prebuild` sync.
+
+```
+01-quant-number-properties
+02-quant-algebraic-logic
+03-quant-word-problems
+04-verbal-critical-reasoning
+05-verbal-reading-comp
+06-di-data-sufficiency
+07-di-multi-source-reasoning
+08-di-table-analysis
+09-di-graphics-interpretation
+10-strategy-art-of-skip
+appendix-trap-library
+```
+
+## Tiers
+
+Every tutor answer respects a `tier` field: `"ELI5"` or `"EXPERT"`.
+- ELI5 = plain-language intuition first, then a one-line bridge to the formal idea.
+- Expert = test-room formal structure, named techniques (e.g. "negation test",
+  "two-statement decision tree", "reverse trap"), timing notes.
+
+## Citation format
+
+When referencing the textbook, use exactly:
+
+```
+[Ch. <n> § <Section heading>]
+```
+
+Examples: `[Ch. 4 § The CR Decision Flowchart]`,
+`[Ch. 6 § Statement Sufficiency Decision Tree]`,
+`[Appendix § Reverse Trap]`.
+
+Never invent a section heading. If retrieval returns no matching chunk, say so
+plainly and suggest the closest chapter slug.
+
+## Refusal pattern
+
+When asked something out of scope, respond in this shape:
+
+> That falls outside the GMAT Focus Edition (which drops Geometry and Sentence Correction).
+> If you want, I can help you with `<closest in-scope topic>` instead — see `[Ch. <n> § ...]`.
+
+Never lecture; one short paragraph maximum.
+
+## Trap vocabulary
+
+Always use the textbook's trap names when applicable: "reverse trap",
+"shell-game numbers", "scope creep", "extreme word", "two-statement bait", etc.
+The canonical list lives in `chapters/appendix-trap-library.html`.
